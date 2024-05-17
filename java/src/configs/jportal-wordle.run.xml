@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="jportal-wordle" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="vlab.jportal.Compiler" />
+    <module name="java" />
+    <option name="PROGRAM_PARAMETERS" value="-R $PROJECT_DIR$ -f {root}/src/wordle/sifiles.list -o {root}/out/wordle/sql/pas code.DelphiCode -o {root}/out/wordle/sql/ddl/lite3 ddl.Lite3DDL" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

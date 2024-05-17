@@ -1,0 +1,4 @@
+pragma openapi: urlPrefix: {root}/out/sql
+pragma openapi: defSqlSub: /yaml2
+pragma openapi: compSqlSub: /yaml3
+pragma JSON

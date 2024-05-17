@@ -1,0 +1,96 @@
+DATABASE wordle
+PACKAGE  vlab.wordle
+OUTPUT   wordle
+SERVER   wordle
+
+TABLE Dictionary
+      word    char 8
+      meaning char 4096
+KEY dictpk PRIMARY word
+
+PROC Insert
+PROC Update
+PROC SelectOne
+PROC Exists
+PROC SelectAll
+
+TABLE Word5
+      word   char 5
+      status int (game=0 used=1 coll=2)
+KEY word5pk PRIMARY word
+
+PROC Insert
+PROC Update
+PROC SelectOne
+PROC SelectAll
+PROC SelectAll in order word
+PROC ListByStatus SELECTBY status in order word
+PROC DictList
+OUTPUT
+   word char 5
+SQLCODE
+  select w.word
+  from Word5 w, Dictionary d
+  where w.word = d.word
+ENDCODE
+
+TABLE Word6
+      word   char 6
+      status int (game=0 used=1 coll=2)
+KEY word6pk PRIMARY word
+
+PROC Insert
+PROC Update
+PROC SelectOne
+PROC SelectAll
+PROC SelectAll in order word
+PROC ListByStatus SELECTBY status in order word
+PROC DictList
+OUTPUT
+   word char 6
+SQLCODE
+  select w.word
+  from Word6 w, Dictionary d
+  where w.word = d.word
+ENDCODE
+
+TABLE Word7
+      word   char 7
+      status int (game=0 used=1 coll=2)
+KEY word7pk PRIMARY word
+
+PROC Insert
+PROC Update
+PROC SelectOne
+PROC SelectAll
+PROC SelectAll in order word
+PROC ListByStatus SELECTBY status in order word
+PROC DictList
+OUTPUT
+   word char 7
+SQLCODE
+  select w.word
+  from Word7 w, Dictionary d
+  where w.word = d.word
+ENDCODE
+
+TABLE Word8
+      word   char 8
+      status int (game=0 used=1 coll=2)
+KEY word8pk PRIMARY word
+
+PROC Insert
+PROC Update
+PROC SelectOne
+PROC SelectAll
+PROC SelectAll in order word
+PROC ListByStatus SELECTBY status in order word
+PROC DictList
+OUTPUT
+   word char 8
+SQLCODE
+  select w.word
+  from Word8 w, Dictionary d
+  where w.word = d.word
+ENDCODE
+

@@ -1,0 +1,74 @@
+DATABASE audio
+PACKAGE  vlab.audio
+OUTPUT   audio
+SERVER   audio
+
+DECLARE
+    _Id     char 10
+    _Name   char 120
+    _AName  char 250
+    _BName  char 250
+    _FName  char 250
+    _List   char 250
+    _Des    char 4000
+    _Cmt    char 500
+    _No     short
+    _Len    int
+    _Date   char 20
+    _Status int
+
+TABLE Author
+    authorId    =(_Id)
+    authorName  =(_Name)
+KEY AuthorPK PRIMARY authorId
+
+PROC Insert upsert
+PROC Update
+PROC SelectOne
+PROC SelectAll
+PROC DeleteOne
+PROC Exists
+PROC Merge
+
+TABLE Narrator
+    narratorId    =(_Id)
+    narratorName  =(_Name)
+KEY NarratorPK PRIMARY narratorId
+
+PROC Insert upsert
+PROC Update
+PROC SelectOne
+PROC SelectAll
+PROC DeleteOne
+PROC Exists
+PROC Merge
+
+TABLE Book
+    authorId    =(_Id)
+    bookId      =(_Id)
+    partNo      =(_No)
+    bookName    =(_BName)
+    fileName    =(_FName)
+    album       =(_AName)
+    authors     =(_List)
+    narrators   =(_List)
+    comment     =(_Cmt) null
+    description =(_Des)
+
+KEY  AuthorBookPK PRIMARY authorId bookId partNo
+LINK Author DELETE CASCADE authorId
+
+PROC Insert upsert
+PROC Update
+PROC SelectOne
+PROC DeleteOne
+PROC Exists
+PROC Merge
+PROC AuthorCount
+input
+  authorId =(_Id)
+output (single)
+  noOf =(_No)
+sqlcode
+  select count(*) noOf from Book where authorId = :authorId
+endcode

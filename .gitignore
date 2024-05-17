@@ -1,0 +1,9 @@
+build
+tools
+out
+target
+*.suo
+*.pyc
+__pycache__
+.vs
+.idea

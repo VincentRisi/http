@@ -1,0 +1,12 @@
+int ping(int given, int add)
+{
+message: #
+openapi: get "ping/given/{given}/add/{add}" Utility
+input 
+    given;
+    add;
+code
+PYTHON: 
+    return given + add
+endcode
+}

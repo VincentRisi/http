@@ -1,0 +1,23 @@
+EXPORTS
+  SockClientInit=_SockClientInit@12
+  SockClientOpen=_SockClientOpen@4
+  SockClose=_SockClose@4
+  SockDone=_SockDone@4
+  SockDupServer=_SockDupServer@16
+  SockDuplicate=_SockDuplicate@16
+  SockError=_SockError@4
+  SockErrorMsg=_SockErrorMsg@4
+  SockErrorMsgNet=_SockErrorMsgNet@12
+  SockErrorText=_SockErrorText@4
+  SockRead=_SockRead@12
+  SockReadLength=_SockReadLength@8
+  SockServerInit=_SockServerInit@8
+  SockServerOpen=_SockServerOpen@4
+  SockSetRetries=_SockSetRetries@8
+  SockSetTimeOut=_SockSetTimeOut@8
+  SockStreamRead=_SockStreamRead@16
+  SockWaitRead=_SockWaitRead@12
+  SockWaitServer=_SockWaitServer@12
+  SockWaitWrite=_SockWaitWrite@12
+  SockWrite=_SockWrite@12
+  SockWriteLength=_SockWriteLength@8
