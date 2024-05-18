@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:complexType name="CustomPaymentComment">
+        <xs:attribute name="CommentType" type="xs:string" />
+        <xs:attribute name="Comment" type="xs:string" />
+        <xs:attribute name="Field" type="xs:string" />
+        <xs:attribute name="User" type="xs:string" />
+        <xs:attribute name="TimeStamp" type="xs:dateTime" />
+        <xs:attribute name="Id" type="xs:int" />
+    </xs:complexType>
+    <xs:simpleType name="ErrorSeverity">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="Error" value="0" />
+            <xs:enumeration id="Warning" value="1" />
+            <xs:enumeration id="Info" value="2" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="MT191AmountWithRate">
+        <xs:sequence>
+            <xs:element name="Amount" type="xs:float" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Currency" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Id" type="xs:int" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Rate" type="xs:float" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentAmount">
+        <xs:sequence>
+            <xs:element name="Amount" type="xs:float" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Currency" type="xs:string" maxOccurs="1" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentAmountWithRate">
+        <xs:sequence>
+            <xs:element name="Amount" type="xs:float" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Currency" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Rate" type="xs:float" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentAuthorisation">
+        <xs:attribute name="Id" type="xs:int" />
+        <xs:attribute name="PaymentStatus" type="xs:string" />
+        <xs:attribute name="AuthorisationRule" type="xs:string" />
+        <xs:attribute name="FailedDate" type="xs:dateTime" />
+        <xs:attribute name="AuthorisedBy" type="xs:string" />
+        <xs:attribute name="AuthorisedDate" type="xs:dateTime" />
+        <xs:attribute name="User" type="xs:string" />
+        <xs:attribute name="Username" type="xs:string" />
+        <xs:attribute name="TimeStamp" type="xs:dateTime" />
+    </xs:complexType>
+    <xs:complexType name="PaymentBeneficiary">
+        <xs:sequence>
+            <xs:element name="HoganCisNo" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="CIFNo" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="NTSystemCode" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="NTTxnCode" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Name" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="SegmentId" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Surname" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="FicaStatus" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="PassportNo" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="PassportCountry" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ResidentInd" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="NonResidentTaxIndicator" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ResidentID1" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ResidentID2" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ResidentID3" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ResidentID4" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ResidentID5" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="DcarNo" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="TaxRefNo" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="RegistrationType" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="RegistrationNo" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="AddressLine1_Street" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="AddressLine2_Suburb" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="CityName" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ContactName" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="ContactEmailNo" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ContactFaxNo" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="ContactTelNo" type="xs:string" maxOccurs="1" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentBank">
+        <xs:sequence>
+            <xs:element name="Id" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="SwiftAddress" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="BankType" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Name" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Address" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Account" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Branch" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="SortCode" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="AccountType" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="AccountCurrency" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Status" type="xs:string" maxOccurs="1" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentBeneficiaryAccount">
+        <xs:sequence>
+            <xs:element name="ID" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="MultiFunding" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="AccountNo" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="AccountBrn" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="AccountType" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Amount" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="AmountCurrency" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Status" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="GLAccountNo" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ZAREquivalent" type="xs:string" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentBeneficiaryCharge">
+        <xs:sequence>
+            <xs:element name="AccountNo" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="GLAccountNo" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="AccountType" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Amount" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="AmountCurrency" type="xs:string" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentBOP">
+        <xs:sequence>
+            <xs:element name="Id" type="xs:int" maxOccurs="1" minOccurs="0" />
+            <xs:element name="BOPAmount" type="xs:float" maxOccurs="1" minOccurs="0" />
+            <xs:element name="DebitAcct" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="CreditAcct" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="BenBankCC" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="InstrBankCC" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="CatCode" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Reportable" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="AccountIdentifier" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="flow" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Status" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="ErrorMsg" type="xs:string" maxOccurs="1" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentCLS">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="TimeIndication" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="TimeOffset" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ReleaseFlag" type="xs:boolean" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentComment">
+        <xs:attribute name="Id" type="xs:int" />
+        <xs:attribute name="CommentType" type="xs:string" />
+        <xs:attribute name="Comment" type="xs:string" />
+        <xs:attribute name="User" type="xs:string" />
+        <xs:attribute name="TimeStamp" type="xs:dateTime" />
+    </xs:complexType>
+    <xs:complexType name="PaymentCoverClass">
+        <xs:sequence>
+            <xs:element name="Id" type="xs:int" maxOccurs="1" minOccurs="1" />
+            <xs:element name="PaymentId" type="xs:int" maxOccurs="1" minOccurs="1" />
+            <xs:element name="MT910CoverId" type="xs:int" maxOccurs="1" minOccurs="1" />
+            <xs:element name="CoverStatus" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ApprovedBy" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="MatchedDate" type="xs:dateTime" maxOccurs="1" minOccurs="1" />
+            <xs:element name="SwiftMessage" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="FundStatus" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="DCarNumber" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ApprovalMethod" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ApprovalDate" type="xs:dateTime" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ReceivedDate" type="xs:dateTime" maxOccurs="1" minOccurs="1" />
+            <xs:element name="MT910SaffyNo" type="xs:string" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentDate">
+        <xs:sequence>
+            <xs:element name="Time" type="xs:dateTime" maxOccurs="1" minOccurs="1" />
+            <xs:element name="LocalTime" type="xs:dateTime" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Type" type="xs:string" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentDuplicate">
+        <xs:sequence>
+            <xs:element name="DuplicateID" type="xs:int" />
+            <xs:element name="OriginalID" type="xs:int" />
+            <xs:element name="Status" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentError">
+        <xs:attribute name="Id" type="xs:int" />
+        <xs:attribute name="Severity" type="ErrorSeverity" />
+        <xs:attribute name="Code" type="xs:int" />
+        <xs:attribute name="Reason" type="xs:string" />
+        <xs:attribute name="Field" type="xs:string" />
+        <xs:attribute name="Status" type="xs:int" />
+        <xs:attribute name="TimeStamp" type="xs:dateTime" />
+    </xs:complexType>
+    <xs:complexType name="PaymentFECClass">
+        <xs:sequence>
+            <xs:element name="Id" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="PaymentId" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="MultiFunding" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="ContractNumber" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="TradeRate" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="BaseAmount" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="TargetAmount" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="BaseCurrency" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="TargetCurrency" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="ValueDate" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="DealType" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="BuySellInd" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="ExistingFEC" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="TmStamp" type="xs:dateTime" maxOccurs="1" minOccurs="0" />
+            <xs:element name="MultiDivInd" type="xs:string" maxOccurs="1" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentFINSURV">
+        <xs:sequence>
+            <xs:element name="Id" type="xs:int" maxOccurs="1" minOccurs="0" />
+            <xs:element name="MultiFunding" type="xs:int" maxOccurs="1" minOccurs="0" />
+            <xs:element name="IsCharges" type="xs:int" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Amount" type="xs:float" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Status" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="URL" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Grouping" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Category" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="SubCategory" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="ThirdPartyFlag" type="xs:int" maxOccurs="1" minOccurs="0" />
+            <xs:element name="NonReportableFlag" type="xs:int" maxOccurs="1" minOccurs="0" />
+            <xs:element name="CannotCategoriseReason" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="UserName" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="ErrorMsg" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="OrigBankSwiftAddress" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="OrigBankName" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="OrigBankCountryCde" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="ExportControlNumber" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="CustomsClientNumber" type="xs:string" maxOccurs="1" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Paymentflags">
+        <xs:sequence>
+            <xs:element name="OUT103" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="OUT205Sarb" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="OUT205Bank" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="OUT202Bank" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="OUT191" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="MT199" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Repaired" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="RoutedBackToSaffy" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="PaymentCover" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="OUT103Y" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="OUT202YCOV" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ManualCaptured" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="SpecialInstruction" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="SIM" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="BulkUpload" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="CLS" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Vostro" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="NIS" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="CashOps" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="GPI" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="GPIException" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ManualVerification" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="AutoFEC" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="DbtAccInsufftFunds" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="PayAmountUnderIFILimit" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="SiressPayment" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="NostroCcyCutOff" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Field59F" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="LoanIQPayment" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ReturnOfFunds" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ElectronicCharge" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ReturnedFromNT" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="NationalTreasury" type="xs:string" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentIFI">
+        <xs:sequence>
+            <xs:element name="SwiftAddress" type="xs:string" />
+            <xs:element name="IFILimit" type="xs:float" />
+            <xs:element name="Approved" type="xs:boolean" />
+            <xs:element name="AssignmentType" type="xs:string" />
+            <xs:element name="Balance" type="xs:float" />
+            <xs:element name="AwaitingFunds" type="xs:boolean" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentIndicators">
+        <xs:sequence>
+            <xs:element name="Field57D" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Field72" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="CorrespondentLookup" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="BranchLimitChecked" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="CoverReceived" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="MT101Msg" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="NedTreasuryClient" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="DefaultRecCodeDone" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="GermanPension" type="xs:string" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentInfoField">
+        <xs:sequence>
+            <xs:element name="Id" type="xs:int" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Type" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Value" type="xs:string" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentProfile">
+        <xs:sequence>
+            <xs:element name="CapturedUser" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="AuthorisedBy" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Direction" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Status" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ProcessedBy" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="AssignedTo" type="xs:string" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentReturn">
+        <xs:sequence>
+            <xs:element name="Id" type="xs:int" maxOccurs="1" minOccurs="1" />
+            <xs:element name="PaymentId" type="xs:int" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ReturnField" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ReturnReason" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="SendersReference" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="RECCodeDetails" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="FurtherDetails" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="OriginalCover" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ReturnProcCover" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ReturnAuthCover" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ReturnNoCover" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="IsManual" type="xs:boolean" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ManualReference" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ManualDate" type="xs:dateTime" maxOccurs="1" minOccurs="1" />
+            <xs:element name="TmStamp" type="xs:dateTime" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="PaymentType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="Unknown" value="0" />
+            <xs:enumeration id="ZarOnUs" value="1" />
+            <xs:enumeration id="CcyOnUs" value="2" />
+            <xs:enumeration id="ZarPayOn" value="3" />
+            <xs:enumeration id="CcyPayOn" value="4" />
+            <xs:enumeration id="VostroZarOnUs" value="5" />
+            <xs:enumeration id="VostroZarPayOn" value="6" />
+            <xs:enumeration id="ClsZarPayIn" value="7" />
+            <xs:enumeration id="ClsZarPayOut" value="8" />
+            <xs:enumeration id="VostroCcyOnUs" value="9" />
+            <xs:enumeration id="VostroCcyPayOn" value="10" />
+            <xs:enumeration id="ClsCcyPayIn" value="11" />
+            <xs:enumeration id="ClsCcyPayOut" value="12" />
+            <xs:enumeration id="CcyConversionPayOn" value="13" />
+            <xs:enumeration id="OutgoingPayOn" value="20" />
+            <xs:enumeration id="OutgoingIntraOnUs" value="21" />
+            <xs:enumeration id="OutgoingInterOnUs" value="22" />
+            <xs:enumeration id="OutgoingBankToBank" value="23" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="PaymentUserNotes">
+        <xs:sequence>
+            <xs:element name="Id" type="xs:int" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Ext" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Tag" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ContactPerson" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="NumberDailed" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="BOPCategory" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="FECChecked" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="FEC" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="FATF" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="UserName" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Time" type="xs:dateTime" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="SearchType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="Lookup" value="0" />
+            <xs:enumeration id="RTGS" value="1" />
+            <xs:enumeration id="Result" value="2" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="Payment">
+        <xs:sequence>
+            <!--PaymentId attrib="Id"-->
+            <xs:element name="PaymentReference" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="RelatedReference" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="SendersReference" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ReceiverReference" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Profile" type="PaymentProfile" />
+            <xs:element name="BOPRecs" type="PaymentBOP" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="FINSURVRecs" type="PaymentFINSURV" minOccurs="0" maxOccurs="unbounded" />
+            <!--SessionNo attrib="SessionNo"-->
+            <!--SequenceNo attrib="SequenceNo"-->
+            <xs:element name="SaffyNo" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ProductCode" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="InputDate" type="xs:dateTime" maxOccurs="1" minOccurs="1" />
+            <xs:element name="OutputDate" type="xs:dateTime" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ReceivedDate" type="xs:dateTime" maxOccurs="1" minOccurs="1" />
+            <xs:element name="OriginalBrnNo" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ProcessingBrnNo" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="RoutedFromBrnNo" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="FinancialBrnNo" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Channel" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ChannelType" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="AdditionalFields">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="PaymentInfoField" type="PaymentInfoField" maxOccurs="unbounded" minOccurs="0" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PaymentType" type="PaymentType" maxOccurs="1" minOccurs="1" />
+            <xs:element name="SwiftType" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="SwiftMessage" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Priority" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="AssignTo" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ValueDate" type="xs:date" maxOccurs="1" minOccurs="1" />
+            <xs:element name="OriginalValueDate" type="xs:date" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ProcessedDate" type="xs:date" maxOccurs="1" minOccurs="1" />
+            <xs:element name="TmStamp" type="xs:dateTime" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Principle" type="PaymentAmount" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Instructed" type="PaymentAmountWithRate" maxOccurs="1" minOccurs="1" />
+            <xs:element name="OriginalInstructed" type="PaymentAmountWithRate" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ZAREq" type="PaymentAmount" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Settlement" type="PaymentAmount" maxOccurs="1" minOccurs="1" />
+            <xs:element name="TotalCharge" type="PaymentAmount" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ChargeType" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="OutChargeType" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="SendersCharges" type="PaymentAmount" maxOccurs="unbounded" minOccurs="0" />
+            <xs:element name="ReceiversCharges" type="PaymentAmount" maxOccurs="unbounded" minOccurs="0" />
+            <xs:element name="IFI" type="PaymentIFI" maxOccurs="1" minOccurs="0" />
+            <xs:element name="TransactionDate" type="PaymentDate" maxOccurs="1" minOccurs="1" />
+            <xs:element name="SendersBank" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="RecipientBank" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="OrderingCustomer" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="OrderingInstitution" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="SendersCorrespondent" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="ReceiversCorrespondent" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="ThirdReimbursementBank" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="IntermediaryBank" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="FundsWith" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="Beneficiary" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="AccountWith" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="SenderToReceiverInfo" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="OrderingCustomerB" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="OrderingInstitutionB" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="IntermediaryBankB" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="AccountWithB" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="BeneficiaryB" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="SenderToReceiverInfoB" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="DebitBank" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="CreditBank" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="BeneficiaryDetails" type="PaymentBeneficiary" maxOccurs="1" minOccurs="1" />
+            <xs:element name="BeneficiaryAccounts">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="PaymentBeneficiaryAccount" type="PaymentBeneficiaryAccount" maxOccurs="unbounded" minOccurs="0" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BeneficiaryCharge" type="PaymentBeneficiaryCharge" maxOccurs="1" minOccurs="0" />
+            <xs:element name="PaymentFEC" type="PaymentFECClass" maxOccurs="unbounded" minOccurs="0" />
+            <xs:element name="OutSendersCorrespondent" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="OutReceiversCorrespondent" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="STP" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="PaymentOutflags" type="Paymentflags" maxOccurs="1" minOccurs="1" />
+            <xs:element name="Indicators" type="PaymentIndicators" />
+            <xs:element name="MT103" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="MT202COV" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="MT202BANK" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="MT191" type="MT191AmountWithRate" maxOccurs="1" minOccurs="0" />
+            <xs:element name="MT199" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="NedbankCorrespondent" type="PaymentBank" maxOccurs="1" minOccurs="0" />
+            <xs:element name="MCPEResponse" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="MCPEStatus" type="xs:string" maxOccurs="1" minOccurs="0" />
+            <xs:element name="CLSData" type="PaymentCLS" maxOccurs="1" minOccurs="1" />
+            <xs:element name="CoverData" type="PaymentCoverClass" maxOccurs="1" minOccurs="1" />
+            <xs:element name="ReturnDetails" type="PaymentReturn" maxOccurs="1" minOccurs="0" />
+            <xs:element name="UETR" type="xs:string" maxOccurs="1" minOccurs="1" />
+            <xs:element name="PaymentUserNotesITT" type="PaymentUserNotes" maxOccurs="unbounded" />
+            <xs:element name="Errors" type="PaymentError" maxOccurs="unbounded" minOccurs="0" />
+            <xs:element name="Comments" type="PaymentComment" maxOccurs="unbounded" minOccurs="0" />
+            <xs:element name="CustomComments" type="CustomPaymentComment" maxOccurs="unbounded" minOccurs="0" />
+            <xs:element name="Authorisations" type="PaymentAuthorisation" maxOccurs="unbounded" minOccurs="0" />
+        </xs:sequence>
+        <xs:attribute name="Id" type="xs:string" use="optional" />
+        <xs:attribute name="SessionNo" type="xs:int" use="optional" />
+        <xs:attribute name="SequenceNo" type="xs:int" use="optional" />
+    </xs:complexType>
+</xs:schema>

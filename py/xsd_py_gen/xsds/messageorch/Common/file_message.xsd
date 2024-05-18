@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="root">
+    <xsd:sequence>
+   		<xsd:element minOccurs="1" name="FileName" type="xsd:string" />
+   		<xsd:element minOccurs="1" name="StorageLocation" type="xsd:string" />
+	  </xsd:sequence>
+   </xsd:complexType>
+</xsd:schema>

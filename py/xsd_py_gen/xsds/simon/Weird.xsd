@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:tns="http://fundtech.com/SCL/CommonTypes"
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	targetNamespace="http://fundtech.com/SCL/CommonTypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="FndtMsgSubset" type="tns:FndtMsgSubsetType" />
+
+  <xsd:simpleType name="XmlType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="FULL">
+        <xsd:annotation>
+          <xsd:documentation>
+            Includes the following data in the output XML:
+            - ALL MINF Relational columns
+            - All Monitor Fields
+            - All User Defined Fields
+            - Updated Xml pmnt Section
+            - Related Static data
+            - Interfaces Section
+            - Msg Notes
+            - Msg Fees
+            - Msg Posting
+            - Msg Rates
+            - Msg Special Instructions
+            - Msg Errors
+            - Msg Audit Trail
+            - Msg Advising
+            - Msg Stop Flags
+            - Orig Xml Pmnt Section
+            - Orig Xml Extension Section
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="PERSISTENT_DATA">
+        <xsd:annotation>
+          <xsd:documentation>
+            Includes the following data in the output XML:
+            - ALL MINF Relational columns
+            - All Monitor Fields
+            - All User Defined Fields
+            - Updated Xml pmnt Section
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="ORIG_PERSISTENT_DATA">
+        <xsd:annotation>
+          <xsd:documentation>
+            Includes the following data in the output XML:
+            - Original feeded Message and Extension (if provided)
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="RTR">
+        <xsd:annotation>
+          <xsd:documentation>
+            Includes the following data in the output XML:
+            - EXCHRATE_RTR
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="ParseOutputModeType">
+    <xsd:simpleContent>
+      <xsd:extension base="tns:XmlType">
+        <xsd:attribute name="pmntConversionType" type="xsd:string" use="optional" default="AS-IS"/>
+        <xsd:attribute name="origPmntConversionType" type="xsd:string" use="optional" default="AS-IS"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <xsd:group name="FndtTxType">
+    <xsd:sequence>
+      <xsd:choice minOccurs="0" maxOccurs="1">
+        <xsd:element name="outputMode" type="tns:ParseOutputModeType"/>
+        <xsd:element name="fndtMsgSubset" type="tns:FndtMsgSubsetType"/>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:group>
+
+  <xsd:complexType name="LogicalFieldType">
+    <xsd:sequence />
+    <xsd:attribute name="id" type="xsd:string" use="required" />
+  </xsd:complexType>
+
+  <xsd:complexType name="LogicalFieldDocument">
+    <xsd:complexContent>
+      <xsd:extension base="tns:LogicalFieldType">
+        <xsd:sequence>
+          <xsd:element name="field" type="xsd:anyType" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="conversionType" type="xsd:string" use="optional" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="FndtMsgSubsetType">
+    <xsd:sequence>
+      <xsd:element name="document" type="tns:LogicalFieldDocument" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+
+</xsd:schema>

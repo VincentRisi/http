@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9b8cf034-8b25-40a1-bc1e-57b823a343b4}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>test_attrib.py</StartupFile>
+    <SearchPath>build\simon\py</SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>Global|VisualStudio|Python310</InterpreterId>
+    <TestFramework>Pytest</TestFramework>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+    <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="build\example\log\gpspayment.log" />
+    <Content Include="build\example\log\pacs.008.001.08.log" />
+    <Content Include="build\example\log\pain.001.001.09.log" />
+    <Content Include="build\messageorch\Common\log\file_message.log" />
+    <Content Include="build\simon\log\commontypes.log" />
+    <Content Include="build\simon\log\externalfndtmsg.log" />
+    <Content Include="build\simon\log\weird.log" />
+    <Content Include="data\GPSPayment.xml" />
+    <Content Include="data\GPSPayment2.xml" />
+    <Content Include="data\GPSPayment3.xml" />
+    <Content Include="data\GPSPayment4.xml" />
+    <Content Include="data\GPSPayment5.xml" />
+    <Content Include="data\Message.xml" />
+    <Content Include="python_front.py" />
+    <Content Include="xsds\example\GPSPayment.xsd" />
+    <Content Include="xsds\example\pacs.008.001.08.xsd" />
+    <Content Include="xsds\example\pain.001.001.09.xsd" />
+    <Content Include="xsds\messageorch\builtin\soap_envelope_v000003.xsd" />
+    <Content Include="xsds\messageorch\builtin\xml.xsd" />
+    <Content Include="xsds\messageorch\Common\file_message.xsd" />
+    <Content Include="xsds\README.md" />
+    <Content Include="xsds\simon\CommonTypes.xsd" />
+    <Content Include="xsds\simon\ExternalFndtMsg.xsd" />
+    <Content Include="xsds\simon\Weird.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\ctools\audio\utility\py\aaxlist.py">
+      <Link>aaxlist.py</Link>
+    </Compile>
+    <Compile Include="build\example\py\XSD_GPSPayment.py" />
+    <Compile Include="build\example\py\XSD_PACS_008.py" />
+    <Compile Include="build\example\py\XSD_PAIN_001.py" />
+    <Compile Include="build\messageorch\Common\py\XSD_FILE_MESSAGE.py" />
+    <Compile Include="build\simon\py\XSD_CommonTypes.py" />
+    <Compile Include="build\simon\py\XSD_ExternalFndtMsg.py" />
+    <Compile Include="build\simon\py\XSD_Weird.py" />
+    <Compile Include="gends_util.py" />
+    <Compile Include="json_yaml_tester.py" />
+    <Compile Include="test_attrib.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="openapi_test.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="base85.py" />
+    <Compile Include="tester.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="runner.py" />
+    <Compile Include="simon_commontypes.py" />
+    <Compile Include="typing_usage.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="wsdl_to_xsd.py" />
+    <Compile Include="dict_utils.py" />
+    <Compile Include="xml_to_xsd.py" />
+    <Compile Include="xsd_consts.py" />
+    <Compile Include="xsd_load_tester.py" />
+    <Compile Include="xsd_py_gen.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="build" />
+    <Folder Include="build\example\" />
+    <Folder Include="build\example\log\" />
+    <Folder Include="build\example\py" />
+    <Folder Include="build\messageorch\" />
+    <Folder Include="build\messageorch\Common\" />
+    <Folder Include="build\messageorch\Common\log\" />
+    <Folder Include="build\messageorch\Common\py" />
+    <Folder Include="build\simon\" />
+    <Folder Include="build\simon\log\" />
+    <Folder Include="build\simon\py" />
+    <Folder Include="data\" />
+    <Folder Include="xsds\" />
+    <Folder Include="xsds\example\" />
+    <Folder Include="xsds\messageorch\" />
+    <Folder Include="xsds\messageorch\builtin\" />
+    <Folder Include="xsds\messageorch\Common\" />
+    <Folder Include="xsds\simon\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|VisualStudio|Python310" />
+    <InterpreterReference Include="Global|VisualStudio|Python311" />
+    <InterpreterReference Include="Global|VisualStudio|Python37" />
+    <InterpreterReference Include="Global|VisualStudio|Python39" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>
