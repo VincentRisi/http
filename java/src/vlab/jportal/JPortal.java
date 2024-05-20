@@ -17,171 +17,42 @@ import java.lang.*;
 import java.io.*;
 
 /**
- * JDBC Database Definition Compiler and Generator
- */
-public class JPortal implements JPortalConstants
-{
-  static final private int[] jj_la1 = new int[189];
-  static final private JJCalls[] jj_2_rtns = new JJCalls[12];
-  static final private LookaheadSuccess jj_ls = new LookaheadSuccess();
-  /**
-   * Generated Token Manager.
-   */
-  static public JPortalTokenManager token_source;
-  /**
-   * Current token.
-   */
-  static public Token token;
-  /**
-   * Next token.
-   */
-  static public Token jj_nt;
-  protected static Database database;
-  protected static Table table;
+* JDBC Database Definition Compiler and Generator
+*/
+public class JPortal implements JPortalConstants {
+  protected static Database   database;
+  protected static Table      table;
   protected static Enumerator entry;
-  protected static Field field;
-  protected static Const constant;
-  protected static Value value;
-  protected static Grant grant;
-  protected static Key key;
-  protected static Link link;
-  protected static View view;
-  protected static Proc proc;
-  protected static With with;
-  protected static Parameter parameter;
-  protected static String perm;
-  protected static String user;
-  protected static String line;
-  protected static String inDir;
+  protected static Field      field;
+  protected static Const      constant;
+  protected static Value      value;
+  protected static Grant      grant;
+  protected static Key        key;
+  protected static Link       link;
+  protected static View       view;
+  protected static Proc       proc;
+  protected static With       with;
+  protected static Parameter  parameter;
+  protected static String     perm;
+  protected static String     user;
+  protected static String     line;
+  protected static String     inDir;
   protected static PrintWriter outLog;
-  static SimpleCharStream jj_input_stream;
   static private boolean parser_initialised = false;
   static private boolean fieldsNullByDefault = false;
   static private boolean isLiteral = false;
   static private String literal = "";
-  static private boolean jj_initialized_once = false;
-  static private int jj_ntk;
-  static private Token jj_scanpos, jj_lastpos;
-  static private int jj_la;
   /**
-   * Whether we are looking ahead.
-   */
-  static private final boolean jj_lookingAhead = false;
-  static private boolean jj_semLA;
-  static private int jj_gen;
-  static private int[] jj_la1_0;
-  static private int[] jj_la1_1;
-  static private int[] jj_la1_2;
-  static private int[] jj_la1_3;
-  static private int[] jj_la1_4;
-  static private boolean jj_rescan = false;
-  static private int jj_gc = 0;
-  static private final java.util.List jj_expentries = new java.util.ArrayList();
-  static private int[] jj_expentry;
-  static private int jj_kind = -1;
-  static private final int[] jj_lasttokens = new int[100];
-  static private int jj_endpos;
-
-  static
-  {
-    jj_la1_init_0();
-    jj_la1_init_1();
-    jj_la1_init_2();
-    jj_la1_init_3();
-    jj_la1_init_4();
-  }
-
-  /**
-   * Constructor with InputStream.
-   */
-  public JPortal(java.io.InputStream stream)
-  {
-    this(stream, null);
-  }
-
-  /**
-   * Constructor with InputStream and supplied encoding
-   */
-  public JPortal(java.io.InputStream stream, String encoding)
-  {
-    if (jj_initialized_once)
-    {
-      System.out.println("ERROR: Second call to constructor of static parser.  ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
-      throw new Error();
-    }
-    jj_initialized_once = true;
-    try
-    {
-      jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1);
-    }
-    catch (java.io.UnsupportedEncodingException e)
-    {
-      throw new RuntimeException(e);
-    }
-    token_source = new JPortalTokenManager(jj_input_stream);
-    token = new Token();
-    jj_ntk = -1;
-    jj_gen = 0;
-    for (int i = 0; i < 189; i++) jj_la1[i] = -1;
-    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
-  }
-
-  /**
-   * Constructor.
-   */
-  public JPortal(java.io.Reader stream)
-  {
-    if (jj_initialized_once)
-    {
-      System.out.println("ERROR: Second call to constructor of static parser. ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
-      throw new Error();
-    }
-    jj_initialized_once = true;
-    jj_input_stream = new SimpleCharStream(stream, 1, 1);
-    token_source = new JPortalTokenManager(jj_input_stream);
-    token = new Token();
-    jj_ntk = -1;
-    jj_gen = 0;
-    for (int i = 0; i < 189; i++) jj_la1[i] = -1;
-    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
-  }
-
-  /**
-   * Constructor with generated Token Manager.
-   */
-  public JPortal(JPortalTokenManager tm)
-  {
-    if (jj_initialized_once)
-    {
-      System.out.println("ERROR: Second call to constructor of static parser. ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
-      throw new Error();
-    }
-    jj_initialized_once = true;
-    token_source = tm;
-    token = new Token();
-    jj_ntk = -1;
-    jj_gen = 0;
-    for (int i = 0; i < 189; i++) jj_la1[i] = -1;
-    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
-  }
-
-  /**
-   * Reads input from standard input
-   */
+  * Reads input from standard input
+  */
   public static void main(String[] args)
   {
     try
     {
       PrintWriter outLog = new PrintWriter(System.out);
-      for (int i = 0; i < args.length; i++)
+      for (int i = 0; i <args.length; i++)
       {
-        System.out.println(args[i] + ": Parsing ...");
+        System.out.println(args[i]+": Parsing ...");
         setFieldsNullState(false);
         run(args[i], outLog);
       }
@@ -191,18 +62,15 @@ public class JPortal implements JPortalConstants
       e.printStackTrace();
     }
   }
-
   /**
-   * Reads input from supplied file
-   *
-   * @param inFile is the input file to parse
-   * @return Table from jbdcdef package
-   */
+  * Reads input from supplied file
+  * @param  inFile is the input file to parse
+  * @return Table from jbdcdef package
+  */
   public static Database run(String inFile, PrintWriter outLog)
   {
     return run(inFile, "", outLog);
   }
-
   public static Database run(String inFile, String inNub, PrintWriter outLog)
   {
     try
@@ -223,17 +91,14 @@ public class JPortal implements JPortalConstants
     }
     return null;
   }
-
   private static void setupNub(String inNub)
   {
     inDir = inNub;
   }
-
   public static Database run(String inFile, Reader reader, PrintWriter useOutLog)
   {
     return run(inFile, "", reader, useOutLog);
   }
-
   public static Database run(String inFile, String inNub, Reader reader, PrintWriter useOutLog)
   {
     outLog = useOutLog;
@@ -244,7 +109,8 @@ public class JPortal implements JPortalConstants
       {
         new JPortal(reader);
         parser_initialised = true;
-      } else
+      }
+      else
         JPortal.ReInit(reader);
       database = null;
       table = null;
@@ -268,7 +134,7 @@ public class JPortal implements JPortalConstants
     }
     catch (ParseException e)
     {
-      outLog.println("ParseException [" + e.getMessage() + "]");
+      outLog.println("ParseException ["+e.getMessage()+"]");
       outLog.flush();
       e.printStackTrace();
     }
@@ -278,25 +144,21 @@ public class JPortal implements JPortalConstants
     }
     return null;
   }
-
   /**
-   * How to create tables null field state
-   */
+  * How to create tables null field state
+  */
   public static void setFieldsNullState(boolean state)
   {
     fieldsNullByDefault = state;
   }
-
   public static Database loadBinFile(String inFile)
   {
     return database;
   }
-
   static String fixString(String s)
   {
-    return s.substring(1, s.length() - 1);
+    return s.substring(1, s.length()-1);
   }
-
   static String parseConsts(String s)
   {
     StringBuffer buffer = new StringBuffer();
@@ -304,8 +166,8 @@ public class JPortal implements JPortalConstants
     {
       if (cB > 0)
       {
-        buffer.append(s, 0, cB);
-        s = s.substring(cB + 1);
+        buffer.append(s,0,cB);
+        s = s.substring(cB+1);
       }
       // Looking for %xxx%
       int cE = s.indexOf("%");
@@ -323,26 +185,26 @@ public class JPortal implements JPortalConstants
         continue;
       }
       // Check for Const in form fieldName.enumName
-      String lookup = s.substring(0, cE);
+      String lookup = s.substring(0,cE);
       int cP = lookup.indexOf(".");
       if (cP > 0)
       {
-        String fieldName = lookup.substring(0, cP);
-        String enumName = lookup.substring(cP + 1);
+        String fieldName = lookup.substring(0,cP);
+        String enumName = lookup.substring(cP+1);
         Field field = table.getField(fieldName);
         if (field != null)
         {
           boolean done = false;
-          for (int i = 0; i < field.enums.size(); i++)
+          for (int i=0; i < field.enums.size(); i++)
           {
             Enumerator entry = field.enums.elementAt(i);
             if (entry.name.equalsIgnoreCase(enumName))
             {
-              String evalue = "" + entry.value;
-              if (field.type == Field.ANSICHAR && field.length == 1)
-                evalue = "'" + (char) entry.value + "'";
+              String evalue = ""+entry.value;
+              if (field.type == Field.ANSICHAR &&  field.length == 1)
+                 evalue = "'"+(char)entry.value+"'";
               buffer.append(evalue);
-              s = s.substring(cE + 1);
+              s = s.substring(cE+1);
               done = true;
               break;
             }
@@ -355,12 +217,11 @@ public class JPortal implements JPortalConstants
       buffer.append('%');
       buffer.append(lookup);
       buffer.append('%');
-      s = s.substring(cE + 1);
+      s = s.substring(cE+1);
     }
     buffer.append(s);
     return buffer.toString();
   }
-
   static String parseDynamics(String s)
   {
     s = parseConsts(s);
@@ -370,7 +231,7 @@ public class JPortal implements JPortalConstants
     {
       if (dB > 0)
       {
-        line = new Line(s.substring(0, dB) + " ");
+        line = new Line(s.substring(0, dB)+" ");
         proc.addLine(line);
         s = s.substring(dB);
       }
@@ -379,7 +240,7 @@ public class JPortal implements JPortalConstants
       int addB = 0;
       int addE = 0;
       char c = 0;
-      for (dE = 1; dE < s.length(); dE++)
+      for (dE=1; dE < s.length(); dE++)
       {
         c = s.charAt(dE);
         if (dE == 1 && c == '\'')
@@ -397,7 +258,7 @@ public class JPortal implements JPortalConstants
         addE = 1;
         dE++;
       }
-      String dVar = s.substring(1 + addB, dE - addB);
+      String dVar = s.substring(1+addB, dE-addB);
       s = s.substring(dE);
       int sB = dVar.indexOf("(");
       int sE = dVar.indexOf(")");
@@ -407,11 +268,12 @@ public class JPortal implements JPortalConstants
         //int sE = dVar.indexOf(")");
         if (sE > sB)
         {
-          String dSize = dVar.substring(sB + 1, sE);
+          String dSize = dVar.substring(sB+1, sE);
           size = Integer.parseInt(dSize);
         }
         dVar = dVar.substring(0, sB);
-      } else if (sE > 0)
+      }
+      else if (sE > 0)
       {
         s = dVar.substring(sE) + s;
         dVar = dVar.substring(0, sE);
@@ -429,12 +291,11 @@ public class JPortal implements JPortalConstants
     }
     return s;
   }
-
   static void loadTableModule(String s, Vector useProcs)
   {
     try
     {
-      String importFile = inDir + s + ".nub";
+      String importFile = inDir  + s + ".nub";
       String workDir = inDir;
       int sep = workDir.indexOf(';');
       boolean found = false;
@@ -448,7 +309,7 @@ public class JPortal implements JPortalConstants
         }
         if (sep >= workDir.length())
           break;
-        workDir = workDir.substring(sep + 1);
+        workDir = workDir.substring(sep+1);
         sep = workDir.indexOf(';');
       }
       if (found == false)
@@ -461,7 +322,8 @@ public class JPortal implements JPortalConstants
         table.reader(ids, useProcs);
         ids.close();
         table.database = database;
-      } else
+      }
+      else
         outLog.println("Import of " + s + ".nub failed");
     }
     catch (Exception e)
@@ -470,22 +332,20 @@ public class JPortal implements JPortalConstants
       e.printStackTrace();
     }
   }
-
   static String replaceAllLiteral(String haystack)
   {
     String s = "\\[]'\" ";
-    for (int i = 0; i < s.length(); i++)
+    for(int i = 0; i < s.length(); i++)
     {
-      String c = "" + s.charAt(i);
-      haystack = replaceAll(haystack, c, "");
+       String c = "" + s.charAt(i);
+       haystack = replaceAll(haystack, c, "");
     }
     return haystack;
   }
-
   static String replaceAll(
-          String haystack,              // String to search in
-          String needle,                // Substring to find
-          String replacement)
+  String haystack,              // String to search in
+  String needle,                // Substring to find
+  String replacement)
   {
     int i = haystack.lastIndexOf(needle);
     if (i != -1)
@@ -500,7 +360,6 @@ public class JPortal implements JPortalConstants
     }
     return haystack;
   }
-
   static void saveTableModule()
   {
     try
@@ -526,10 +385,9 @@ public class JPortal implements JPortalConstants
     }
   }
 
-  // Parser starting point
-  static final public void jInput() throws ParseException
-  {
-    String s;
+// Parser starting point
+  static final public void jInput() throws ParseException {
+  String s;
     jj_consume_token(DATABASE);
     s = jIdent();
     database = new Database();
@@ -537,120 +395,114 @@ public class JPortal implements JPortalConstants
     database.userid = "";
     database.password = "";
     label_1:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case FLAGS:
-          break;
-        default:
-          jj_la1[0] = jj_gen;
-          break label_1;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case FLAGS:
+        ;
+        break;
+      default:
+        jj_la1[0] = jj_gen;
+        break label_1;
       }
       jj_consume_token(FLAGS);
       label_2:
-      while (true)
-      {
+      while (true) {
         s = jString();
         database.flags.addElement(s);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case STRING:
-            break;
-          default:
-            jj_la1[1] = jj_gen;
-            break label_2;
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case STRING:
+          ;
+          break;
+        default:
+          jj_la1[1] = jj_gen;
+          break label_2;
         }
       }
     }
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case PACKAGE:
-        jj_consume_token(PACKAGE);
-        s = jPackageIdent();
-        database.packageName = s;
-        break;
-      default:
-        jj_la1[2] = jj_gen;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case PACKAGE:
+      jj_consume_token(PACKAGE);
+      s = jPackageIdent();
+      database.packageName = s;
+      break;
+    default:
+      jj_la1[2] = jj_gen;
+      ;
     }
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case USING:
-        jj_consume_token(USING);
-        s = jPackageIdent();
-        database.portalName = s;
-        break;
-      default:
-        jj_la1[3] = jj_gen;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case USING:
+      jj_consume_token(USING);
+      s = jPackageIdent();
+      database.portalName = s;
+      break;
+    default:
+      jj_la1[3] = jj_gen;
+      ;
     }
     label_3:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case IMPORT:
-        case OUTPUT:
-          break;
-        default:
-          jj_la1[4] = jj_gen;
-          break label_3;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IMPORT:
+      case OUTPUT:
+        ;
+        break;
+      default:
+        jj_la1[4] = jj_gen;
+        break label_3;
       }
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case OUTPUT:
-          jj_consume_token(OUTPUT);
-          s = jIdentOrString();
-          database.output = s;
-          break;
-        case IMPORT:
-          jj_consume_token(IMPORT);
-          s = jIdentOrString();
-          database.imports.addElement(s);
-          break;
-        default:
-          jj_la1[5] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case OUTPUT:
+        jj_consume_token(OUTPUT);
+        s = jIdentOrString();
+            database.output = s;
+        break;
+      case IMPORT:
+        jj_consume_token(IMPORT);
+        s = jIdentOrString();
+            database.imports.addElement(s);
+        break;
+      default:
+        jj_la1[5] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
       }
     }
     jConnect();
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case DECLARE:
-        jj_consume_token(DECLARE);
-        jDeclares();
-        break;
-      default:
-        jj_la1[6] = jj_gen;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case DECLARE:
+      jj_consume_token(DECLARE);
+      jDeclares();
+      break;
+    default:
+      jj_la1[6] = jj_gen;
+      ;
     }
     label_4:
-    while (true)
-    {
+    while (true) {
       jTables();
       if (database.hasTable(table.name))
-        outLog.println(table.name + " is already present");
+        outLog.println(table.name+" is already present");
       else
         database.tables.addElement(table);
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case IMPORT:
-        case TABLE:
-          break;
-        default:
-          jj_la1[7] = jj_gen;
-          break label_4;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IMPORT:
+      case TABLE:
+        ;
+        break;
+      default:
+        jj_la1[7] = jj_gen;
+        break label_4;
       }
     }
     label_5:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case VIEW:
-          break;
-        default:
-          jj_la1[8] = jj_gen;
-          break label_5;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case VIEW:
+        ;
+        break;
+      default:
+        jj_la1[8] = jj_gen;
+        break label_5;
       }
       jView();
       database.views.addElement(view);
@@ -658,221 +510,195 @@ public class JPortal implements JPortalConstants
     jj_consume_token(0);
   }
 
-  // Field definitions
-  static final public void jDeclares() throws ParseException
-  {
+// Field definitions
+  static final public void jDeclares() throws ParseException {
     label_6:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case IDENTIFIER:
-        case LIDENTIFIER:
-          break;
-        default:
-          jj_la1[9] = jj_gen;
-          break label_6;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IDENTIFIER:
+      case LIDENTIFIER:
+        ;
+        break;
+      default:
+        jj_la1[9] = jj_gen;
+        break label_6;
       }
       jField();
       if (database.hasDeclare(field.name))
-        outLog.println(field.name + " is already present in declares");
+        outLog.println(field.name+" is already present in declares");
       else
         database.declares.addElement(field);
     }
   }
 
-  // This is only used for table generation code.
-  static final public void jConnect() throws ParseException
-  {
-    String s;
+// This is only used for table generation code.
+  static final public void jConnect() throws ParseException {
+  String s;
     jj_consume_token(SERVER);
     s = jIdentOrString();
     database.server = s;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case SCHEMA:
-        jj_consume_token(SCHEMA);
-        s = jIdentOrString();
-        database.schema = s;
-        break;
-      default:
-        jj_la1[10] = jj_gen;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case SCHEMA:
+      jj_consume_token(SCHEMA);
+      s = jIdentOrString();
+      database.schema = s;
+      break;
+    default:
+      jj_la1[10] = jj_gen;
+      ;
     }
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case USERID:
-        jj_consume_token(USERID);
-        s = jIdent();
-        database.userid = s;
-        jj_consume_token(PASSWORD);
-        s = jIdent();
-        database.password = s;
-        break;
-      default:
-        jj_la1[11] = jj_gen;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case USERID:
+      jj_consume_token(USERID);
+      s = jIdent();
+      database.userid = s;
+      jj_consume_token(PASSWORD);
+      s = jIdent();
+      database.password = s;
+      break;
+    default:
+      jj_la1[11] = jj_gen;
+      ;
     }
   }
 
-  // A package can contain dotted notation
-  static final public String jPackageIdent() throws ParseException
-  {
-    String s, n;
+// A package can contain dotted notation
+  static final public String jPackageIdent() throws ParseException {
+  String s, n;
     s = jIdent();
     label_7:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case 151:
-          break;
-        default:
-          jj_la1[12] = jj_gen;
-          break label_7;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case 151:
+        ;
+        break;
+      default:
+        jj_la1[12] = jj_gen;
+        break label_7;
       }
       jj_consume_token(151);
       n = jIdent();
       s = s + "." + n;
     }
-    {
-      if (true) return s;
+    {if (true) return s;}
+    throw new Error("Missing return statement in function");
+  }
+
+// The server may be a standard variable or a string
+  static final public String jIdentOrString() throws ParseException {
+  Token t;
+  String s;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case IDENTIFIER:
+    case LIDENTIFIER:
+      s = jIdent();
+    {if (true) return s;}
+      break;
+    case STRING:
+      t = jj_consume_token(STRING);
+    s = t.image;
+    {if (true) return fixString(s);}
+      break;
+    default:
+      jj_la1[13] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
     throw new Error("Missing return statement in function");
   }
 
-  // The server may be a standard variable or a string
-  static final public String jIdentOrString() throws ParseException
-  {
-    Token t;
-    String s;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case IDENTIFIER:
-      case LIDENTIFIER:
-        s = jIdent();
-      {
-        if (true) return s;
-      }
+// Identifiers may be DEF keywords if they are escaped using L'x'
+  static final public String jIdent() throws ParseException {
+  Token t;
+  String s;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case IDENTIFIER:
+      t = jj_consume_token(IDENTIFIER);
+    isLiteral = false;
+    literal = "";
+    {if (true) return t.image;}
       break;
-      case STRING:
-        t = jj_consume_token(STRING);
-        s = t.image;
-      {
-        if (true) return fixString(s);
-      }
+    case LIDENTIFIER:
+      t = jj_consume_token(LIDENTIFIER);
+    s = t.image;
+    isLiteral = true;
+    literal = s.substring(2, s.length()-1);
+    {if (true) return replaceAllLiteral(s.substring(2, s.length()-1));}
       break;
-      default:
-        jj_la1[13] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
+    default:
+      jj_la1[14] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
     throw new Error("Missing return statement in function");
   }
 
-  // Identifiers may be DEF keywords if they are escaped using L'x'
-  static final public String jIdent() throws ParseException
-  {
-    Token t;
-    String s;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case IDENTIFIER:
-        t = jj_consume_token(IDENTIFIER);
-        isLiteral = false;
-        literal = "";
-      {
-        if (true) return t.image;
-      }
-      break;
-      case LIDENTIFIER:
-        t = jj_consume_token(LIDENTIFIER);
-        s = t.image;
-        isLiteral = true;
-        literal = s.substring(2, s.length() - 1);
-      {
-        if (true) return replaceAllLiteral(s.substring(2, s.length() - 1));
-      }
-      break;
-      default:
-        jj_la1[14] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-    }
-    throw new Error("Missing return statement in function");
-  }
-
-  static final public void jTables() throws ParseException
-  {
-    boolean save = false;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case TABLE:
-        jTable();
-        label_8:
-        while (true)
-        {
-          if (jj_2_1(2))
-          {
-          } else
-          {
-            break label_8;
-          }
-          jExtras();
+  static final public void jTables() throws ParseException {
+  boolean save = false;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case TABLE:
+      jTable();
+      label_8:
+      while (true) {
+        if (jj_2_1(2)) {
+          ;
+        } else {
+          break label_8;
         }
-        save = true;
-        break;
-      case IMPORT:
-        jTableImport();
-        save = false;
-        break;
-      default:
-        jj_la1[15] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
+        jExtras();
+      }
+      save = true;
+      break;
+    case IMPORT:
+      jTableImport();
+      save = false;
+      break;
+    default:
+      jj_la1[15] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
     label_9:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case PROC:
-        case SPROC:
-        case WITH:
-        case DATA:
-        case DATALINE:
-        case IDLLINE:
-          break;
-        default:
-          jj_la1[16] = jj_gen;
-          break label_9;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PROC:
+      case SPROC:
+      case WITH:
+      case DATA:
+      case DATALINE:
+      case IDLLINE:
+        ;
+        break;
+      default:
+        jj_la1[16] = jj_gen;
+        break label_9;
       }
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case PROC:
-        case SPROC:
-        case DATA:
-        case DATALINE:
-        case IDLLINE:
-          jProc();
-          break;
-        case WITH:
-          jWith();
-          break;
-        default:
-          jj_la1[17] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PROC:
+      case SPROC:
+      case DATA:
+      case DATALINE:
+      case IDLLINE:
+        jProc();
+        break;
+      case WITH:
+        jWith();
+        break;
+      default:
+        jj_la1[17] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
       }
     }
     label_10:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case PARM:
-          break;
-        default:
-          jj_la1[18] = jj_gen;
-          break label_10;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PARM:
+        ;
+        break;
+      default:
+        jj_la1[18] = jj_gen;
+        break label_10;
       }
       jj_consume_token(PARM);
       parameter = new Parameter();
@@ -883,54 +709,51 @@ public class JPortal implements JPortalConstants
       saveTableModule();
   }
 
-  static final public void jTableImport() throws ParseException
-  {
-    String s;
-    String p;
-    Vector v = new Vector();
+  static final public void jTableImport() throws ParseException {
+  String s;
+  String p;
+  Vector v = new Vector();
     jj_consume_token(IMPORT);
     s = jIdentOrString();
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case LEFTBRACK:
-        jj_consume_token(LEFTBRACK);
-        label_11:
-        while (true)
-        {
-          p = jIdent();
-          v.addElement(p);
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              break;
-            default:
-              jj_la1[19] = jj_gen;
-              break label_11;
-          }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LEFTBRACK:
+      jj_consume_token(LEFTBRACK);
+      label_11:
+      while (true) {
+        p = jIdent();
+        v.addElement(p);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          ;
+          break;
+        default:
+          jj_la1[19] = jj_gen;
+          break label_11;
         }
-        jj_consume_token(RIGHTBRACK);
-        break;
-      default:
-        jj_la1[20] = jj_gen;
+      }
+      jj_consume_token(RIGHTBRACK);
+      break;
+    default:
+      jj_la1[20] = jj_gen;
+      ;
     }
     loadTableModule(s, v);
     table.database = database;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case LEFTPAREN:
-        s = jAlias();
-        table.alias = s;
-        break;
-      default:
-        jj_la1[21] = jj_gen;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LEFTPAREN:
+      s = jAlias();
+                   table.alias = s;
+      break;
+    default:
+      jj_la1[21] = jj_gen;
+      ;
     }
   }
 
-  static final public void jTable() throws ParseException
-  {
-    Token t;
-    String s;
+  static final public void jTable() throws ParseException {
+  Token t;
+  String s;
     t = jj_consume_token(TABLE);
     s = jIdent();
     table = new Table();
@@ -939,92 +762,86 @@ public class JPortal implements JPortalConstants
     table.isLiteral = isLiteral;
     table.literalName = literal;
     table.start = t.beginLine;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case LEFTPAREN:
-        s = jAlias();
-        table.alias = s;
-        break;
-      default:
-        jj_la1[22] = jj_gen;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LEFTPAREN:
+      s = jAlias();
+                   table.alias = s;
+      break;
+    default:
+      jj_la1[22] = jj_gen;
+      ;
     }
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case CHECK:
-        jj_consume_token(CHECK);
-        t = jj_consume_token(STRING);
-        s = t.image;
-        table.check = fixString(s);
-        break;
-      default:
-        jj_la1[23] = jj_gen;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case CHECK:
+      jj_consume_token(CHECK);
+      t = jj_consume_token(STRING);
+                          s = t.image; table.check = fixString(s);
+      break;
+    default:
+      jj_la1[23] = jj_gen;
+      ;
     }
     label_12:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case COMMENT:
-          break;
-        default:
-          jj_la1[24] = jj_gen;
-          break label_12;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case COMMENT:
+        ;
+        break;
+      default:
+        jj_la1[24] = jj_gen;
+        break label_12;
       }
       s = jComment();
       table.comments.addElement(s);
     }
     label_13:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case OPTIONS:
-          break;
-        default:
-          jj_la1[25] = jj_gen;
-          break label_13;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case OPTIONS:
+        ;
+        break;
+      default:
+        jj_la1[25] = jj_gen;
+        break label_13;
       }
       jj_consume_token(OPTIONS);
       label_14:
-      while (true)
-      {
+      while (true) {
         s = jString();
         table.options.addElement(s);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case STRING:
-            break;
-          default:
-            jj_la1[26] = jj_gen;
-            break label_14;
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case STRING:
+          ;
+          break;
+        default:
+          jj_la1[26] = jj_gen;
+          break label_14;
         }
       }
     }
     label_15:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case IDENTIFIER:
-        case LIDENTIFIER:
-          break;
-        default:
-          jj_la1[27] = jj_gen;
-          break label_15;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IDENTIFIER:
+      case LIDENTIFIER:
+        ;
+        break;
+      default:
+        jj_la1[27] = jj_gen;
+        break label_15;
       }
       jField();
       if (table.hasField(field.name))
-        outLog.println(field.name + " is already present");
+        outLog.println(field.name+" is already present");
       else
         table.fields.addElement(field);
     }
   }
 
-  static final public void jPackageField() throws ParseException
-  {
-    String s;
-    Token t;
-    boolean state;
+  static final public void jPackageField() throws ParseException {
+  String s;
+  Token t;
+  boolean state;
     s = jPackageIdent();
     field = new Field();
     field.name = s;
@@ -1032,90 +849,86 @@ public class JPortal implements JPortalConstants
     field.literalName = literal;
     field.isNull = fieldsNullByDefault;
     state = true;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case LEFTPAREN:
-        s = jAlias();
-        field.alias = s;
-        break;
-      default:
-        jj_la1[28] = jj_gen;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LEFTPAREN:
+      s = jAlias();
+                   field.alias = s;
+      break;
+    default:
+      jj_la1[28] = jj_gen;
+      ;
     }
     jDatatype();
     label_16:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case CALC:
-        case CHECK:
-        case DEFAULTV:
-        case NOT:
-        case NULL:
-          break;
-        default:
-          jj_la1[29] = jj_gen;
-          break label_16;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case CALC:
+      case CHECK:
+      case DEFAULTV:
+      case NOT:
+      case NULL:
+        ;
+        break;
+      default:
+        jj_la1[29] = jj_gen;
+        break label_16;
       }
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case DEFAULTV:
-          jj_consume_token(DEFAULTV);
-          t = jj_consume_token(STRING);
-          s = t.image;
-          field.defaultValue = fixString(s);
-          break;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case DEFAULTV:
+        jj_consume_token(DEFAULTV);
+        t = jj_consume_token(STRING);
+      s = t.image;
+      field.defaultValue = fixString(s);
+        break;
+      case NOT:
+      case NULL:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case NOT:
-        case NULL:
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case NOT:
-              jj_consume_token(NOT);
-              state = false;
-              break;
-            default:
-              jj_la1[30] = jj_gen;
-          }
-          jj_consume_token(NULL);
-          field.isNull = state;
-          break;
-        case CALC:
-          jj_consume_token(CALC);
-          field.isCalc = state;
-          break;
-        case CHECK:
-          jj_consume_token(CHECK);
-          t = jj_consume_token(STRING);
-          s = t.image;
-          field.checkValue = fixString(s);
+          jj_consume_token(NOT);
+            state = false;
           break;
         default:
-          jj_la1[31] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
+          jj_la1[30] = jj_gen;
+          ;
+        }
+        jj_consume_token(NULL);
+      field.isNull = state;
+        break;
+      case CALC:
+        jj_consume_token(CALC);
+      field.isCalc = state;
+        break;
+      case CHECK:
+        jj_consume_token(CHECK);
+        t = jj_consume_token(STRING);
+      s = t.image;
+      field.checkValue = fixString(s);
+        break;
+      default:
+        jj_la1[31] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
       }
     }
     label_17:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case COMMENT:
-          break;
-        default:
-          jj_la1[32] = jj_gen;
-          break label_17;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case COMMENT:
+        ;
+        break;
+      default:
+        jj_la1[32] = jj_gen;
+        break label_17;
       }
       s = jComment();
-      field.comments.addElement(s);
+     field.comments.addElement(s);
     }
   }
 
-  static final public void jField() throws ParseException
-  {
-    String s;
-    Token t;
-    boolean state;
+  static final public void jField() throws ParseException {
+  String s;
+  Token t;
+  boolean state;
     s = jIdent();
     field = new Field();
     field.name = s;
@@ -1123,510 +936,497 @@ public class JPortal implements JPortalConstants
     field.literalName = literal;
     field.isNull = fieldsNullByDefault;
     state = true;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case LEFTPAREN:
-        s = jAlias();
-        field.alias = s;
-        break;
-      default:
-        jj_la1[33] = jj_gen;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LEFTPAREN:
+      s = jAlias();
+                   field.alias = s;
+      break;
+    default:
+      jj_la1[33] = jj_gen;
+      ;
     }
     jDatatype();
     label_18:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case CALC:
-        case CHECK:
-        case DEFAULTV:
-        case NOT:
-        case NULL:
-          break;
-        default:
-          jj_la1[34] = jj_gen;
-          break label_18;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case CALC:
+      case CHECK:
+      case DEFAULTV:
+      case NOT:
+      case NULL:
+        ;
+        break;
+      default:
+        jj_la1[34] = jj_gen;
+        break label_18;
       }
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case DEFAULTV:
-          jj_consume_token(DEFAULTV);
-          t = jj_consume_token(STRING);
-          s = t.image;
-          field.defaultValue = fixString(s);
-          break;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case DEFAULTV:
+        jj_consume_token(DEFAULTV);
+        t = jj_consume_token(STRING);
+      s = t.image;
+      field.defaultValue = fixString(s);
+        break;
+      case NOT:
+      case NULL:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case NOT:
-        case NULL:
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case NOT:
-              jj_consume_token(NOT);
-              state = false;
-              break;
-            default:
-              jj_la1[35] = jj_gen;
-          }
-          jj_consume_token(NULL);
-          field.isNull = state;
-          break;
-        case CALC:
-          jj_consume_token(CALC);
-          field.isCalc = state;
-          break;
-        case CHECK:
-          jj_consume_token(CHECK);
-          t = jj_consume_token(STRING);
-          s = t.image;
-          field.checkValue = fixString(s);
+          jj_consume_token(NOT);
+            state = false;
           break;
         default:
-          jj_la1[36] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
+          jj_la1[35] = jj_gen;
+          ;
+        }
+        jj_consume_token(NULL);
+      field.isNull = state;
+        break;
+      case CALC:
+        jj_consume_token(CALC);
+      field.isCalc = state;
+        break;
+      case CHECK:
+        jj_consume_token(CHECK);
+        t = jj_consume_token(STRING);
+      s = t.image;
+      field.checkValue = fixString(s);
+        break;
+      default:
+        jj_la1[36] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
       }
     }
     label_19:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case COMMENT:
-          break;
-        default:
-          jj_la1[37] = jj_gen;
-          break label_19;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case COMMENT:
+        ;
+        break;
+      default:
+        jj_la1[37] = jj_gen;
+        break label_19;
       }
       s = jComment();
-      field.comments.addElement(s);
+     field.comments.addElement(s);
     }
   }
 
-  static final public String jAlias() throws ParseException
-  {
-    String alias;
+  static final public String jAlias() throws ParseException {
+  String alias;
     jj_consume_token(LEFTPAREN);
     alias = jIdent();
     jj_consume_token(RIGHTPAREN);
     //field.alias = alias;
-    {
-      if (true) return alias;
-    }
+    {if (true) return alias;}
     throw new Error("Missing return statement in function");
   }
 
-  static final public void jDatatype() throws ParseException
-  {
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case BLOB:
-        jj_consume_token(BLOB);
-        field.type = Field.BLOB;
-        field.length = 0;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACK:
-          case LEFTPAREN:
-          case NUMBER:
-            jCharsize();
-            break;
-          default:
-            jj_la1[38] = jj_gen;
-        }
-        break;
-      case IMAGE:
-        jj_consume_token(IMAGE);
-        field.type = Field.IMAGE;
-        field.length = 0;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACK:
-          case LEFTPAREN:
-          case NUMBER:
-            jCharsize();
-            break;
-          default:
-            jj_la1[39] = jj_gen;
-        }
-        break;
-      case BOOLEAN:
-        jj_consume_token(BOOLEAN);
-        field.type = Field.BOOLEAN;
-        field.length = 1;
-        break;
-      case BYTE:
-        jj_consume_token(BYTE);
-        field.type = Field.BYTE;
-        field.length = 1;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACE:
-          case LEFTPAREN:
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case LEFTPAREN:
-                jEnumValue();
-                break;
-              case LEFTBRACE:
-                jCharList();
-                break;
-              default:
-                jj_la1[40] = jj_gen;
-                jj_consume_token(-1);
-                throw new ParseException();
-            }
-            break;
-          default:
-            jj_la1[41] = jj_gen;
-        }
-        break;
-      case CHAR:
-        jj_consume_token(CHAR);
-        field.type = Field.CHAR;
-        field.length = 1;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACK:
-          case LEFTPAREN:
-          case NUMBER:
-            jCharsize();
-            break;
-          default:
-            jj_la1[42] = jj_gen;
-        }
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACE:
-            jCharList();
-            break;
-          default:
-            jj_la1[43] = jj_gen;
-        }
-        break;
-      case ANSICHAR:
-        jj_consume_token(ANSICHAR);
-        field.type = Field.ANSICHAR;
-        field.length = 1;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACK:
-          case LEFTPAREN:
-          case NUMBER:
-            jEnumChar();
-            break;
-          default:
-            jj_la1[44] = jj_gen;
-        }
-        break;
-      case WCHAR:
-        jj_consume_token(WCHAR);
-        field.type = Field.WCHAR;
-        field.length = 1;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACK:
-          case LEFTPAREN:
-          case NUMBER:
-            jCharsize();
-            break;
-          default:
-            jj_la1[45] = jj_gen;
-        }
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACE:
-            jCharList();
-            break;
-          default:
-            jj_la1[46] = jj_gen;
-        }
-        break;
-      case WANSICHAR:
-        jj_consume_token(WANSICHAR);
-        field.type = Field.WANSICHAR;
-        field.length = 1;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACK:
-          case LEFTPAREN:
-          case NUMBER:
-            jEnumChar();
-            break;
-          default:
-            jj_la1[47] = jj_gen;
-        }
-        break;
-      case UNICODE:
-        jj_consume_token(UNICODE);
-        field.type = Field.UNICODE;
-        field.length = 1;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACK:
-          case LEFTPAREN:
-          case NUMBER:
-            jCharsize();
-            break;
-          default:
-            jj_la1[48] = jj_gen;
-        }
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACE:
-            jCharList();
-            break;
-          default:
-            jj_la1[49] = jj_gen;
-        }
-        break;
-      case UTF8:
-        jj_consume_token(UTF8);
-        field.type = Field.UTF8;
-        field.length = 1;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACK:
-          case LEFTPAREN:
-          case NUMBER:
-            jCharsize();
-            break;
-          default:
-            jj_la1[50] = jj_gen;
-        }
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACE:
-            jCharList();
-            break;
-          default:
-            jj_la1[51] = jj_gen;
-        }
-        break;
-      case SHORT:
-        jj_consume_token(SHORT);
-        field.type = Field.SHORT;
-        field.length = 2;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACE:
-          case LEFTPAREN:
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case LEFTPAREN:
-                jEnumValue();
-                break;
-              case LEFTBRACE:
-                jCharList();
-                break;
-              default:
-                jj_la1[52] = jj_gen;
-                jj_consume_token(-1);
-                throw new ParseException();
-            }
-            break;
-          default:
-            jj_la1[53] = jj_gen;
-        }
-        break;
-      case INT:
-        jj_consume_token(INT);
-        field.type = Field.INT;
-        field.length = 4;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACE:
-          case LEFTPAREN:
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case LEFTPAREN:
-                jEnumValue();
-                break;
-              case LEFTBRACE:
-                jCharList();
-                break;
-              default:
-                jj_la1[54] = jj_gen;
-                jj_consume_token(-1);
-                throw new ParseException();
-            }
-            break;
-          default:
-            jj_la1[55] = jj_gen;
-        }
-        break;
-      case LONG:
-        jj_consume_token(LONG);
-        field.type = Field.LONG;
-        field.length = 8;
-        break;
-      case UID:
-        jj_consume_token(UID);
-        field.type = Field.UID;
-        field.length = 16;
-        break;
-      case DATE:
-        jj_consume_token(DATE);
-        field.type = Field.DATE;
-        field.length = 8;
-        break;
-      case DATETIME:
-        jj_consume_token(DATETIME);
-        field.type = Field.DATETIME;
-        field.length = 14;
-        break;
-      case TIME:
-        jj_consume_token(TIME);
-        field.type = Field.TIME;
-        field.length = 6;
-        break;
-      case TIMESTAMP:
-        jj_consume_token(TIMESTAMP);
-        field.type = Field.TIMESTAMP;
-        table.hasTimeStamp = true;
-        field.length = 14;
-        break;
-      case AUTOTIMESTAMP:
-        jj_consume_token(AUTOTIMESTAMP);
-        field.type = Field.AUTOTIMESTAMP;
-        table.hasAutoTimeStamp = true;
-        field.length = 14;
-        break;
-      case TLOB:
-        jj_consume_token(TLOB);
-        field.type = Field.TLOB;
-        field.length = 0;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACK:
-          case LEFTPAREN:
-          case NUMBER:
-            jCharsize();
-            break;
-          default:
-            jj_la1[56] = jj_gen;
-        }
-        break;
-      case XML:
-        jj_consume_token(XML);
-        field.type = Field.XML;
-        field.length = Field.DEFAULT_XML;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACK:
-          case LEFTPAREN:
-          case NUMBER:
-            jCharsize();
-            break;
-          default:
-            jj_la1[57] = jj_gen;
-        }
-        break;
-      case BIGXML:
-        jj_consume_token(BIGXML);
-        field.type = Field.BIGXML;
-        field.length = Field.DEFAULT_BIG_XML;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACK:
-          case LEFTPAREN:
-          case NUMBER:
-            jCharsize();
-            break;
-          default:
-            jj_la1[58] = jj_gen;
-        }
-        break;
-      case USERSTAMP:
-        jj_consume_token(USERSTAMP);
-        field.type = Field.USERSTAMP;
-        table.hasUserStamp = true;
-        field.length = 50;
-        break;
-      case SEQUENCE:
-        jj_consume_token(SEQUENCE);
-        field.type = Field.SEQUENCE;
-        field.isSequence = true;
-        table.hasSequence = true;
-        field.length = 4;
-        break;
-      case BIGSEQUENCE:
-        jj_consume_token(BIGSEQUENCE);
-        field.type = Field.BIGSEQUENCE;
-        field.isSequence = true;
-        table.hasSequence = true;
-        field.length = 8;
-        break;
-      case IDENTITY:
-        jj_consume_token(IDENTITY);
-        field.type = Field.IDENTITY;
-        field.isIdentity = true;
-        table.hasIdentity = true;
-        field.length = 4;
-        break;
-      case BIGIDENTITY:
-        jj_consume_token(BIGIDENTITY);
-        field.type = Field.BIGIDENTITY;
-        field.isIdentity = true;
-        table.hasIdentity = true;
-        field.length = 8;
-        break;
-      case DOUBLE:
-      case FLOAT:
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case DOUBLE:
-            jj_consume_token(DOUBLE);
-            break;
-          case FLOAT:
-            jj_consume_token(FLOAT);
-            break;
-          default:
-            jj_la1[59] = jj_gen;
-            jj_consume_token(-1);
-            throw new ParseException();
-        }
-        field.type = Field.DOUBLE;
-        field.length = 8;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTBRACK:
-          case LEFTPAREN:
-            jFloatsize();
-            break;
-          default:
-            jj_la1[60] = jj_gen;
-        }
-        break;
-      case MONEY:
-        jj_consume_token(MONEY);
-        field.type = Field.MONEY;
-        field.length = 8;
-        break;
-      case EQUALS:
-        jLookup();
+  static final public void jDatatype() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case BLOB:
+      jj_consume_token(BLOB);
+    field.type = Field.BLOB;
+    field.length = 0;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACK:
+      case LEFTPAREN:
+      case NUMBER:
+        jCharsize();
         break;
       default:
-        jj_la1[61] = jj_gen;
+        jj_la1[38] = jj_gen;
+        ;
+      }
+      break;
+    case IMAGE:
+      jj_consume_token(IMAGE);
+    field.type = Field.IMAGE;
+    field.length = 0;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACK:
+      case LEFTPAREN:
+      case NUMBER:
+        jCharsize();
+        break;
+      default:
+        jj_la1[39] = jj_gen;
+        ;
+      }
+      break;
+    case BOOLEAN:
+      jj_consume_token(BOOLEAN);
+    field.type = Field.BOOLEAN;
+    field.length = 1;
+      break;
+    case BYTE:
+      jj_consume_token(BYTE);
+    field.type = Field.BYTE;
+    field.length = 1;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACE:
+      case LEFTPAREN:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case LEFTPAREN:
+          jEnumValue();
+          break;
+        case LEFTBRACE:
+          jCharList();
+          break;
+        default:
+          jj_la1[40] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        break;
+      default:
+        jj_la1[41] = jj_gen;
+        ;
+      }
+      break;
+    case CHAR:
+      jj_consume_token(CHAR);
+    field.type = Field.CHAR;
+    field.length = 1;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACK:
+      case LEFTPAREN:
+      case NUMBER:
+        jCharsize();
+        break;
+      default:
+        jj_la1[42] = jj_gen;
+        ;
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACE:
+        jCharList();
+        break;
+      default:
+        jj_la1[43] = jj_gen;
+        ;
+      }
+      break;
+    case ANSICHAR:
+      jj_consume_token(ANSICHAR);
+    field.type = Field.ANSICHAR;
+    field.length = 1;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACK:
+      case LEFTPAREN:
+      case NUMBER:
+        jEnumChar();
+        break;
+      default:
+        jj_la1[44] = jj_gen;
+        ;
+      }
+      break;
+    case WCHAR:
+      jj_consume_token(WCHAR);
+    field.type = Field.WCHAR;
+    field.length = 1;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACK:
+      case LEFTPAREN:
+      case NUMBER:
+        jCharsize();
+        break;
+      default:
+        jj_la1[45] = jj_gen;
+        ;
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACE:
+        jCharList();
+        break;
+      default:
+        jj_la1[46] = jj_gen;
+        ;
+      }
+      break;
+    case WANSICHAR:
+      jj_consume_token(WANSICHAR);
+    field.type = Field.WANSICHAR;
+    field.length = 1;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACK:
+      case LEFTPAREN:
+      case NUMBER:
+        jEnumChar();
+        break;
+      default:
+        jj_la1[47] = jj_gen;
+        ;
+      }
+      break;
+    case UNICODE:
+      jj_consume_token(UNICODE);
+    field.type = Field.UNICODE;
+    field.length = 1;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACK:
+      case LEFTPAREN:
+      case NUMBER:
+        jCharsize();
+        break;
+      default:
+        jj_la1[48] = jj_gen;
+        ;
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACE:
+        jCharList();
+        break;
+      default:
+        jj_la1[49] = jj_gen;
+        ;
+      }
+      break;
+    case UTF8:
+      jj_consume_token(UTF8);
+    field.type = Field.UTF8;
+    field.length = 1;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACK:
+      case LEFTPAREN:
+      case NUMBER:
+        jCharsize();
+        break;
+      default:
+        jj_la1[50] = jj_gen;
+        ;
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACE:
+        jCharList();
+        break;
+      default:
+        jj_la1[51] = jj_gen;
+        ;
+      }
+      break;
+    case SHORT:
+      jj_consume_token(SHORT);
+    field.type = Field.SHORT;
+    field.length = 2;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACE:
+      case LEFTPAREN:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case LEFTPAREN:
+          jEnumValue();
+          break;
+        case LEFTBRACE:
+          jCharList();
+          break;
+        default:
+          jj_la1[52] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        break;
+      default:
+        jj_la1[53] = jj_gen;
+        ;
+      }
+      break;
+    case INT:
+      jj_consume_token(INT);
+    field.type = Field.INT;
+    field.length = 4;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACE:
+      case LEFTPAREN:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case LEFTPAREN:
+          jEnumValue();
+          break;
+        case LEFTBRACE:
+          jCharList();
+          break;
+        default:
+          jj_la1[54] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        break;
+      default:
+        jj_la1[55] = jj_gen;
+        ;
+      }
+      break;
+    case LONG:
+      jj_consume_token(LONG);
+    field.type = Field.LONG;
+    field.length = 8;
+      break;
+    case UID:
+      jj_consume_token(UID);
+    field.type = Field.UID;
+    field.length = 16;
+      break;
+    case DATE:
+      jj_consume_token(DATE);
+    field.type = Field.DATE;
+    field.length = 8;
+      break;
+    case DATETIME:
+      jj_consume_token(DATETIME);
+    field.type = Field.DATETIME;
+    field.length = 14;
+      break;
+    case TIME:
+      jj_consume_token(TIME);
+    field.type = Field.TIME;
+    field.length = 6;
+      break;
+    case TIMESTAMP:
+      jj_consume_token(TIMESTAMP);
+    field.type = Field.TIMESTAMP;
+    table.hasTimeStamp = true;
+    field.length = 14;
+      break;
+    case AUTOTIMESTAMP:
+      jj_consume_token(AUTOTIMESTAMP);
+    field.type = Field.AUTOTIMESTAMP;
+    table.hasAutoTimeStamp = true;
+    field.length = 14;
+      break;
+    case TLOB:
+      jj_consume_token(TLOB);
+    field.type = Field.TLOB;
+    field.length = 0;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACK:
+      case LEFTPAREN:
+      case NUMBER:
+        jCharsize();
+        break;
+      default:
+        jj_la1[56] = jj_gen;
+        ;
+      }
+      break;
+    case XML:
+      jj_consume_token(XML);
+    field.type = Field.XML;
+    field.length = Field.DEFAULT_XML;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACK:
+      case LEFTPAREN:
+      case NUMBER:
+        jCharsize();
+        break;
+      default:
+        jj_la1[57] = jj_gen;
+        ;
+      }
+      break;
+    case BIGXML:
+      jj_consume_token(BIGXML);
+    field.type = Field.BIGXML;
+    field.length = Field.DEFAULT_BIG_XML;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACK:
+      case LEFTPAREN:
+      case NUMBER:
+        jCharsize();
+        break;
+      default:
+        jj_la1[58] = jj_gen;
+        ;
+      }
+      break;
+    case USERSTAMP:
+      jj_consume_token(USERSTAMP);
+    field.type = Field.USERSTAMP;
+    table.hasUserStamp = true;
+    field.length = 50;
+      break;
+    case SEQUENCE:
+      jj_consume_token(SEQUENCE);
+    field.type = Field.SEQUENCE;
+    field.isSequence = true;
+    table.hasSequence = true;
+    field.length = 4;
+      break;
+    case BIGSEQUENCE:
+      jj_consume_token(BIGSEQUENCE);
+    field.type = Field.BIGSEQUENCE;
+    field.isSequence = true;
+    table.hasSequence = true;
+    field.length = 8;
+      break;
+    case IDENTITY:
+      jj_consume_token(IDENTITY);
+    field.type = Field.IDENTITY;
+    field.isIdentity = true;
+    table.hasIdentity = true;
+    field.length = 4;
+      break;
+    case BIGIDENTITY:
+      jj_consume_token(BIGIDENTITY);
+    field.type = Field.BIGIDENTITY;
+    field.isIdentity = true;
+    table.hasIdentity = true;
+    field.length = 8;
+      break;
+    case DOUBLE:
+    case FLOAT:
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case DOUBLE:
+        jj_consume_token(DOUBLE);
+        break;
+      case FLOAT:
+        jj_consume_token(FLOAT);
+        break;
+      default:
+        jj_la1[59] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
+      }
+    field.type = Field.DOUBLE;
+    field.length = 8;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTBRACK:
+      case LEFTPAREN:
+        jFloatsize();
+        break;
+      default:
+        jj_la1[60] = jj_gen;
+        ;
+      }
+      break;
+    case MONEY:
+      jj_consume_token(MONEY);
+    field.type = Field.MONEY;
+    field.length = 8;
+      break;
+    case EQUALS:
+      jLookup();
+      break;
+    default:
+      jj_la1[61] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
   }
 
-  static final public void jLookup() throws ParseException
-  {
-    String name = field.name;
-    String oname = field.name;
-    Field other = null;
+  static final public void jLookup() throws ParseException {
+  String name = field.name;
+  String oname = field.name;
+  Field other = null;
     jj_consume_token(EQUALS);
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case LEFTPAREN:
-        jj_consume_token(LEFTPAREN);
-        oname = jIdent();
-        jj_consume_token(RIGHTPAREN);
-        break;
-      default:
-        jj_la1[62] = jj_gen;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LEFTPAREN:
+      jj_consume_token(LEFTPAREN);
+      oname = jIdent();
+      jj_consume_token(RIGHTPAREN);
+      break;
+    default:
+      jj_la1[62] = jj_gen;
+      ;
     }
     if (proc != null)
     {
@@ -1646,7 +1446,8 @@ public class JPortal implements JPortalConstants
       outLog.println(oname + " is not present for type usage. Resorting to int.");
       field.type = Field.INT;
       field.length = 4;
-    } else
+    }
+    else
     {
       field.type = other.type;
       field.length = other.length;
@@ -1655,712 +1456,668 @@ public class JPortal implements JPortalConstants
     }
   }
 
-  static final public void jEnumValue() throws ParseException
-  {
-    int n;
-    String s;
+  static final public void jEnumValue() throws ParseException {
+  int n;
+  String s;
     jj_consume_token(LEFTPAREN);
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case LINK:
-        jj_consume_token(LINK);
-        s = jIdent();
-        field.enumLink = s;
-        break;
-      default:
-        jj_la1[63] = jj_gen;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LINK:
+      jj_consume_token(LINK);
+      s = jIdent();
+      field.enumLink = s;
+      break;
+    default:
+      jj_la1[63] = jj_gen;
+      ;
     }
     label_20:
-    while (true)
-    {
+    while (true) {
       s = jIdent();
       jj_consume_token(EQUALS);
       n = jNumber();
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case COMMA:
-          jj_consume_token(COMMA);
-          break;
-        default:
-          jj_la1[64] = jj_gen;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case COMMA:
+        jj_consume_token(COMMA);
+        break;
+      default:
+        jj_la1[64] = jj_gen;
+        ;
       }
       entry = new Enumerator();
       entry.name = s;
       entry.value = n;
       field.enums.addElement(entry);
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case IDENTIFIER:
-        case LIDENTIFIER:
-          break;
-        default:
-          jj_la1[65] = jj_gen;
-          break label_20;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IDENTIFIER:
+      case LIDENTIFIER:
+        ;
+        break;
+      default:
+        jj_la1[65] = jj_gen;
+        break label_20;
       }
     }
     jj_consume_token(RIGHTPAREN);
   }
 
-  static final public void jFloatsize() throws ParseException
-  {
-    int n;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case LEFTBRACK:
-        jj_consume_token(LEFTBRACK);
-        n = jNumber();
-        field.precision = n;
-        jj_consume_token(COMMA);
-        n = jNumber();
-        field.scale = n;
-        jj_consume_token(RIGHTBRACK);
-        break;
-      case LEFTPAREN:
-        jj_consume_token(LEFTPAREN);
-        n = jNumber();
-        field.precision = n;
-        jj_consume_token(COMMA);
-        n = jNumber();
-        field.scale = n;
-        jj_consume_token(RIGHTPAREN);
-        break;
-      default:
-        jj_la1[66] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
+  static final public void jFloatsize() throws ParseException {
+  int n;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LEFTBRACK:
+      jj_consume_token(LEFTBRACK);
+      n = jNumber();
+    field.precision = n;
+      jj_consume_token(COMMA);
+      n = jNumber();
+    field.scale = n;
+      jj_consume_token(RIGHTBRACK);
+      break;
+    case LEFTPAREN:
+      jj_consume_token(LEFTPAREN);
+      n = jNumber();
+    field.precision = n;
+      jj_consume_token(COMMA);
+      n = jNumber();
+    field.scale = n;
+      jj_consume_token(RIGHTPAREN);
+      break;
+    default:
+      jj_la1[66] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
   }
 
-  static final public void jEnumChar() throws ParseException
-  {
-    int n;
-    String s;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case LEFTBRACK:
-        jj_consume_token(LEFTBRACK);
+  static final public void jEnumChar() throws ParseException {
+  int n;
+  String s;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LEFTBRACK:
+      jj_consume_token(LEFTBRACK);
+      n = jNumber();
+      field.length = n;
+      jj_consume_token(RIGHTBRACK);
+      break;
+    case LEFTPAREN:
+      jj_consume_token(LEFTPAREN);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case NUMBER:
         n = jNumber();
         field.length = n;
-        jj_consume_token(RIGHTBRACK);
         break;
-      case LEFTPAREN:
-        jj_consume_token(LEFTPAREN);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case NUMBER:
-            n = jNumber();
-            field.length = n;
-            break;
-          case LINK:
-          case IDENTIFIER:
-          case LIDENTIFIER:
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case LINK:
-                jj_consume_token(LINK);
-                s = jIdent();
-                field.enumLink = s;
-                break;
-              default:
-                jj_la1[67] = jj_gen;
-            }
-            label_21:
-            while (true)
-            {
-              s = jIdent();
-              jj_consume_token(EQUALS);
-              n = jAsciiChar();
-              switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-              {
-                case COMMA:
-                  jj_consume_token(COMMA);
-                  break;
-                default:
-                  jj_la1[68] = jj_gen;
-              }
-              entry = new Enumerator();
-              entry.name = s;
-              entry.value = n;
-              field.enums.addElement(entry);
-              switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-              {
-                case IDENTIFIER:
-                case LIDENTIFIER:
-                  break;
-                default:
-                  jj_la1[69] = jj_gen;
-                  break label_21;
-              }
-            }
+      case LINK:
+      case IDENTIFIER:
+      case LIDENTIFIER:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case LINK:
+          jj_consume_token(LINK);
+          s = jIdent();
+          field.enumLink = s;
+          break;
+        default:
+          jj_la1[67] = jj_gen;
+          ;
+        }
+        label_21:
+        while (true) {
+          s = jIdent();
+          jj_consume_token(EQUALS);
+          n = jAsciiChar();
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case COMMA:
+            jj_consume_token(COMMA);
             break;
           default:
-            jj_la1[70] = jj_gen;
-            jj_consume_token(-1);
-            throw new ParseException();
+            jj_la1[68] = jj_gen;
+            ;
+          }
+          entry = new Enumerator();
+          entry.name = s;
+          entry.value = n;
+          field.enums.addElement(entry);
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case IDENTIFIER:
+          case LIDENTIFIER:
+            ;
+            break;
+          default:
+            jj_la1[69] = jj_gen;
+            break label_21;
+          }
         }
-        jj_consume_token(RIGHTPAREN);
-        break;
-      case NUMBER:
-        n = jNumber();
-        field.length = n;
         break;
       default:
-        jj_la1[71] = jj_gen;
+        jj_la1[70] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
+      }
+      jj_consume_token(RIGHTPAREN);
+      break;
+    case NUMBER:
+      n = jNumber();
+    field.length = n;
+      break;
+    default:
+      jj_la1[71] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
   }
 
-  static final public void jCharsize() throws ParseException
-  {
-    int n;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case LEFTBRACK:
-        jj_consume_token(LEFTBRACK);
-        n = jNumber();
-        field.length = n;
-        jj_consume_token(RIGHTBRACK);
-        break;
-      case LEFTPAREN:
-        jj_consume_token(LEFTPAREN);
-        n = jNumber();
-        field.length = n;
-        jj_consume_token(RIGHTPAREN);
-        break;
-      case NUMBER:
-        n = jNumber();
-        field.length = n;
-        break;
-      default:
-        jj_la1[72] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
+  static final public void jCharsize() throws ParseException {
+  int n;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LEFTBRACK:
+      jj_consume_token(LEFTBRACK);
+      n = jNumber();
+    field.length = n;
+      jj_consume_token(RIGHTBRACK);
+      break;
+    case LEFTPAREN:
+      jj_consume_token(LEFTPAREN);
+      n = jNumber();
+    field.length = n;
+      jj_consume_token(RIGHTPAREN);
+      break;
+    case NUMBER:
+      n = jNumber();
+    field.length = n;
+      break;
+    default:
+      jj_la1[72] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
   }
 
-  static final public void jCharList() throws ParseException
-  {
-    String s;
+  static final public void jCharList() throws ParseException {
+  String s;
     jj_consume_token(LEFTBRACE);
     label_22:
-    while (true)
-    {
+    while (true) {
       s = jIdent();
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case COMMA:
-          jj_consume_token(COMMA);
-          break;
-        default:
-          jj_la1[73] = jj_gen;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case COMMA:
+        jj_consume_token(COMMA);
+        break;
+      default:
+        jj_la1[73] = jj_gen;
+        ;
       }
       field.valueList.addElement(s);
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case IDENTIFIER:
-        case LIDENTIFIER:
-          break;
-        default:
-          jj_la1[74] = jj_gen;
-          break label_22;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IDENTIFIER:
+      case LIDENTIFIER:
+        ;
+        break;
+      default:
+        jj_la1[74] = jj_gen;
+        break label_22;
       }
     }
     jj_consume_token(RIGHTBRACE);
   }
 
-  static final public int jNumber() throws ParseException
-  {
-    Token t;
-    String s;
-    int i;
+  static final public int jNumber() throws ParseException {
+  Token t;
+  String s;
+  int i;
     t = jj_consume_token(NUMBER);
     s = t.image;
     i = Integer.parseInt(s);
-    {
-      if (true) return i;
-    }
+    {if (true) return i;}
     throw new Error("Missing return statement in function");
   }
 
-  static final public void jParm() throws ParseException
-  {
-    String s;
-    Proc p;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case STRING:
-        s = jString();
-        parameter.title = s;
-        break;
-      default:
-        jj_la1[75] = jj_gen;
+  static final public void jParm() throws ParseException {
+  String s;
+  Proc p;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case STRING:
+      s = jString();
+      parameter.title = s;
+      break;
+    default:
+      jj_la1[75] = jj_gen;
+      ;
     }
     label_23:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case PARMCACHE:
-        case PARMDELETE:
-        case PARMINSERT:
-        case PARMREADER:
-        case PARMSHOWS:
-        case PARMSUPPLIED:
-        case PARMUPDATE:
-        case PARMVIEWONLY:
-          break;
-        default:
-          jj_la1[76] = jj_gen;
-          break label_23;
-      }
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case PARMSHOWS:
-          jj_consume_token(PARMSHOWS);
-          label_24:
-          while (true)
-          {
-            s = jIdent();
-            if (table.hasField(s))
-              parameter.shows.addElement(table.getField(s));
-            else
-              outLog.println(s + " is not present in table for show.");
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case IDENTIFIER:
-              case LIDENTIFIER:
-                break;
-              default:
-                jj_la1[77] = jj_gen;
-                break label_24;
-            }
-          }
-          break;
-        case PARMVIEWONLY:
-          jj_consume_token(PARMVIEWONLY);
-          parameter.isViewOnly = true;
-          break;
-        case PARMSUPPLIED:
-          jj_consume_token(PARMSUPPLIED);
-          label_25:
-          while (true)
-          {
-            s = jIdent();
-            if (table.hasField(s))
-              parameter.supplied.addElement(table.getField(s));
-            else
-              outLog.println(s + " is not present in table for supplied.");
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case IDENTIFIER:
-              case LIDENTIFIER:
-                break;
-              default:
-                jj_la1[78] = jj_gen;
-                break label_25;
-            }
-          }
-          break;
-        case PARMCACHE:
-          jj_consume_token(PARMCACHE);
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              s = jIdent();
-              break;
-            case SELECTALL:
-              jj_consume_token(SELECTALL);
-              s = "SelectAll";
-              break;
-            default:
-              jj_la1[79] = jj_gen;
-              jj_consume_token(-1);
-              throw new ParseException();
-          }
-          p = table.getProc(s);
-          if (p != null)
-            parameter.cache = p;
-          else
-            outLog.println(s + " is not present in table as a cache reader.");
-          label_26:
-          while (true)
-          {
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case IDENTIFIER:
-              case LIDENTIFIER:
-                break;
-              default:
-                jj_la1[80] = jj_gen;
-                break label_26;
-            }
-            s = jIdent();
-            parameter.cacheExtras.addElement(s);
-          }
-          break;
-        case PARMREADER:
-          jj_consume_token(PARMREADER);
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              s = jIdent();
-              break;
-            case SELECTALL:
-              jj_consume_token(SELECTALL);
-              s = "SelectAll";
-              break;
-            default:
-              jj_la1[81] = jj_gen;
-              jj_consume_token(-1);
-              throw new ParseException();
-          }
-          p = table.getProc(s);
-          if (p != null)
-            parameter.reader = p;
-          else
-            outLog.println(s + " is not present in table as a reader.");
-          break;
-        case PARMINSERT:
-          jj_consume_token(PARMINSERT);
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              s = jIdent();
-              break;
-            case INSERT:
-              jj_consume_token(INSERT);
-              s = "Insert";
-              break;
-            default:
-              jj_la1[82] = jj_gen;
-              jj_consume_token(-1);
-              throw new ParseException();
-          }
-          p = table.getProc(s);
-          if (p != null)
-            parameter.insert = p;
-          else
-            outLog.println(s + " is not present in table as an inserter.");
-          break;
-        case PARMUPDATE:
-          jj_consume_token(PARMUPDATE);
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              s = jIdent();
-              break;
-            case UPDATE:
-              jj_consume_token(UPDATE);
-              s = "Update";
-              break;
-            default:
-              jj_la1[83] = jj_gen;
-              jj_consume_token(-1);
-              throw new ParseException();
-          }
-          p = table.getProc(s);
-          if (p != null)
-            parameter.update = p;
-          else
-            outLog.println(s + " is not present in table as an updater.");
-          break;
-        case PARMDELETE:
-          jj_consume_token(PARMDELETE);
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              s = jIdent();
-              break;
-            case DELETEONE:
-              jj_consume_token(DELETEONE);
-              s = "DeleteOne";
-              break;
-            default:
-              jj_la1[84] = jj_gen;
-              jj_consume_token(-1);
-              throw new ParseException();
-          }
-          p = table.getProc(s);
-          if (p != null)
-            parameter.delete = p;
-          else
-            outLog.println(s + " is not present in table as a deleter.");
-          break;
-        default:
-          jj_la1[85] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
-      }
-    }
-  }
-
-  static final public void jExtras() throws ParseException
-  {
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case GRANT:
-        jGrant();
-        table.grants.addElement(grant);
-        break;
-      case KEY:
-        jKey();
-        table.keys.addElement(key);
-        break;
-      case LINK:
-        jLink();
-        table.links.addElement(link);
-        break;
-      case VIEW:
-        jView();
-        table.views.addElement(view);
-        break;
-      case CONST:
-        jConst();
-        table.consts.addElement(constant);
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PARMCACHE:
+      case PARMDELETE:
+      case PARMINSERT:
+      case PARMREADER:
+      case PARMSHOWS:
+      case PARMSUPPLIED:
+      case PARMUPDATE:
+      case PARMVIEWONLY:
+        ;
         break;
       default:
-        jj_la1[86] = jj_gen;
+        jj_la1[76] = jj_gen;
+        break label_23;
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PARMSHOWS:
+        jj_consume_token(PARMSHOWS);
+        label_24:
+        while (true) {
+          s = jIdent();
+        if (table.hasField(s))
+          parameter.shows.addElement(table.getField(s));
+        else
+          outLog.println(s + " is not present in table for show.");
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case IDENTIFIER:
+          case LIDENTIFIER:
+            ;
+            break;
+          default:
+            jj_la1[77] = jj_gen;
+            break label_24;
+          }
+        }
+        break;
+      case PARMVIEWONLY:
+        jj_consume_token(PARMVIEWONLY);
+      parameter.isViewOnly = true;
+        break;
+      case PARMSUPPLIED:
+        jj_consume_token(PARMSUPPLIED);
+        label_25:
+        while (true) {
+          s = jIdent();
+        if (table.hasField(s))
+          parameter.supplied.addElement(table.getField(s));
+        else
+          outLog.println(s+" is not present in table for supplied.");
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case IDENTIFIER:
+          case LIDENTIFIER:
+            ;
+            break;
+          default:
+            jj_la1[78] = jj_gen;
+            break label_25;
+          }
+        }
+        break;
+      case PARMCACHE:
+        jj_consume_token(PARMCACHE);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          s = jIdent();
+          break;
+        case SELECTALL:
+          jj_consume_token(SELECTALL);
+                                 s = "SelectAll";
+          break;
+        default:
+          jj_la1[79] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+      p = table.getProc(s);
+      if (p != null)
+        parameter.cache = p;
+      else
+        outLog.println(s+" is not present in table as a cache reader.");
+        label_26:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case IDENTIFIER:
+          case LIDENTIFIER:
+            ;
+            break;
+          default:
+            jj_la1[80] = jj_gen;
+            break label_26;
+          }
+          s = jIdent();
+        parameter.cacheExtras.addElement(s);
+        }
+        break;
+      case PARMREADER:
+        jj_consume_token(PARMREADER);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          s = jIdent();
+          break;
+        case SELECTALL:
+          jj_consume_token(SELECTALL);
+                                 s = "SelectAll";
+          break;
+        default:
+          jj_la1[81] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+      p = table.getProc(s);
+      if (p != null)
+        parameter.reader = p;
+      else
+        outLog.println(s+" is not present in table as a reader.");
+        break;
+      case PARMINSERT:
+        jj_consume_token(PARMINSERT);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          s = jIdent();
+          break;
+        case INSERT:
+          jj_consume_token(INSERT);
+                              s = "Insert";
+          break;
+        default:
+          jj_la1[82] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+      p = table.getProc(s);
+      if (p != null)
+        parameter.insert = p;
+      else
+        outLog.println(s+" is not present in table as an inserter.");
+        break;
+      case PARMUPDATE:
+        jj_consume_token(PARMUPDATE);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          s = jIdent();
+          break;
+        case UPDATE:
+          jj_consume_token(UPDATE);
+                              s = "Update";
+          break;
+        default:
+          jj_la1[83] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+      p = table.getProc(s);
+      if (p != null)
+        parameter.update = p;
+      else
+        outLog.println(s+" is not present in table as an updater.");
+        break;
+      case PARMDELETE:
+        jj_consume_token(PARMDELETE);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          s = jIdent();
+          break;
+        case DELETEONE:
+          jj_consume_token(DELETEONE);
+                                 s = "DeleteOne";
+          break;
+        default:
+          jj_la1[84] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+      p = table.getProc(s);
+      if (p != null)
+        parameter.delete = p;
+      else
+        outLog.println(s+" is not present in table as a deleter.");
+        break;
+      default:
+        jj_la1[85] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
+      }
     }
   }
 
-  static final public void jConst() throws ParseException
-  {
-    String s, v;
+  static final public void jExtras() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case GRANT:
+      jGrant();
+    table.grants.addElement(grant);
+      break;
+    case KEY:
+      jKey();
+    table.keys.addElement(key);
+      break;
+    case LINK:
+      jLink();
+    table.links.addElement(link);
+      break;
+    case VIEW:
+      jView();
+    table.views.addElement(view);
+      break;
+    case CONST:
+      jConst();
+    table.consts.addElement(constant);
+      break;
+    default:
+      jj_la1[86] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  static final public void jConst() throws ParseException {
+  String s,v;
     jj_consume_token(CONST);
     s = jIdent();
     constant = new Const();
     constant.name = s;
     label_27:
-    while (true)
-    {
+    while (true) {
       s = jIdent();
       jj_consume_token(EQUALS);
       v = jString();
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case COMMA:
-          jj_consume_token(COMMA);
-          break;
-        default:
-          jj_la1[87] = jj_gen;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case COMMA:
+        jj_consume_token(COMMA);
+        break;
+      default:
+        jj_la1[87] = jj_gen;
+        ;
       }
       value = new Value();
       value.key = s;
       value.value = v;
       constant.values.addElement(value);
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case IDENTIFIER:
-        case LIDENTIFIER:
-          break;
-        default:
-          jj_la1[88] = jj_gen;
-          break label_27;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IDENTIFIER:
+      case LIDENTIFIER:
+        ;
+        break;
+      default:
+        jj_la1[88] = jj_gen;
+        break label_27;
       }
     }
   }
 
-  static final public void jGrant() throws ParseException
-  {
+  static final public void jGrant() throws ParseException {
     jj_consume_token(GRANT);
     grant = new Grant();
     label_28:
-    while (true)
-    {
+    while (true) {
       jPermission();
-      if (grant.hasPerm(perm))
-        outLog.println("perm " + perm + " already present in grant");
-      else
-        grant.perms.addElement(perm);
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case ALL:
-        case DELETE:
-        case EXECUTE:
-        case INSERT:
-        case SELECT:
-        case UPDATE:
-          break;
-        default:
-          jj_la1[89] = jj_gen;
-          break label_28;
+    if (grant.hasPerm(perm))
+      outLog.println("perm "+perm+" already present in grant");
+    else
+      grant.perms.addElement(perm);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case ALL:
+      case DELETE:
+      case EXECUTE:
+      case INSERT:
+      case SELECT:
+      case UPDATE:
+        ;
+        break;
+      default:
+        jj_la1[89] = jj_gen;
+        break label_28;
       }
     }
     jj_consume_token(TO);
     label_29:
-    while (true)
-    {
+    while (true) {
       jUser();
-      if (grant.hasUser(user))
-        outLog.println("user " + user + " already present in grant");
-      else
-        grant.users.addElement(user);
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case IDENTIFIER:
-        case LIDENTIFIER:
-          break;
-        default:
-          jj_la1[90] = jj_gen;
-          break label_29;
+    if (grant.hasUser(user))
+      outLog.println("user "+user+" already present in grant");
+    else
+      grant.users.addElement(user);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IDENTIFIER:
+      case LIDENTIFIER:
+        ;
+        break;
+      default:
+        jj_la1[90] = jj_gen;
+        break label_29;
       }
     }
   }
 
-  static final public void jPermission() throws ParseException
-  {
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case ALL:
-        jj_consume_token(ALL);
-        table.hasExecute = true;
-        table.hasSelect = true;
-        table.hasDelete = true;
-        table.hasInsert = true;
-        table.hasUpdate = true;
-        perm = "all";
-        break;
-      case DELETE:
-        jj_consume_token(DELETE);
-        table.hasDelete = true;
-        perm = "delete";
-        break;
-      case INSERT:
-        jj_consume_token(INSERT);
-        table.hasInsert = true;
-        perm = "insert";
-        break;
-      case SELECT:
-        jj_consume_token(SELECT);
-        table.hasSelect = true;
-        perm = "select";
-        break;
-      case UPDATE:
-        jj_consume_token(UPDATE);
-        table.hasUpdate = true;
-        perm = "update";
-        break;
-      case EXECUTE:
-        jj_consume_token(EXECUTE);
-        table.hasExecute = true;
-        break;
-      default:
-        jj_la1[91] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
+  static final public void jPermission() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case ALL:
+      jj_consume_token(ALL);
+    table.hasExecute = true;
+    table.hasSelect  = true;
+    table.hasDelete  = true;
+    table.hasInsert  = true;
+    table.hasUpdate  = true;
+    perm = "all";
+      break;
+    case DELETE:
+      jj_consume_token(DELETE);
+    table.hasDelete  = true;
+    perm = "delete";
+      break;
+    case INSERT:
+      jj_consume_token(INSERT);
+    table.hasInsert  = true;
+    perm = "insert";
+      break;
+    case SELECT:
+      jj_consume_token(SELECT);
+    table.hasSelect  = true;
+    perm = "select";
+      break;
+    case UPDATE:
+      jj_consume_token(UPDATE);
+    table.hasUpdate  = true;
+    perm = "update";
+      break;
+    case EXECUTE:
+      jj_consume_token(EXECUTE);
+    table.hasExecute = true;
+      break;
+    default:
+      jj_la1[91] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
   }
 
-  static final public void jUser() throws ParseException
-  {
+  static final public void jUser() throws ParseException {
     user = jIdent();
   }
 
-  static final public void jKey() throws ParseException
-  {
-    String s;
+  static final public void jKey() throws ParseException {
+  String s;
     jj_consume_token(KEY);
     s = jIdent();
     key = new Key();
     key.name = s;
     label_30:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case OPTIONS:
-          break;
-        default:
-          jj_la1[92] = jj_gen;
-          break label_30;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case OPTIONS:
+        ;
+        break;
+      default:
+        jj_la1[92] = jj_gen;
+        break label_30;
       }
       jj_consume_token(OPTIONS);
       label_31:
-      while (true)
-      {
+      while (true) {
         s = jString();
         key.options.addElement(s);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case STRING:
-            break;
-          default:
-            jj_la1[93] = jj_gen;
-            break label_31;
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case STRING:
+          ;
+          break;
+        default:
+          jj_la1[93] = jj_gen;
+          break label_31;
         }
       }
     }
     label_32:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case CLUSTERED:
-        case PRIMARY:
-        case UNIQUE:
-          break;
-        default:
-          jj_la1[94] = jj_gen;
-          break label_32;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case CLUSTERED:
+      case PRIMARY:
+      case UNIQUE:
+        ;
+        break;
+      default:
+        jj_la1[94] = jj_gen;
+        break label_32;
       }
       jModifier();
     }
     label_33:
-    while (true)
-    {
+    while (true) {
       jColumn();
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case IDENTIFIER:
-        case LIDENTIFIER:
-          break;
-        default:
-          jj_la1[95] = jj_gen;
-          break label_33;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IDENTIFIER:
+      case LIDENTIFIER:
+        ;
+        break;
+      default:
+        jj_la1[95] = jj_gen;
+        break label_33;
       }
     }
   }
 
-  static final public void jModifier() throws ParseException
-  {
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case UNIQUE:
-        jj_consume_token(UNIQUE);
-        key.isUnique = true;
-        break;
-      case PRIMARY:
-        jj_consume_token(PRIMARY);
-        key.isPrimary = true;
-        table.hasPrimaryKey = true;
-        break;
-      case CLUSTERED:
-        jj_consume_token(CLUSTERED);
-        key.isClustered = true;
-        break;
-      default:
-        jj_la1[96] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
+  static final public void jModifier() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case UNIQUE:
+      jj_consume_token(UNIQUE);
+    key.isUnique = true;
+      break;
+    case PRIMARY:
+      jj_consume_token(PRIMARY);
+    key.isPrimary = true;
+    table.hasPrimaryKey = true;
+      break;
+    case CLUSTERED:
+      jj_consume_token(CLUSTERED);
+    key.isClustered = true;
+      break;
+    default:
+      jj_la1[96] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
   }
 
-  static final public void jColumn() throws ParseException
-  {
-    String s;
+  static final public void jColumn() throws ParseException {
+  String s;
     s = jIdent();
     if (!table.hasField(s))
-      outLog.println(key.name + " field " + s + " not present in table");
+      outLog.println(key.name+" field "+s+" not present in table");
     else if (key.hasField(s))
-      outLog.println(key.name + " field " + s + " already present in key");
+      outLog.println(key.name+" field "+s+" already present in key");
     else
     {
       if (key.isPrimary)
@@ -2369,229 +2126,215 @@ public class JPortal implements JPortalConstants
     }
   }
 
-  static final public void jLink() throws ParseException
-  {
-    String s;
-    Token t;
-    Proc dproc = new Proc();
+  static final public void jLink() throws ParseException {
+  String s;
+  Token t;
+  Proc dproc = new Proc();
     jj_consume_token(LINK);
     s = jPackageIdent();
     link = new Link();
     link.name = s;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case LEFTPAREN:
-        jj_consume_token(LEFTPAREN);
-        label_34:
-        while (true)
-        {
-          s = jIdent();
-          link.linkFields.addElement(s);
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              break;
-            default:
-              jj_la1[97] = jj_gen;
-              break label_34;
-          }
-        }
-        jj_consume_token(RIGHTPAREN);
-        break;
-      default:
-        jj_la1[98] = jj_gen;
-    }
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case DELETE:
-        jj_consume_token(DELETE);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case CASCADE:
-            jj_consume_token(CASCADE);
-            break;
-          default:
-            jj_la1[99] = jj_gen;
-        }
-        link.isDeleteCascade = true;
-        break;
-      default:
-        jj_la1[100] = jj_gen;
-    }
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case UPDATE:
-        jj_consume_token(UPDATE);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case CASCADE:
-            jj_consume_token(CASCADE);
-            break;
-          default:
-            jj_la1[101] = jj_gen;
-        }
-        link.isUpdateCascade = true;
-        break;
-      default:
-        jj_la1[102] = jj_gen;
-    }
-    label_35:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case OPTIONS:
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LEFTPAREN:
+      jj_consume_token(LEFTPAREN);
+      label_34:
+      while (true) {
+        s = jIdent();
+        link.linkFields.addElement(s);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          ;
           break;
         default:
-          jj_la1[103] = jj_gen;
-          break label_35;
+          jj_la1[97] = jj_gen;
+          break label_34;
+        }
+      }
+      jj_consume_token(RIGHTPAREN);
+      break;
+    default:
+      jj_la1[98] = jj_gen;
+      ;
+    }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case DELETE:
+      jj_consume_token(DELETE);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case CASCADE:
+        jj_consume_token(CASCADE);
+        break;
+      default:
+        jj_la1[99] = jj_gen;
+        ;
+      }
+      link.isDeleteCascade = true;
+      break;
+    default:
+      jj_la1[100] = jj_gen;
+      ;
+    }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case UPDATE:
+      jj_consume_token(UPDATE);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case CASCADE:
+        jj_consume_token(CASCADE);
+        break;
+      default:
+        jj_la1[101] = jj_gen;
+        ;
+      }
+      link.isUpdateCascade = true;
+      break;
+    default:
+      jj_la1[102] = jj_gen;
+      ;
+    }
+    label_35:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case OPTIONS:
+        ;
+        break;
+      default:
+        jj_la1[103] = jj_gen;
+        break label_35;
       }
       jj_consume_token(OPTIONS);
       label_36:
-      while (true)
-      {
+      while (true) {
         s = jString();
         link.options.addElement(s);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case STRING:
-            break;
-          default:
-            jj_la1[104] = jj_gen;
-            break label_36;
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case STRING:
+          ;
+          break;
+        default:
+          jj_la1[104] = jj_gen;
+          break label_36;
         }
       }
     }
     label_37:
-    while (true)
-    {
+    while (true) {
       jLinkColumn();
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case IDENTIFIER:
-        case LIDENTIFIER:
-          break;
-        default:
-          jj_la1[105] = jj_gen;
-          break label_37;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IDENTIFIER:
+      case LIDENTIFIER:
+        ;
+        break;
+      default:
+        jj_la1[105] = jj_gen;
+        break label_37;
       }
     }
   }
 
-  static final public void jLinkColumn() throws ParseException
-  {
-    String s;
+  static final public void jLinkColumn() throws ParseException {
+  String s;
     s = jIdent();
     if (!table.hasField(s))
-      outLog.println(link.name + " field " + s + " not present in table");
+      outLog.println(link.name+" field "+s+" not present in table");
     else if (link.hasField(s))
-      outLog.println(link.name + " field " + s + " already present in link");
+      outLog.println(link.name+" field "+s+" already present in link");
     else
       link.fields.addElement(s);
   }
 
-  static final public void jView() throws ParseException
-  {
-    Token t;
-    String s;
+  static final public void jView() throws ParseException {
+  Token t;
+  String s;
     t = jj_consume_token(VIEW);
     s = jIdent();
     view = new View();
     view.name = s;
     view.start = t.beginLine;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case TO:
-        jj_consume_token(TO);
-        label_38:
-        while (true)
-        {
-          jUser();
-          if (view.hasUser(user))
-            outLog.println(view.name + " user " + user + " already present in view");
-          else
-            view.users.addElement(user);
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              break;
-            default:
-              jj_la1[106] = jj_gen;
-              break label_38;
-          }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case TO:
+      jj_consume_token(TO);
+      label_38:
+      while (true) {
+        jUser();
+    if (view.hasUser(user))
+      outLog.println(view.name+" user "+user+" already present in view");
+    else
+      view.users.addElement(user);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          ;
+          break;
+        default:
+          jj_la1[106] = jj_gen;
+          break label_38;
         }
-        break;
-      default:
-        jj_la1[107] = jj_gen;
+      }
+      break;
+    default:
+      jj_la1[107] = jj_gen;
+      ;
     }
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case OUTPUT:
-        jj_consume_token(OUTPUT);
-        label_39:
-        while (true)
-        {
-          jViewAlias();
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              break;
-            default:
-              jj_la1[108] = jj_gen;
-              break label_39;
-          }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case OUTPUT:
+      jj_consume_token(OUTPUT);
+      label_39:
+      while (true) {
+        jViewAlias();
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          ;
+          break;
+        default:
+          jj_la1[108] = jj_gen;
+          break label_39;
         }
-        break;
-      default:
-        jj_la1[109] = jj_gen;
+      }
+      break;
+    default:
+      jj_la1[109] = jj_gen;
+      ;
     }
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case CODE:
-        jOldViewCode();
-        break;
-      default:
-        jj_la1[110] = jj_gen;
-        jNewViewCode();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case CODE:
+      jOldViewCode();
+      break;
+    default:
+      jj_la1[110] = jj_gen;
+      jNewViewCode();
     }
   }
 
-  static final public void jNewViewCode() throws ParseException
-  {
-    Token t;
+  static final public void jNewViewCode() throws ParseException {
+  Token t;
     label_40:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case CODELINE:
-          break;
-        default:
-          jj_la1[111] = jj_gen;
-          break label_40;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case CODELINE:
+        ;
+        break;
+      default:
+        jj_la1[111] = jj_gen;
+        break label_40;
       }
       t = jj_consume_token(CODELINE);
-      line = t.image.trim();
-      view.lines.addElement(line);
+        line = t.image.trim();
+        view.lines.addElement(line);
     }
   }
 
-  static final public void jOldViewCode() throws ParseException
-  {
+  static final public void jOldViewCode() throws ParseException {
     jj_consume_token(CODE);
     label_41:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case STRING:
-          break;
-        default:
-          jj_la1[112] = jj_gen;
-          break label_41;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case STRING:
+        ;
+        break;
+      default:
+        jj_la1[112] = jj_gen;
+        break label_41;
       }
       jLine();
       view.lines.addElement(line);
@@ -2599,204 +2342,185 @@ public class JPortal implements JPortalConstants
     jj_consume_token(ENDCODE);
   }
 
-  static final public void jViewAlias() throws ParseException
-  {
-    String s;
+  static final public void jViewAlias() throws ParseException {
+  String s;
     s = jIdent();
     if (view.hasAlias(s))
-      outLog.println(key.name + " alias " + s + " already present in view");
+      outLog.println(key.name+" alias "+s+" already present in view");
     else
     {
       view.aliases.addElement(s);
     }
   }
 
-  static final public void jLine() throws ParseException
-  {
-    Token t;
-    String s;
+  static final public void jLine() throws ParseException {
+  Token t;
+  String s;
     t = jj_consume_token(STRING);
     s = t.image;
     line = fixString(s);
   }
 
-  static final public String jString() throws ParseException
-  {
-    Token t;
-    String s;
+  static final public String jString() throws ParseException {
+  Token t;
+  String s;
     t = jj_consume_token(STRING);
     s = t.image;
-    {
-      if (true) return fixString(s);
-    }
+    {if (true) return fixString(s);}
     throw new Error("Missing return statement in function");
   }
 
-  static final public int jAsciiChar() throws ParseException
-  {
-    String s;
+  static final public int jAsciiChar() throws ParseException {
+  String s;
     s = jString();
-    {
-      if (true) return s.charAt(0);
-    }
+    {if (true) return (int)s.charAt(0);}
     throw new Error("Missing return statement in function");
   }
 
-  static final public void jProc() throws ParseException
-  {
-    Token t;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
+  static final public void jProc() throws ParseException {
+  Token t;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case PROC:
+    case SPROC:
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case PROC:
-      case SPROC:
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case PROC:
-            t = jj_consume_token(PROC);
-            proc = new Proc();
-            proc.table = table;
-            proc.start = t.beginLine;
-            proc.isProc = true;
-            break;
-          case SPROC:
-            t = jj_consume_token(SPROC);
-            proc = new Proc();
-            proc.table = table;
-            proc.start = t.beginLine;
-            proc.isSProc = true;
-            break;
-          default:
-            jj_la1[113] = jj_gen;
-            jj_consume_token(-1);
-            throw new ParseException();
-        }
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case BULKINSERT:
-          case BULKUPDATE:
-          case COUNT:
-          case DELETEALL:
-          case DELETEONE:
-          case EXISTS:
-          case INSERT:
-          case MAXTMSTAMP:
-          case MERGE:
-          case SELECTALL:
-          case SELECTONE:
-          case UPDATE:
-            jStdProc();
-            break;
-          case IDENTIFIER:
-          case LIDENTIFIER:
-            if (jj_2_2(3))
-            {
-              jNewProc();
-            } else
-            {
-              switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-              {
-                case IDENTIFIER:
-                case LIDENTIFIER:
-                  jUserProc();
-                  break;
-                default:
-                  jj_la1[114] = jj_gen;
-                  jj_consume_token(-1);
-                  throw new ParseException();
-              }
-            }
-            break;
-          default:
-            jj_la1[115] = jj_gen;
-            jj_consume_token(-1);
-            throw new ParseException();
-        }
-        if (table.hasProc(proc))
-          outLog.println("proc " + proc.name + " already present in table");
-        else
-        {
-          table.procs.addElement(proc);
-          proc.checkPlaceHolders();
-        }
+        t = jj_consume_token(PROC);
+      proc = new Proc();
+      proc.table = table;
+      proc.start = t.beginLine;
+      proc.isProc = true;
         break;
-      case DATA:
-      case DATALINE:
-      case IDLLINE:
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case DATA:
-            jOldData();
-            break;
-          case DATALINE:
-            jNewData();
-            break;
-          case IDLLINE:
-            jIdlCode();
-            break;
-          default:
-            jj_la1[116] = jj_gen;
-            jj_consume_token(-1);
-            throw new ParseException();
-        }
-        table.procs.addElement(proc);
+      case SPROC:
+        t = jj_consume_token(SPROC);
+      proc = new Proc();
+      proc.table = table;
+      proc.start = t.beginLine;
+      proc.isSProc = true;
         break;
       default:
-        jj_la1[117] = jj_gen;
+        jj_la1[113] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case BULKINSERT:
+      case BULKUPDATE:
+      case COUNT:
+      case DELETEALL:
+      case DELETEONE:
+      case EXISTS:
+      case INSERT:
+      case MAXTMSTAMP:
+      case MERGE:
+      case SELECTALL:
+      case SELECTONE:
+      case UPDATE:
+        jStdProc();
+        break;
+      case IDENTIFIER:
+      case LIDENTIFIER:
+        if (jj_2_2(3)) {
+          jNewProc();
+        } else {
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case IDENTIFIER:
+          case LIDENTIFIER:
+            jUserProc();
+            break;
+          default:
+            jj_la1[114] = jj_gen;
+            jj_consume_token(-1);
+            throw new ParseException();
+          }
+        }
+        break;
+      default:
+        jj_la1[115] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    if (table.hasProc(proc))
+      outLog.println("proc "+proc.name+" already present in table");
+    else
+    {
+      table.procs.addElement(proc);
+      proc.checkPlaceHolders();
+    }
+      break;
+    case DATA:
+    case DATALINE:
+    case IDLLINE:
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case DATA:
+        jOldData();
+        break;
+      case DATALINE:
+        jNewData();
+        break;
+      case IDLLINE:
+        jIdlCode();
+        break;
+      default:
+        jj_la1[116] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    table.procs.addElement(proc);
+      break;
+    default:
+      jj_la1[117] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
   }
 
-  static final public void jStdProc() throws ParseException
-  {
-    boolean forUpdate = false;
-    boolean forReadOnly = false;
-    boolean inOrder = false;
-    boolean descending = false;
-    boolean isStdProc = false;
-    String s;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case INSERT:
-        jj_consume_token(INSERT);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case RETURNING:
-          case UPSERT:
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case RETURNING:
-                jj_consume_token(RETURNING);
-                proc.hasReturning = true;
-                break;
-              case UPSERT:
-                jj_consume_token(UPSERT);
-                proc.useUpsert = true;
-                break;
-              default:
-                jj_la1[118] = jj_gen;
-                jj_consume_token(-1);
-                throw new ParseException();
-            }
-            break;
-          default:
-            jj_la1[119] = jj_gen;
-        }
-        table.hasSequenceReturning = table.hasSequence;
-        proc.name = "Insert";
-        table.buildInsert(proc);
-        table.hasStdProcs = true;
-        if (table.hasIdentity)
-        {
-          table.procs.addElement(proc);
-          proc = new Proc();
-          proc.table = table;
-          proc.name = "Identity";
-          table.buildIdentity(proc);
+  static final public void jStdProc() throws ParseException {
+  boolean forUpdate = false;
+  boolean forReadOnly = false;
+  boolean inOrder = false;
+  boolean descending = false;
+  boolean isStdProc = false;
+  String s;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case INSERT:
+      jj_consume_token(INSERT);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case RETURNING:
+      case UPSERT:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case RETURNING:
+          jj_consume_token(RETURNING);
+                   proc.hasReturning = true;
+          break;
+        case UPSERT:
+          jj_consume_token(UPSERT);
+                                                          proc.useUpsert = true;
+          break;
+        default:
+          jj_la1[118] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
         }
         break;
-      case UPDATE:
-        jj_consume_token(UPDATE);
+      default:
+        jj_la1[119] = jj_gen;
+        ;
+      }
+      table.hasSequenceReturning = table.hasSequence;
+      proc.name = "Insert";
+      table.buildInsert(proc);
+      table.hasStdProcs = true;
+      if (table.hasIdentity)
+      {
+        table.procs.addElement(proc);
+        proc = new Proc();
+        proc.table = table;
+        proc.name = "Identity";
+        table.buildIdentity(proc);
+      }
+      break;
+    case UPDATE:
+      jj_consume_token(UPDATE);
         if (!table.hasPrimaryKey)
           outLog.println("proc Update requires a primary key");
         else
@@ -2806,607 +2530,585 @@ public class JPortal implements JPortalConstants
           table.buildUpdate(proc);
           table.hasStdProcs = true;
         }
+      break;
+    case BULKINSERT:
+      jj_consume_token(BULKINSERT);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTPAREN:
+        jRowCount();
         break;
-      case BULKINSERT:
-        jj_consume_token(BULKINSERT);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTPAREN:
-            jRowCount();
-            break;
-          default:
-            jj_la1[120] = jj_gen;
-        }
-        proc.name = "BulkInsert";
-        table.buildBulkInsert(proc);
+      default:
+        jj_la1[120] = jj_gen;
+        ;
+      }
+      proc.name = "BulkInsert";
+      table.buildBulkInsert(proc);
+      table.hasStdProcs = true;
+      break;
+    case MAXTMSTAMP:
+      jj_consume_token(MAXTMSTAMP);
+      proc.name = "MaxTmStamp";
+      table.buildMaxTmStamp(proc);
+      table.hasStdProcs = true;
+      break;
+    case BULKUPDATE:
+      jj_consume_token(BULKUPDATE);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTPAREN:
+        jRowCount();
+        break;
+      default:
+        jj_la1[121] = jj_gen;
+        ;
+      }
+      if (!table.hasPrimaryKey)
+        outLog.println("proc Update requires a primary key");
+      else
+      {
+        proc.name = "BulkUpdate";
+        proc.isUpdate = true;
+        table.buildBulkUpdate(proc);
         table.hasStdProcs = true;
+      }
+      break;
+    case DELETEONE:
+      jj_consume_token(DELETEONE);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTPAREN:
+        jj_consume_token(LEFTPAREN);
+        jj_consume_token(STANDARD);
+        jj_consume_token(RIGHTPAREN);
+        proc.isStd = true;
         break;
-      case MAXTMSTAMP:
-        jj_consume_token(MAXTMSTAMP);
-        proc.name = "MaxTmStamp";
-        table.buildMaxTmStamp(proc);
+      default:
+        jj_la1[122] = jj_gen;
+        ;
+      }
         table.hasStdProcs = true;
-        break;
-      case BULKUPDATE:
-        jj_consume_token(BULKUPDATE);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTPAREN:
-            jRowCount();
-            break;
-          default:
-            jj_la1[121] = jj_gen;
-        }
-        if (!table.hasPrimaryKey)
-          outLog.println("proc Update requires a primary key");
-        else
-        {
-          proc.name = "BulkUpdate";
-          proc.isUpdate = true;
-          table.buildBulkUpdate(proc);
-          table.hasStdProcs = true;
-        }
-        break;
-      case DELETEONE:
-        jj_consume_token(DELETEONE);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTPAREN:
-            jj_consume_token(LEFTPAREN);
-            jj_consume_token(STANDARD);
-            jj_consume_token(RIGHTPAREN);
-            proc.isStd = true;
-            break;
-          default:
-            jj_la1[122] = jj_gen;
-        }
+      if (!table.hasPrimaryKey)
+        outLog.println("proc DeleteOne requires a primary key");
+      else
+      {
+        proc.name = "DeleteOne";
+        table.buildDeleteOne(proc);
         table.hasStdProcs = true;
-        if (!table.hasPrimaryKey)
-          outLog.println("proc DeleteOne requires a primary key");
-        else
-        {
-          proc.name = "DeleteOne";
-          table.buildDeleteOne(proc);
-          table.hasStdProcs = true;
+      }
+      break;
+    case DELETEALL:
+      jj_consume_token(DELETEALL);
+      proc.name = "DeleteAll";
+      table.buildDeleteAll(proc);
+      table.hasStdProcs = true;
+      break;
+    case SELECTONE:
+      jj_consume_token(SELECTONE);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case FOR:
+      case READONLY:
+      case UPDATE:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case FOR:
+          jj_consume_token(FOR);
+          break;
+        default:
+          jj_la1[123] = jj_gen;
+          ;
         }
-        break;
-      case DELETEALL:
-        jj_consume_token(DELETEALL);
-        proc.name = "DeleteAll";
-        table.buildDeleteAll(proc);
-        table.hasStdProcs = true;
-        break;
-      case SELECTONE:
-        jj_consume_token(SELECTONE);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case FOR:
-          case READONLY:
-          case UPDATE:
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case FOR:
-                jj_consume_token(FOR);
-                break;
-              default:
-                jj_la1[123] = jj_gen;
-            }
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case UPDATE:
-                jj_consume_token(UPDATE);
-                forUpdate = true;
-                break;
-              case READONLY:
-                jj_consume_token(READONLY);
-                forReadOnly = true;
-                break;
-              default:
-                jj_la1[124] = jj_gen;
-                jj_consume_token(-1);
-                throw new ParseException();
-            }
-            break;
-          default:
-            jj_la1[125] = jj_gen;
-        }
-        if (!table.hasPrimaryKey)
-          outLog.println("proc SelectOne requires a primary key");
-        else
-        {
-          proc.name = "SelectOne";
-          if (forUpdate) proc.name = proc.name + "Upd";
-          else if (forReadOnly) proc.name = proc.name + "ReadOnly";
-          table.buildSelectOne(proc, forUpdate, forReadOnly);
-          table.hasStdProcs = true;
-        }
-        break;
-      case SELECTALL:
-        jj_consume_token(SELECTALL);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case IN:
-          case ORDER:
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case IN:
-                jj_consume_token(IN);
-                break;
-              default:
-                jj_la1[126] = jj_gen;
-            }
-            jj_consume_token(ORDER);
-            inOrder = true;
-            label_42:
-            while (true)
-            {
-              switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-              {
-                case IDENTIFIER:
-                case LIDENTIFIER:
-                  break;
-                default:
-                  jj_la1[127] = jj_gen;
-                  break label_42;
-              }
-              jOrderColumn();
-            }
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case DESC:
-                jj_consume_token(DESC);
-                descending = true;
-                break;
-              default:
-                jj_la1[128] = jj_gen;
-            }
-            break;
-          default:
-            jj_la1[129] = jj_gen;
-        }
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case FOR:
-          case READONLY:
-          case UPDATE:
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case FOR:
-                jj_consume_token(FOR);
-                break;
-              default:
-                jj_la1[130] = jj_gen;
-            }
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case UPDATE:
-                jj_consume_token(UPDATE);
-                forUpdate = true;
-                break;
-              case READONLY:
-                jj_consume_token(READONLY);
-                forReadOnly = true;
-                break;
-              default:
-                jj_la1[131] = jj_gen;
-                jj_consume_token(-1);
-                throw new ParseException();
-            }
-            break;
-          default:
-            jj_la1[132] = jj_gen;
-        }
-        if (table.hasBigXML)
-          outLog.println("proc SelectAll is invalid with BigXML field");
-        else
-        {
-          proc.name = "SelectAll";
-          if (inOrder) proc.name = proc.name + "Sorted";
-          if (forUpdate) proc.name = proc.name + "Upd";
-          else if (forReadOnly) proc.name = proc.name + "ReadOnly";
-          table.buildSelectAll(proc, forUpdate, forReadOnly, inOrder, descending);
-          table.hasStdProcs = true;
-        }
-        break;
-      case COUNT:
-        jj_consume_token(COUNT);
-        proc.name = "Count";
-        table.buildCount(proc);
-        break;
-      case EXISTS:
-        jj_consume_token(EXISTS);
-        if (!table.hasPrimaryKey)
-          outLog.println("proc Exists requires a primary key");
-        else
-        {
-          proc.name = "Exists";
-          table.buildExists(proc);
-        }
-        break;
-      case MERGE:
-        jj_consume_token(MERGE);
-        if (!table.hasPrimaryKey)
-          outLog.println("proc Merge requires a primary key");
-        else if (table.hasSequence)
-          outLog.println("proc Merge cannot be used on a table with a sequence");
-        else
-        {
-          proc.name = "Merge";
-          table.buildMerge(proc);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case UPDATE:
+          jj_consume_token(UPDATE);
+                         forUpdate = true;
+          break;
+        case READONLY:
+          jj_consume_token(READONLY);
+                                                          forReadOnly = true;
+          break;
+        default:
+          jj_la1[124] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
         }
         break;
       default:
-        jj_la1[133] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-    }
-    label_43:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
+        jj_la1[125] = jj_gen;
+        ;
+      }
+      if (!table.hasPrimaryKey)
+        outLog.println("proc SelectOne requires a primary key");
+      else
       {
-        case OPTIONS:
+        proc.name = "SelectOne";
+        if (forUpdate) proc.name = proc.name+"Upd";
+        else if (forReadOnly) proc.name = proc.name+"ReadOnly";
+        table.buildSelectOne(proc, forUpdate, forReadOnly);
+        table.hasStdProcs = true;
+      }
+      break;
+    case SELECTALL:
+      jj_consume_token(SELECTALL);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IN:
+      case ORDER:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IN:
+          jj_consume_token(IN);
           break;
         default:
-          jj_la1[134] = jj_gen;
-          break label_43;
+          jj_la1[126] = jj_gen;
+          ;
+        }
+        jj_consume_token(ORDER);
+                      inOrder = true;
+        label_42:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case IDENTIFIER:
+          case LIDENTIFIER:
+            ;
+            break;
+          default:
+            jj_la1[127] = jj_gen;
+            break label_42;
+          }
+          jOrderColumn();
+        }
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case DESC:
+          jj_consume_token(DESC);
+                                                                  descending = true;
+          break;
+        default:
+          jj_la1[128] = jj_gen;
+          ;
+        }
+        break;
+      default:
+        jj_la1[129] = jj_gen;
+        ;
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case FOR:
+      case READONLY:
+      case UPDATE:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case FOR:
+          jj_consume_token(FOR);
+          break;
+        default:
+          jj_la1[130] = jj_gen;
+          ;
+        }
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case UPDATE:
+          jj_consume_token(UPDATE);
+                         forUpdate = true;
+          break;
+        case READONLY:
+          jj_consume_token(READONLY);
+                                                          forReadOnly = true;
+          break;
+        default:
+          jj_la1[131] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        break;
+      default:
+        jj_la1[132] = jj_gen;
+        ;
+      }
+      if (table.hasBigXML)
+        outLog.println("proc SelectAll is invalid with BigXML field");
+      else
+      {
+        proc.name = "SelectAll";
+        if (inOrder) proc.name = proc.name+"Sorted";
+        if (forUpdate) proc.name = proc.name+"Upd";
+        else if (forReadOnly) proc.name = proc.name+"ReadOnly";
+        table.buildSelectAll(proc, forUpdate, forReadOnly, inOrder, descending);
+        table.hasStdProcs = true;
+      }
+      break;
+    case COUNT:
+      jj_consume_token(COUNT);
+      proc.name = "Count";
+      table.buildCount(proc);
+      break;
+    case EXISTS:
+      jj_consume_token(EXISTS);
+      if (!table.hasPrimaryKey)
+        outLog.println("proc Exists requires a primary key");
+      else
+      {
+        proc.name = "Exists";
+        table.buildExists(proc);
+      }
+      break;
+    case MERGE:
+      jj_consume_token(MERGE);
+      if (!table.hasPrimaryKey)
+        outLog.println("proc Merge requires a primary key");
+      else if (table.hasSequence)
+        outLog.println("proc Merge cannot be used on a table with a sequence");
+      else
+      {
+        proc.name = "Merge";
+        table.buildMerge(proc);
+      }
+      break;
+    default:
+      jj_la1[133] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    label_43:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case OPTIONS:
+        ;
+        break;
+      default:
+        jj_la1[134] = jj_gen;
+        break label_43;
       }
       jj_consume_token(OPTIONS);
       label_44:
-      while (true)
-      {
+      while (true) {
         s = jString();
         proc.options.addElement(s);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case STRING:
-            break;
-          default:
-            jj_la1[135] = jj_gen;
-            break label_44;
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case STRING:
+          ;
+          break;
+        default:
+          jj_la1[135] = jj_gen;
+          break label_44;
         }
       }
     }
   }
 
-  static final public void jNewProc() throws ParseException
-  {
-    String s;
-    boolean isStdProc = false;
-    boolean forUpdate = false;
-    boolean forReadOnly = false;
-    boolean inOrder = false;
-    boolean descending = false;
+  static final public void jNewProc() throws ParseException {
+  String s;
+  boolean isStdProc = false;
+  boolean forUpdate = false;
+  boolean forReadOnly = false;
+  boolean inOrder = false;
+  boolean descending = false;
     s = jIdent();
     proc.name = s;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case SELECTONEBY:
-        jj_consume_token(SELECTONEBY);
-        label_45:
-        while (true)
-        {
-          jProcColumn();
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              break;
-            default:
-              jj_la1[136] = jj_gen;
-              break label_45;
-          }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case SELECTONEBY:
+      jj_consume_token(SELECTONEBY);
+      label_45:
+      while (true) {
+        jProcColumn();
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          ;
+          break;
+        default:
+          jj_la1[136] = jj_gen;
+          break label_45;
         }
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case FOR:
-          case READONLY:
-          case UPDATE:
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case FOR:
-                jj_consume_token(FOR);
-                break;
-              default:
-                jj_la1[137] = jj_gen;
-            }
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case UPDATE:
-                jj_consume_token(UPDATE);
-                forUpdate = true;
-                break;
-              case READONLY:
-                jj_consume_token(READONLY);
-                forReadOnly = true;
-                break;
-              default:
-                jj_la1[138] = jj_gen;
-                jj_consume_token(-1);
-                throw new ParseException();
-            }
-            break;
-          default:
-            jj_la1[139] = jj_gen;
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case FOR:
+      case READONLY:
+      case UPDATE:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case FOR:
+          jj_consume_token(FOR);
+          break;
+        default:
+          jj_la1[137] = jj_gen;
+          ;
         }
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case OUTPUT:
-          case RETURNING:
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case OUTPUT:
-                jByOutput();
-                break;
-              case RETURNING:
-                jByOutlist();
-                break;
-              default:
-                jj_la1[140] = jj_gen;
-                jj_consume_token(-1);
-                throw new ParseException();
-            }
-            break;
-          default:
-            jj_la1[141] = jj_gen;
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case UPDATE:
+          jj_consume_token(UPDATE);
+                           forUpdate = true;
+          break;
+        case READONLY:
+          jj_consume_token(READONLY);
+                                                            forReadOnly = true;
+          break;
+        default:
+          jj_la1[138] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
         }
+        break;
+      default:
+        jj_la1[139] = jj_gen;
+        ;
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case OUTPUT:
+      case RETURNING:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case OUTPUT:
+          jByOutput();
+          break;
+        case RETURNING:
+          jByOutlist();
+          break;
+        default:
+          jj_la1[140] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        break;
+      default:
+        jj_la1[141] = jj_gen;
+        ;
+      }
         proc.isSingle = true;
         table.buildSelectBy(proc, forUpdate, forReadOnly, inOrder, descending, outLog);
         table.hasStdProcs = true;
-        break;
-      case SELECTBY:
-        jj_consume_token(SELECTBY);
-        label_46:
-        while (true)
-        {
-          jProcColumn();
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              break;
-            default:
-              jj_la1[142] = jj_gen;
-              break label_46;
+      break;
+    case SELECTBY:
+      jj_consume_token(SELECTBY);
+      label_46:
+      while (true) {
+        jProcColumn();
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          ;
+          break;
+        default:
+          jj_la1[142] = jj_gen;
+          break label_46;
+        }
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IN:
+      case ORDER:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IN:
+          jj_consume_token(IN);
+          break;
+        default:
+          jj_la1[143] = jj_gen;
+          ;
+        }
+        jj_consume_token(ORDER);
+                        inOrder = true;
+        label_47:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case IDENTIFIER:
+          case LIDENTIFIER:
+            ;
+            break;
+          default:
+            jj_la1[144] = jj_gen;
+            break label_47;
           }
+          jOrderColumn();
         }
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case IN:
-          case ORDER:
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case IN:
-                jj_consume_token(IN);
-                break;
-              default:
-                jj_la1[143] = jj_gen;
-            }
-            jj_consume_token(ORDER);
-            inOrder = true;
-            label_47:
-            while (true)
-            {
-              switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-              {
-                case IDENTIFIER:
-                case LIDENTIFIER:
-                  break;
-                default:
-                  jj_la1[144] = jj_gen;
-                  break label_47;
-              }
-              jOrderColumn();
-            }
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case DESC:
-                jj_consume_token(DESC);
-                descending = true;
-                break;
-              default:
-                jj_la1[145] = jj_gen;
-            }
-            break;
-          default:
-            jj_la1[146] = jj_gen;
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case DESC:
+          jj_consume_token(DESC);
+                                                                    descending = true;
+          break;
+        default:
+          jj_la1[145] = jj_gen;
+          ;
         }
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case FOR:
-          case READONLY:
-          case UPDATE:
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case FOR:
-                jj_consume_token(FOR);
-                break;
-              default:
-                jj_la1[147] = jj_gen;
-            }
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case UPDATE:
-                jj_consume_token(UPDATE);
-                forUpdate = true;
-                break;
-              case READONLY:
-                jj_consume_token(READONLY);
-                forReadOnly = true;
-                break;
-              default:
-                jj_la1[148] = jj_gen;
-                jj_consume_token(-1);
-                throw new ParseException();
-            }
-            break;
-          default:
-            jj_la1[149] = jj_gen;
+        break;
+      default:
+        jj_la1[146] = jj_gen;
+        ;
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case FOR:
+      case READONLY:
+      case UPDATE:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case FOR:
+          jj_consume_token(FOR);
+          break;
+        default:
+          jj_la1[147] = jj_gen;
+          ;
         }
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case OUTPUT:
-          case RETURNING:
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-            {
-              case OUTPUT:
-                jByOutput();
-                break;
-              case RETURNING:
-                jByOutlist();
-                break;
-              default:
-                jj_la1[150] = jj_gen;
-                jj_consume_token(-1);
-                throw new ParseException();
-            }
-            break;
-          default:
-            jj_la1[151] = jj_gen;
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case UPDATE:
+          jj_consume_token(UPDATE);
+                           forUpdate = true;
+          break;
+        case READONLY:
+          jj_consume_token(READONLY);
+                                                            forReadOnly = true;
+          break;
+        default:
+          jj_la1[148] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
         }
+        break;
+      default:
+        jj_la1[149] = jj_gen;
+        ;
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case OUTPUT:
+      case RETURNING:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case OUTPUT:
+          jByOutput();
+          break;
+        case RETURNING:
+          jByOutlist();
+          break;
+        default:
+          jj_la1[150] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        break;
+      default:
+        jj_la1[151] = jj_gen;
+        ;
+      }
         table.buildSelectBy(proc, forUpdate, forReadOnly, inOrder, descending, outLog);
         table.hasStdProcs = true;
-        break;
-      case DELETEBY:
-        jj_consume_token(DELETEBY);
-        label_48:
-        while (true)
-        {
-          jProcColumn();
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              break;
-            default:
-              jj_la1[152] = jj_gen;
-              break label_48;
-          }
+      break;
+    case DELETEBY:
+      jj_consume_token(DELETEBY);
+      label_48:
+      while (true) {
+        jProcColumn();
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          ;
+          break;
+        default:
+          jj_la1[152] = jj_gen;
+          break label_48;
         }
+      }
         table.buildDeleteBy(proc, outLog);
         table.hasStdProcs = true;
-        break;
-      case UPDATEFOR:
-        jj_consume_token(UPDATEFOR);
-        label_49:
-        while (true)
-        {
-          jProcColumn();
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              break;
-            default:
-              jj_la1[153] = jj_gen;
-              break label_49;
-          }
+      break;
+    case UPDATEFOR:
+      jj_consume_token(UPDATEFOR);
+      label_49:
+      while (true) {
+        jProcColumn();
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          ;
+          break;
+        default:
+          jj_la1[153] = jj_gen;
+          break label_49;
         }
+      }
         proc.isUpdate = true;
         table.buildUpdateFor(proc, outLog);
         table.hasStdProcs = true;
-        break;
-      case UPDATEBY:
-        jj_consume_token(UPDATEBY);
-        label_50:
-        while (true)
-        {
-          jProcUpdateByColumn();
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              break;
-            default:
-              jj_la1[154] = jj_gen;
-              break label_50;
-          }
+      break;
+    case UPDATEBY:
+      jj_consume_token(UPDATEBY);
+      label_50:
+      while (true) {
+        jProcUpdateByColumn();
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          ;
+          break;
+        default:
+          jj_la1[154] = jj_gen;
+          break label_50;
         }
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case FOR:
-            jj_consume_token(FOR);
-            label_51:
-            while (true)
-            {
-              jProcColumn();
-              switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-              {
-                case IDENTIFIER:
-                case LIDENTIFIER:
-                  break;
-                default:
-                  jj_la1[155] = jj_gen;
-                  break label_51;
-              }
-            }
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case FOR:
+        jj_consume_token(FOR);
+        label_51:
+        while (true) {
+          jProcColumn();
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case IDENTIFIER:
+          case LIDENTIFIER:
+            ;
             break;
           default:
-            jj_la1[156] = jj_gen;
+            jj_la1[155] = jj_gen;
+            break label_51;
+          }
         }
+        break;
+      default:
+        jj_la1[156] = jj_gen;
+        ;
+      }
         proc.isUpdate = true;
         table.buildUpdateBy(proc, outLog);
         table.hasStdProcs = true;
-        break;
-      default:
-        jj_la1[157] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
+      break;
+    default:
+      jj_la1[157] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
   }
 
-  static final public void jByOutlist() throws ParseException
-  {
-    String s;
+  static final public void jByOutlist() throws ParseException {
+  String s;
     jj_consume_token(RETURNING);
     label_52:
-    while (true)
-    {
+    while (true) {
       s = jIdent();
       if (!table.hasField(s))
-        outLog.println(proc.name + " field " + s + " not present in table");
+        outLog.println(proc.name+" field "+s+" not present in table");
       else if (proc.hasOutput(s))
-        outLog.println(proc.name + " field " + s + " already used has output");
+        outLog.println(proc.name+" field "+s+" already used has output");
       else
       {
         field = table.getField(s);
         proc.outputs.addElement(field);
       }
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case IDENTIFIER:
-        case LIDENTIFIER:
-          break;
-        default:
-          jj_la1[158] = jj_gen;
-          break label_52;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IDENTIFIER:
+      case LIDENTIFIER:
+        ;
+        break;
+      default:
+        jj_la1[158] = jj_gen;
+        break label_52;
       }
     }
   }
 
-  static final public void jByOutput() throws ParseException
-  {
-    String s;
+  static final public void jByOutput() throws ParseException {
+  String s;
     jj_consume_token(OUTPUT);
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case LEFTPAREN:
-        jOutputType();
-        break;
-      default:
-        jj_la1[159] = jj_gen;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LEFTPAREN:
+      jOutputType();
+      break;
+    default:
+      jj_la1[159] = jj_gen;
+      ;
     }
     label_53:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case IDENTIFIER:
-        case LIDENTIFIER:
-          break;
-        default:
-          jj_la1[160] = jj_gen;
-          break label_53;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IDENTIFIER:
+      case LIDENTIFIER:
+        ;
+        break;
+      default:
+        jj_la1[160] = jj_gen;
+        break label_53;
       }
       jField();
       if (proc.isSProc == true)
@@ -3416,13 +3118,15 @@ public class JPortal implements JPortalConstants
         else
           proc.inputs.addElement(field);
         field.isOut = true;
-      } else
+      }
+      else
       {
         if (proc.hasOutput(field.name))
         {
           if (proc.extendsStd == false)
-            outLog.println(proc.name + " field " + field.name + " already present as output");
-        } else
+            outLog.println(proc.name+" field "+field.name+" already present as output");
+        }
+        else
         {
           if (proc.extendsStd == true)
           {
@@ -3436,38 +3140,35 @@ public class JPortal implements JPortalConstants
     }
   }
 
-  static final public void jProcColumn() throws ParseException
-  {
-    String s;
+  static final public void jProcColumn() throws ParseException {
+  String s;
     s = jIdent();
     if (!table.hasField(s))
-      outLog.println(proc.name + " field " + s + " not present in table");
+      outLog.println(proc.name+" field "+s+" not present in table");
     else if (proc.hasFields(s))
-      outLog.println(proc.name + " field " + s + " already present");
+      outLog.println(proc.name+" field "+s+" already present");
     else if (proc.hasUpdateFields(s))
-      outLog.println(proc.name + " field " + s + " cannot be set aswell, already present as input");
+      outLog.println(proc.name+" field "+s+" cannot be set aswell, already present as input");
     else
       proc.fields.addElement(s);
   }
 
-  static final public void jOrderColumn() throws ParseException
-  {
-    String s;
+  static final public void jOrderColumn() throws ParseException {
+  String s;
     s = jIdent();
     if (!table.hasField(s))
-      outLog.println(proc.name + " field " + s + " not present in table");
+      outLog.println(proc.name+" field "+s+" not present in table");
     else if (proc.hasOrders(s))
-      outLog.println(proc.name + " field " + s + " already present");
+      outLog.println(proc.name+" field "+s+" already present");
     else
       proc.orderFields.addElement(s);
   }
 
-  static final public void jProcOutColumn() throws ParseException
-  {
-    String s;
+  static final public void jProcOutColumn() throws ParseException {
+  String s;
     s = jIdent();
     if (!table.hasField(s))
-      outLog.println(proc.name + " field " + s + " not present in table");
+      outLog.println(proc.name+" field "+s+" not present in table");
     else
     {
       Field field = table.getField(s);
@@ -3475,23 +3176,21 @@ public class JPortal implements JPortalConstants
     }
   }
 
-  static final public void jProcUpdateByColumn() throws ParseException
-  {
-    String s;
+  static final public void jProcUpdateByColumn() throws ParseException {
+  String s;
     s = jIdent();
     if (!table.hasField(s))
-      outLog.println(proc.name + " field " + s + " not present in table");
+      outLog.println(proc.name+" field "+s+" not present in table");
     else if (proc.hasUpdateFields(s))
-      outLog.println(proc.name + " field " + s + " already present");
+      outLog.println(proc.name+" field "+s+" already present");
     else
       proc.updateFields.addElement(s);
   }
 
-  static final public String jComment() throws ParseException
-  {
-    Token t;
-    String s;
-    int n;
+  static final public String jComment() throws ParseException {
+  Token t;
+  String s;
+  int n;
     t = jj_consume_token(COMMENT);
     s = t.image;
     while (s.indexOf('*') == 0)
@@ -3501,27 +3200,23 @@ public class JPortal implements JPortalConstants
     {
       n = s.indexOf('\n');
       if (n == -1)
-        n = s.length() - 1;
+        n = s.length()-1;
     }
-    {
-      if (true) return s.substring(0, n);
-    }
+    {if (true) return s.substring(0, n);}
     throw new Error("Missing return statement in function");
   }
 
-  static final public void jRowCount() throws ParseException
-  {
-    int n;
+  static final public void jRowCount() throws ParseException {
+  int n;
     jj_consume_token(LEFTPAREN);
     n = jNumber();
     jj_consume_token(RIGHTPAREN);
     proc.noRows = n;
   }
 
-  static final public void jWith() throws ParseException
-  {
-    Token t;
-    String s;
+  static final public void jWith() throws ParseException {
+  Token t;
+  String s;
     t = jj_consume_token(WITH);
     with = new With();
     with.table = table;
@@ -3530,552 +3225,521 @@ public class JPortal implements JPortalConstants
     s = jIdent();
     with.name = s;
     label_54:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case COMMENT:
-          break;
-        default:
-          jj_la1[161] = jj_gen;
-          break label_54;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case COMMENT:
+        ;
+        break;
+      default:
+        jj_la1[161] = jj_gen;
+        break label_54;
       }
       s = jComment();
       with.comments.addElement(s);
     }
     label_55:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case OPTIONS:
-          break;
-        default:
-          jj_la1[162] = jj_gen;
-          break label_55;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case OPTIONS:
+        ;
+        break;
+      default:
+        jj_la1[162] = jj_gen;
+        break label_55;
       }
       jj_consume_token(OPTIONS);
       label_56:
-      while (true)
-      {
+      while (true) {
         s = jString();
         with.options.addElement(s);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case STRING:
-            break;
-          default:
-            jj_la1[163] = jj_gen;
-            break label_56;
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case STRING:
+          ;
+          break;
+        default:
+          jj_la1[163] = jj_gen;
+          break label_56;
         }
       }
     }
     jWithCode();
   }
 
-  static final public void jWithCode() throws ParseException
-  {
-    Token t;
-    String s;
-    //int size;
-    Line line;
+  static final public void jWithCode() throws ParseException {
+  Token t;
+  String s;
+  //int size;
+  Line line;
     label_57:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case CODELINE:
-          break;
-        default:
-          jj_la1[164] = jj_gen;
-          break label_57;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case CODELINE:
+        ;
+        break;
+      default:
+        jj_la1[164] = jj_gen;
+        break label_57;
       }
       t = jj_consume_token(CODELINE);
-      s = t.image.trim() + " ";
-      if (s.length() > 0)
-      {
-        line = new Line(s);
-        with.lines.addElement(line);
-      }
+        s = t.image.trim() + " ";
+        if (s.length() > 0)
+        {
+          line = new Line(s);
+          with.lines.addElement(line);
+        }
     }
   }
 
-  static final public void jUserProc() throws ParseException
-  {
-    String s;
-    boolean isStdProc = false;
+  static final public void jUserProc() throws ParseException {
+  String s;
+  boolean isStdProc = false;
     s = jIdent();
     proc.name = s;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case LEFTPAREN:
-        jj_consume_token(LEFTPAREN);
-        jj_consume_token(STANDARD);
-        jj_consume_token(RIGHTPAREN);
-        proc.extendsStd = true;
-        proc.useStd = true;
-        isStdProc = true;
-        for (int i = 0; i < table.fields.size(); i++)
-          proc.outputs.addElement(table.fields.elementAt(i));
-        break;
-      default:
-        jj_la1[165] = jj_gen;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LEFTPAREN:
+      jj_consume_token(LEFTPAREN);
+      jj_consume_token(STANDARD);
+      jj_consume_token(RIGHTPAREN);
+      proc.extendsStd = true;
+      proc.useStd = true;
+      isStdProc = true;
+      for (int i=0; i<table.fields.size(); i++)
+        proc.outputs.addElement(table.fields.elementAt(i));
+      break;
+    default:
+      jj_la1[165] = jj_gen;
+      ;
     }
     label_58:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case COMMENT:
-          break;
-        default:
-          jj_la1[166] = jj_gen;
-          break label_58;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case COMMENT:
+        ;
+        break;
+      default:
+        jj_la1[166] = jj_gen;
+        break label_58;
       }
       s = jComment();
       proc.comments.addElement(s);
     }
     label_59:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case OPTIONS:
-          break;
-        default:
-          jj_la1[167] = jj_gen;
-          break label_59;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case OPTIONS:
+        ;
+        break;
+      default:
+        jj_la1[167] = jj_gen;
+        break label_59;
       }
       jj_consume_token(OPTIONS);
       label_60:
-      while (true)
-      {
+      while (true) {
         s = jString();
         proc.options.addElement(s);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case STRING:
-            break;
-          default:
-            jj_la1[168] = jj_gen;
-            break label_60;
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case STRING:
+          ;
+          break;
+        default:
+          jj_la1[168] = jj_gen;
+          break label_60;
         }
       }
     }
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case INPUT:
-        jj_consume_token(INPUT);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTPAREN:
-            jInputType();
-            break;
-          default:
-            jj_la1[169] = jj_gen;
-        }
-        label_61:
-        while (true)
-        {
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              break;
-            default:
-              jj_la1[170] = jj_gen;
-              break label_61;
-          }
-          jField();
-          if (proc.hasInput(field.name))
-          {
-            //if (proc.extendsStd == false)
-            outLog.println(proc.name + " field " + field.name + " already present as input");
-          } else
-          {
-            if (proc.extendsStd == true && proc.hasOutput(field.name) == false)
-            {
-              proc.useStd = false;
-              if (table.getField(field.name) == null)
-                field.isExtStd = true;
-              isStdProc = false;
-            }
-            if (!field.isNull)
-              field.isNull = (table.hasFieldAsNull(field.name));
-            field.isIn = true;
-            proc.inputs.addElement(field);
-          }
-        }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case INPUT:
+      jj_consume_token(INPUT);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTPAREN:
+        jInputType();
         break;
       default:
-        jj_la1[171] = jj_gen;
-    }
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case INOUT:
-        jj_consume_token(INOUT);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTPAREN:
-            jOutputType();
-            break;
-          default:
-            jj_la1[172] = jj_gen;
+        jj_la1[169] = jj_gen;
+        ;
+      }
+      label_61:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          ;
+          break;
+        default:
+          jj_la1[170] = jj_gen;
+          break label_61;
         }
-        label_62:
-        while (true)
+        jField();
+        if (proc.hasInput(field.name))
         {
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
+          //if (proc.extendsStd == false)
+          outLog.println(proc.name+" field "+field.name+" already present as input");
+        }
+        else
+        {
+          if (proc.extendsStd == true && proc.hasOutput(field.name) == false)
           {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              break;
-            default:
-              jj_la1[173] = jj_gen;
-              break label_62;
+            proc.useStd = false;
+            if (table.getField(field.name) == null)
+              field.isExtStd = true;
+            isStdProc = false;
           }
-          jField();
-          if (proc.hasInput(field.name))
+          if (!field.isNull)
+            field.isNull = (table.hasFieldAsNull(field.name));
+          field.isIn = true;
+          proc.inputs.addElement(field);
+        }
+      }
+      break;
+    default:
+      jj_la1[171] = jj_gen;
+      ;
+    }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case INOUT:
+      jj_consume_token(INOUT);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTPAREN:
+        jOutputType();
+        break;
+      default:
+        jj_la1[172] = jj_gen;
+        ;
+      }
+      label_62:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          ;
+          break;
+        default:
+          jj_la1[173] = jj_gen;
+          break label_62;
+        }
+        jField();
+        if (proc.hasInput(field.name))
+        {
+          //if (proc.extendsStd == false)
+          outLog.println(proc.name+" field "+field.name+" already present as input");
+        }
+        else if (proc.hasOutput(field.name))
+        {
+          if (proc.extendsStd == false)
+            outLog.println(proc.name+" field "+field.name+" already present as output");
+        }
+        else
+        {
+          if (proc.extendsStd == true)
           {
-            //if (proc.extendsStd == false)
-            outLog.println(proc.name + " field " + field.name + " already present as input");
-          } else if (proc.hasOutput(field.name))
+            proc.useStd = false;
+            isStdProc = false;
+            proc.isProc = true;
+          }
+          if (!field.isNull)
+            field.isNull = (table.hasFieldAsNull(field.name));
+          field.isIn = true;
+          field.isOut = true;
+          proc.inputs.addElement(field);
+          if (proc.isSProc == false)
+            proc.outputs.addElement(field);
+        }
+      }
+      break;
+    default:
+      jj_la1[174] = jj_gen;
+      ;
+    }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case OUTPUT:
+      jj_consume_token(OUTPUT);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEFTPAREN:
+        jOutputType();
+        break;
+      default:
+        jj_la1[175] = jj_gen;
+        ;
+      }
+      label_63:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          ;
+          break;
+        default:
+          jj_la1[176] = jj_gen;
+          break label_63;
+        }
+        jField();
+        if (proc.isSProc == true)
+        {
+          if (proc.hasInput(field.name))
+            field = proc.getInput(field.name);
+          else
+            proc.inputs.addElement(field);
+          field.isOut = true;
+        }
+        else
+        {
+          if (proc.hasOutput(field.name))
           {
             if (proc.extendsStd == false)
-              outLog.println(proc.name + " field " + field.name + " already present as output");
-          } else
+              outLog.println(proc.name+" field "+field.name+" already present as output");
+          }
+          else
           {
             if (proc.extendsStd == true)
             {
               proc.useStd = false;
+              field.isExtStd = true;
               isStdProc = false;
-              proc.isProc = true;
             }
             if (!field.isNull)
               field.isNull = (table.hasFieldAsNull(field.name));
-            field.isIn = true;
-            field.isOut = true;
-            proc.inputs.addElement(field);
-            if (proc.isSProc == false)
-              proc.outputs.addElement(field);
+            proc.outputs.addElement(field);
           }
         }
-        break;
-      default:
-        jj_la1[174] = jj_gen;
+      }
+      break;
+    default:
+      jj_la1[177] = jj_gen;
+      ;
     }
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case OUTPUT:
-        jj_consume_token(OUTPUT);
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case LEFTPAREN:
-            jOutputType();
-            break;
-          default:
-            jj_la1[175] = jj_gen;
-        }
-        label_63:
-        while (true)
-        {
-          switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-          {
-            case IDENTIFIER:
-            case LIDENTIFIER:
-              break;
-            default:
-              jj_la1[176] = jj_gen;
-              break label_63;
-          }
-          jField();
-          if (proc.isSProc == true)
-          {
-            if (proc.hasInput(field.name))
-              field = proc.getInput(field.name);
-            else
-              proc.inputs.addElement(field);
-            field.isOut = true;
-          } else
-          {
-            if (proc.hasOutput(field.name))
-            {
-              if (proc.extendsStd == false)
-                outLog.println(proc.name + " field " + field.name + " already present as output");
-            } else
-            {
-              if (proc.extendsStd == true)
-              {
-                proc.useStd = false;
-                field.isExtStd = true;
-                isStdProc = false;
-              }
-              if (!field.isNull)
-                field.isNull = (table.hasFieldAsNull(field.name));
-              proc.outputs.addElement(field);
-            }
-          }
-        }
-        break;
-      default:
-        jj_la1[177] = jj_gen;
-    }
-    if (jj_2_3(2))
-    {
+    if (jj_2_3(2)) {
       jj_consume_token(WITH);
       label_64:
-      while (true)
-      {
+      while (true) {
         s = jIdent();
         if (table.hasWith(s))
           proc.withs.addElement(s);
         else
-          outLog.println("With " + s + " not present.");
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-        {
-          case IDENTIFIER:
-          case LIDENTIFIER:
-            break;
-          default:
-            jj_la1[178] = jj_gen;
-            break label_64;
+          outLog.println("With "+s+" not present.");
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+        case LIDENTIFIER:
+          ;
+          break;
+        default:
+          jj_la1[178] = jj_gen;
+          break label_64;
         }
       }
-    } else
-    {
+    } else {
+      ;
     }
     if (isStdProc == true)
       table.hasStdProcs = true;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case SQL:
-      case CODE:
-        jOldCode();
-        break;
-      default:
-        jj_la1[179] = jj_gen;
-        jNewCode();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case SQL:
+    case CODE:
+      jOldCode();
+      break;
+    default:
+      jj_la1[179] = jj_gen;
+      jNewCode();
     }
   }
 
-  static final public void jOldCode() throws ParseException
-  {
-    String s;
-    int size;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case SQL:
-        jj_consume_token(SQL);
-        proc.isSql = true;
-        break;
-      default:
-        jj_la1[180] = jj_gen;
+  static final public void jOldCode() throws ParseException {
+  String s;
+  int size;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case SQL:
+      jj_consume_token(SQL);
+      proc.isSql = true;
+      break;
+    default:
+      jj_la1[180] = jj_gen;
+      ;
     }
     jj_consume_token(CODE);
     label_65:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case STRING:
-        case IDENTIFIER:
-        case LIDENTIFIER:
-          break;
-        default:
-          jj_la1[181] = jj_gen;
-          break label_65;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case STRING:
+      case IDENTIFIER:
+      case LIDENTIFIER:
+        ;
+        break;
+      default:
+        jj_la1[181] = jj_gen;
+        break label_65;
       }
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case STRING:
+        jLine();
+      Line l1 = new Line(line);
+      proc.addLine(l1);
+        break;
+      case IDENTIFIER:
+      case LIDENTIFIER:
+        s = jIdent();
+        size = jOptSize();
+      Line l2 = new Line(s, true);
+      proc.addLine(l2);
+      if (!proc.hasDynamic(s))
       {
-        case STRING:
-          jLine();
-          Line l1 = new Line(line);
-          proc.addLine(l1);
-          break;
-        case IDENTIFIER:
-        case LIDENTIFIER:
-          s = jIdent();
-          size = jOptSize();
-          Line l2 = new Line(s, true);
-          proc.addLine(l2);
-          if (!proc.hasDynamic(s))
-          {
-            if (proc.extendsStd == true)
-              proc.useStd = false;
-            proc.dynamics.addElement(s);
-            proc.dynamicSizes.addElement(size);
-          }
-          break;
-        default:
-          jj_la1[182] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
+        if (proc.extendsStd == true)
+          proc.useStd = false;
+        proc.dynamics.addElement(s);
+        proc.dynamicSizes.addElement(size);
+      }
+        break;
+      default:
+        jj_la1[182] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
       }
     }
     jj_consume_token(ENDCODE);
   }
 
-  static final public void jNewCode() throws ParseException
-  {
-    Token t;
-    String s;
-    Integer size;
-    Line line;
+  static final public void jNewCode() throws ParseException {
+  Token t;
+  String s;
+  Integer size;
+  Line line;
     label_66:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case CODELINE:
-          break;
-        default:
-          jj_la1[183] = jj_gen;
-          break label_66;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case CODELINE:
+        ;
+        break;
+      default:
+        jj_la1[183] = jj_gen;
+        break label_66;
       }
       t = jj_consume_token(CODELINE);
-      s = parseDynamics(t.image.trim() + " ");
-      if (s.length() > 0)
-      {
-        line = new Line(s);
-        proc.addLine(line);
-      }
+        s = parseDynamics(t.image.trim() + " ");
+        if (s.length() > 0)
+        {
+          line = new Line(s);
+          proc.addLine(line);
+        }
     }
   }
 
-  static final public Integer jOptSize() throws ParseException
-  {
-    int n;
+  static final public Integer jOptSize() throws ParseException {
+  int n;
     n = 256;
-    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-    {
-      case LEFTPAREN:
-        jj_consume_token(LEFTPAREN);
-        n = jNumber();
-        jj_consume_token(RIGHTPAREN);
-        break;
-      default:
-        jj_la1[184] = jj_gen;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LEFTPAREN:
+      jj_consume_token(LEFTPAREN);
+      n = jNumber();
+      jj_consume_token(RIGHTPAREN);
+      break;
+    default:
+      jj_la1[184] = jj_gen;
+      ;
     }
-    {
-      if (true) return n;
-    }
+    {if (true) return n;}
     throw new Error("Missing return statement in function");
   }
 
-  static final public void jInputType() throws ParseException
-  {
-    int n;
-    if (jj_2_4(2))
-    {
+  static final public void jInputType() throws ParseException {
+  int n;
+    if (jj_2_4(2)) {
       jj_consume_token(LEFTPAREN);
       jj_consume_token(MULTIPLE);
       jj_consume_token(RIGHTPAREN);
-      proc.isMultipleInput = true;
-    } else if (jj_2_5(2))
-    {
+    proc.isMultipleInput = true;
+    } else if (jj_2_5(2)) {
       jj_consume_token(LEFTPAREN);
       n = jNumber();
       jj_consume_token(RIGHTPAREN);
-      proc.noRows = n;
-      proc.isMultipleInput = true;
-    } else if (jj_2_6(2))
-    {
+    proc.noRows = n;
+    proc.isMultipleInput = true;
+    } else if (jj_2_6(2)) {
       jj_consume_token(LEFTPAREN);
       jj_consume_token(STANDARD);
-      for (int i = 0; i < table.fields.size(); i++)
-        proc.inputs.addElement(table.fields.elementAt(i));
+    for (int i=0; i<table.fields.size(); i++)
+      proc.inputs.addElement(table.fields.elementAt(i));
       jj_consume_token(RIGHTPAREN);
-    } else
-    {
+    } else {
       jj_consume_token(-1);
       throw new ParseException();
     }
   }
 
-  static final public void jOutputType() throws ParseException
-  {
-    int n;
-    if (jj_2_7(2))
-    {
+  static final public void jOutputType() throws ParseException {
+  int n;
+    if (jj_2_7(2)) {
       jj_consume_token(LEFTPAREN);
       jj_consume_token(SINGLE);
-      proc.isSingle = true;
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case STANDARD:
-          jj_consume_token(STANDARD);
-          if (proc.outputs.size() != table.fields.size() && table.fields.size() > 0)
-          {
-            for (int i = 0; i < table.fields.size(); i++)
-              proc.outputs.addElement(table.fields.elementAt(i));
-          }
-          break;
-        default:
-          jj_la1[185] = jj_gen;
-      }
-      jj_consume_token(RIGHTPAREN);
-    } else if (jj_2_8(2))
-    {
-      jj_consume_token(LEFTPAREN);
-      jj_consume_token(SINGLE);
-      proc.isSingle = true;
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case UPDATE:
-          jj_consume_token(UPDATE);
-          proc.hasUpdates = true;
-          break;
-        default:
-          jj_la1[186] = jj_gen;
-      }
-      jj_consume_token(RIGHTPAREN);
-    } else if (jj_2_9(2))
-    {
-      jj_consume_token(LEFTPAREN);
-      n = jNumber();
-      jj_consume_token(RIGHTPAREN);
-      proc.noRows = n;
-    } else if (jj_2_10(2))
-    {
-      jj_consume_token(LEFTPAREN);
-      jj_consume_token(STANDARD);
+    proc.isSingle = true;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case STANDARD:
+        jj_consume_token(STANDARD);
       if (proc.outputs.size() != table.fields.size() && table.fields.size() > 0)
       {
-        for (int i = 0; i < table.fields.size(); i++)
+        for (int i=0; i<table.fields.size(); i++)
           proc.outputs.addElement(table.fields.elementAt(i));
       }
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case SINGLE:
-          jj_consume_token(SINGLE);
-          proc.isSingle = true;
-          break;
-        default:
-          jj_la1[187] = jj_gen;
+        break;
+      default:
+        jj_la1[185] = jj_gen;
+        ;
       }
       jj_consume_token(RIGHTPAREN);
-    } else
+    } else if (jj_2_8(2)) {
+      jj_consume_token(LEFTPAREN);
+      jj_consume_token(SINGLE);
+    proc.isSingle = true;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case UPDATE:
+        jj_consume_token(UPDATE);
+      proc.hasUpdates = true;
+        break;
+      default:
+        jj_la1[186] = jj_gen;
+        ;
+      }
+      jj_consume_token(RIGHTPAREN);
+    } else if (jj_2_9(2)) {
+      jj_consume_token(LEFTPAREN);
+      n = jNumber();
+      jj_consume_token(RIGHTPAREN);
+    proc.noRows = n;
+    } else if (jj_2_10(2)) {
+      jj_consume_token(LEFTPAREN);
+      jj_consume_token(STANDARD);
+    if (proc.outputs.size() != table.fields.size() && table.fields.size() > 0)
     {
+      for (int i=0; i<table.fields.size(); i++)
+        proc.outputs.addElement(table.fields.elementAt(i));
+    }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case SINGLE:
+        jj_consume_token(SINGLE);
+      proc.isSingle = true;
+        break;
+      default:
+        jj_la1[187] = jj_gen;
+        ;
+      }
+      jj_consume_token(RIGHTPAREN);
+    } else {
       jj_consume_token(-1);
       throw new ParseException();
     }
   }
 
-  static final public void jOldData() throws ParseException
-  {
+  static final public void jOldData() throws ParseException {
     jj_consume_token(DATA);
     proc = new Proc();
     proc.isData = true;
     label_67:
-    while (true)
-    {
-      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk)
-      {
-        case STRING:
-          break;
-        default:
-          jj_la1[188] = jj_gen;
-          break label_67;
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case STRING:
+        ;
+        break;
+      default:
+        jj_la1[188] = jj_gen;
+        break label_67;
       }
       jLine();
       proc.addLine(line);
@@ -4083,20 +3747,17 @@ public class JPortal implements JPortalConstants
     jj_consume_token(ENDDATA);
   }
 
-  static final public void jNewData() throws ParseException
-  {
-    Token t;
+  static final public void jNewData() throws ParseException {
+  Token t;
     t = jj_consume_token(DATALINE);
     proc = new Proc();
     proc.isData = true;
     proc.addLine(t.image.trim());
     label_68:
-    while (true)
-    {
-      if (jj_2_11(2))
-      {
-      } else
-      {
+    while (true) {
+      if (jj_2_11(2)) {
+        ;
+      } else {
         break label_68;
       }
       t = jj_consume_token(DATALINE);
@@ -4104,20 +3765,17 @@ public class JPortal implements JPortalConstants
     }
   }
 
-  static final public void jIdlCode() throws ParseException
-  {
-    Token t;
+  static final public void jIdlCode() throws ParseException {
+  Token t;
     t = jj_consume_token(IDLLINE);
     proc = new Proc();
     proc.isIdlCode = true;
     proc.addLine(t.image);
     label_69:
-    while (true)
-    {
-      if (jj_2_12(2))
-      {
-      } else
-      {
+    while (true) {
+      if (jj_2_12(2)) {
+        ;
+      } else {
         break label_69;
       }
       t = jj_consume_token(IDLLINE);
@@ -4125,683 +3783,506 @@ public class JPortal implements JPortalConstants
     }
   }
 
-  static private boolean jj_2_1(int xla)
-  {
-    jj_la = xla;
-    jj_lastpos = jj_scanpos = token;
-    try
-    {
-      return !jj_3_1();
-    }
-    catch (LookaheadSuccess ls)
-    {
-      return true;
-    }
-    finally
-    {
-      jj_save(0, xla);
-    }
+  static private boolean jj_2_1(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_1(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(0, xla); }
   }
 
-  static private boolean jj_2_2(int xla)
-  {
-    jj_la = xla;
-    jj_lastpos = jj_scanpos = token;
-    try
-    {
-      return !jj_3_2();
-    }
-    catch (LookaheadSuccess ls)
-    {
-      return true;
-    }
-    finally
-    {
-      jj_save(1, xla);
-    }
+  static private boolean jj_2_2(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_2(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(1, xla); }
   }
 
-  static private boolean jj_2_3(int xla)
-  {
-    jj_la = xla;
-    jj_lastpos = jj_scanpos = token;
-    try
-    {
-      return !jj_3_3();
-    }
-    catch (LookaheadSuccess ls)
-    {
-      return true;
-    }
-    finally
-    {
-      jj_save(2, xla);
-    }
+  static private boolean jj_2_3(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_3(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(2, xla); }
   }
 
-  static private boolean jj_2_4(int xla)
-  {
-    jj_la = xla;
-    jj_lastpos = jj_scanpos = token;
-    try
-    {
-      return !jj_3_4();
-    }
-    catch (LookaheadSuccess ls)
-    {
-      return true;
-    }
-    finally
-    {
-      jj_save(3, xla);
-    }
+  static private boolean jj_2_4(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_4(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(3, xla); }
   }
 
-  static private boolean jj_2_5(int xla)
-  {
-    jj_la = xla;
-    jj_lastpos = jj_scanpos = token;
-    try
-    {
-      return !jj_3_5();
-    }
-    catch (LookaheadSuccess ls)
-    {
-      return true;
-    }
-    finally
-    {
-      jj_save(4, xla);
-    }
+  static private boolean jj_2_5(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_5(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(4, xla); }
   }
 
-  static private boolean jj_2_6(int xla)
-  {
-    jj_la = xla;
-    jj_lastpos = jj_scanpos = token;
-    try
-    {
-      return !jj_3_6();
-    }
-    catch (LookaheadSuccess ls)
-    {
-      return true;
-    }
-    finally
-    {
-      jj_save(5, xla);
-    }
+  static private boolean jj_2_6(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_6(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(5, xla); }
   }
 
-  static private boolean jj_2_7(int xla)
-  {
-    jj_la = xla;
-    jj_lastpos = jj_scanpos = token;
-    try
-    {
-      return !jj_3_7();
-    }
-    catch (LookaheadSuccess ls)
-    {
-      return true;
-    }
-    finally
-    {
-      jj_save(6, xla);
-    }
+  static private boolean jj_2_7(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_7(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(6, xla); }
   }
 
-  static private boolean jj_2_8(int xla)
-  {
-    jj_la = xla;
-    jj_lastpos = jj_scanpos = token;
-    try
-    {
-      return !jj_3_8();
-    }
-    catch (LookaheadSuccess ls)
-    {
-      return true;
-    }
-    finally
-    {
-      jj_save(7, xla);
-    }
+  static private boolean jj_2_8(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_8(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(7, xla); }
   }
 
-  static private boolean jj_2_9(int xla)
-  {
-    jj_la = xla;
-    jj_lastpos = jj_scanpos = token;
-    try
-    {
-      return !jj_3_9();
-    }
-    catch (LookaheadSuccess ls)
-    {
-      return true;
-    }
-    finally
-    {
-      jj_save(8, xla);
-    }
+  static private boolean jj_2_9(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_9(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(8, xla); }
   }
 
-  static private boolean jj_2_10(int xla)
-  {
-    jj_la = xla;
-    jj_lastpos = jj_scanpos = token;
-    try
-    {
-      return !jj_3_10();
-    }
-    catch (LookaheadSuccess ls)
-    {
-      return true;
-    }
-    finally
-    {
-      jj_save(9, xla);
-    }
+  static private boolean jj_2_10(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_10(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(9, xla); }
   }
 
-  static private boolean jj_2_11(int xla)
-  {
-    jj_la = xla;
-    jj_lastpos = jj_scanpos = token;
-    try
-    {
-      return !jj_3_11();
-    }
-    catch (LookaheadSuccess ls)
-    {
-      return true;
-    }
-    finally
-    {
-      jj_save(10, xla);
-    }
+  static private boolean jj_2_11(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_11(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(10, xla); }
   }
 
-  static private boolean jj_2_12(int xla)
-  {
-    jj_la = xla;
-    jj_lastpos = jj_scanpos = token;
-    try
-    {
-      return !jj_3_12();
-    }
-    catch (LookaheadSuccess ls)
-    {
-      return true;
-    }
-    finally
-    {
-      jj_save(11, xla);
-    }
+  static private boolean jj_2_12(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_12(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(11, xla); }
   }
 
-  static private boolean jj_3R_93()
-  {
-    return jj_3R_99();
+  static private boolean jj_3R_107() {
+    if (jj_scan_token(EXECUTE)) return true;
+    return false;
   }
 
-  static private boolean jj_3R_83()
-  {
+  static private boolean jj_3R_76() {
+    if (jj_3R_87()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_93() {
+    if (jj_3R_99()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_83() {
     if (jj_scan_token(UPDATEFOR)) return true;
     Token xsp;
     if (jj_3R_95()) return true;
-    while (true)
-    {
+    while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_95())
-      {
-        jj_scanpos = xsp;
-        break;
-      }
+      if (jj_3R_95()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
 
-  static private boolean jj_3R_75()
-  {
-    return jj_3R_86();
+  static private boolean jj_3R_75() {
+    if (jj_3R_86()) return true;
+    return false;
   }
 
-  static private boolean jj_3R_106()
-  {
-    return jj_scan_token(UPDATE);
+  static private boolean jj_3R_106() {
+    if (jj_scan_token(UPDATE)) return true;
+    return false;
   }
 
-  static private boolean jj_3R_74()
-  {
-    return jj_3R_85();
+  static private boolean jj_3R_91() {
+    if (jj_scan_token(LIDENTIFIER)) return true;
+    return false;
   }
 
-  static private boolean jj_3R_70()
-  {
+  static private boolean jj_3R_74() {
+    if (jj_3R_85()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_70() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_74())
-    {
-      jj_scanpos = xsp;
-      if (jj_3R_75())
-      {
-        jj_scanpos = xsp;
-        if (jj_3R_76())
-        {
-          jj_scanpos = xsp;
-          if (jj_3R_77())
-          {
-            jj_scanpos = xsp;
-            return jj_3R_78();
-          }
-        }
-      }
+    if (jj_3R_74()) {
+    jj_scanpos = xsp;
+    if (jj_3R_75()) {
+    jj_scanpos = xsp;
+    if (jj_3R_76()) {
+    jj_scanpos = xsp;
+    if (jj_3R_77()) {
+    jj_scanpos = xsp;
+    if (jj_3R_78()) return true;
+    }
+    }
+    }
     }
     return false;
   }
 
-  static private boolean jj_3R_82()
-  {
+  static private boolean jj_3R_82() {
     if (jj_scan_token(DELETEBY)) return true;
     Token xsp;
     if (jj_3R_94()) return true;
-    while (true)
-    {
+    while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_94())
-      {
-        jj_scanpos = xsp;
-        break;
-      }
+      if (jj_3R_94()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
 
-  static private boolean jj_3R_92()
-  {
-    return jj_3R_99();
+  static private boolean jj_3R_92() {
+    if (jj_3R_99()) return true;
+    return false;
   }
 
-  static private boolean jj_3R_91()
-  {
-    return jj_scan_token(LIDENTIFIER);
+  static private boolean jj_3R_105() {
+    if (jj_scan_token(SELECT)) return true;
+    return false;
   }
 
-  static private boolean jj_3R_105()
-  {
-    return jj_scan_token(SELECT);
+  static private boolean jj_3_2() {
+    if (jj_3R_71()) return true;
+    return false;
   }
 
-  static private boolean jj_3_2()
-  {
-    return jj_3R_71();
-  }
-
-  static private boolean jj_3_7()
-  {
+  static private boolean jj_3_7() {
     if (jj_scan_token(LEFTPAREN)) return true;
-    return jj_scan_token(SINGLE);
+    if (jj_scan_token(SINGLE)) return true;
+    return false;
   }
 
-  static private boolean jj_3R_73()
-  {
-    return jj_scan_token(NUMBER);
+  static private boolean jj_3R_73() {
+    if (jj_scan_token(NUMBER)) return true;
+    return false;
   }
 
-  static private boolean jj_3_12()
-  {
-    return jj_scan_token(IDLLINE);
+  static private boolean jj_3_12() {
+    if (jj_scan_token(IDLLINE)) return true;
+    return false;
   }
 
-  static private boolean jj_3R_87()
-  {
-    if (jj_scan_token(LINK)) return true;
-    return jj_3R_98();
-  }
-
-  static private boolean jj_3R_104()
-  {
-    return jj_scan_token(INSERT);
-  }
-
-  static private boolean jj_3R_79()
-  {
+  static private boolean jj_3R_79() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_90())
-    {
-      jj_scanpos = xsp;
-      return jj_3R_91();
+    if (jj_3R_90()) {
+    jj_scanpos = xsp;
+    if (jj_3R_91()) return true;
     }
     return false;
   }
 
-  static private boolean jj_3R_90()
-  {
-    return jj_scan_token(IDENTIFIER);
+  static private boolean jj_3R_90() {
+    if (jj_scan_token(IDENTIFIER)) return true;
+    return false;
   }
 
-  static private boolean jj_3R_81()
-  {
+  static private boolean jj_3R_87() {
+    if (jj_scan_token(LINK)) return true;
+    if (jj_3R_98()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_104() {
+    if (jj_scan_token(INSERT)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_81() {
     if (jj_scan_token(SELECTBY)) return true;
     Token xsp;
     if (jj_3R_93()) return true;
-    while (true)
-    {
+    while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_93())
-      {
-        jj_scanpos = xsp;
-        break;
-      }
+      if (jj_3R_93()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
 
-  static private boolean jj_3R_103()
-  {
-    return jj_scan_token(DELETE);
+  static private boolean jj_3R_103() {
+    if (jj_scan_token(DELETE)) return true;
+    return false;
   }
 
-  static private boolean jj_3R_99()
-  {
-    return jj_3R_79();
+  static private boolean jj_3R_99() {
+    if (jj_3R_79()) return true;
+    return false;
   }
 
-  static private boolean jj_3_6()
-  {
+  static private boolean jj_3_6() {
     if (jj_scan_token(LEFTPAREN)) return true;
-    return jj_scan_token(STANDARD);
+    if (jj_scan_token(STANDARD)) return true;
+    return false;
   }
 
-  static private boolean jj_3R_80()
-  {
+  static private boolean jj_3R_80() {
     if (jj_scan_token(SELECTONEBY)) return true;
     Token xsp;
     if (jj_3R_92()) return true;
-    while (true)
-    {
+    while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_92())
-      {
-        jj_scanpos = xsp;
-        break;
-      }
+      if (jj_3R_92()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
 
-  static private boolean jj_3R_72()
-  {
-    return jj_3R_79();
+  static private boolean jj_3R_72() {
+    if (jj_3R_79()) return true;
+    return false;
   }
 
-  static private boolean jj_3_5()
-  {
+  static private boolean jj_3_5() {
     if (jj_scan_token(LEFTPAREN)) return true;
-    return jj_3R_73();
+    if (jj_3R_73()) return true;
+    return false;
   }
 
-  static private boolean jj_3R_102()
-  {
-    return jj_scan_token(ALL);
+  static private boolean jj_3R_102() {
+    if (jj_scan_token(ALL)) return true;
+    return false;
   }
 
-  static private boolean jj_3R_101()
-  {
+  static private boolean jj_3R_101() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_102())
-    {
-      jj_scanpos = xsp;
-      if (jj_3R_103())
-      {
-        jj_scanpos = xsp;
-        if (jj_3R_104())
-        {
-          jj_scanpos = xsp;
-          if (jj_3R_105())
-          {
-            jj_scanpos = xsp;
-            if (jj_3R_106())
-            {
-              jj_scanpos = xsp;
-              return jj_3R_107();
-            }
-          }
-        }
-      }
+    if (jj_3R_102()) {
+    jj_scanpos = xsp;
+    if (jj_3R_103()) {
+    jj_scanpos = xsp;
+    if (jj_3R_104()) {
+    jj_scanpos = xsp;
+    if (jj_3R_105()) {
+    jj_scanpos = xsp;
+    if (jj_3R_106()) {
+    jj_scanpos = xsp;
+    if (jj_3R_107()) return true;
+    }
+    }
+    }
+    }
     }
     return false;
   }
 
-  static private boolean jj_3_3()
-  {
+  static private boolean jj_3_3() {
     if (jj_scan_token(WITH)) return true;
     Token xsp;
     if (jj_3R_72()) return true;
-    while (true)
-    {
+    while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_72())
-      {
-        jj_scanpos = xsp;
-        break;
-      }
+      if (jj_3R_72()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
 
-  static private boolean jj_3_11()
-  {
-    return jj_scan_token(DATALINE);
+  static private boolean jj_3_11() {
+    if (jj_scan_token(DATALINE)) return true;
+    return false;
   }
 
-  static private boolean jj_3R_71()
-  {
+  static private boolean jj_3R_71() {
     if (jj_3R_79()) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_80())
-    {
-      jj_scanpos = xsp;
-      if (jj_3R_81())
-      {
-        jj_scanpos = xsp;
-        if (jj_3R_82())
-        {
-          jj_scanpos = xsp;
-          if (jj_3R_83())
-          {
-            jj_scanpos = xsp;
-            return jj_3R_84();
-          }
-        }
-      }
+    if (jj_3R_80()) {
+    jj_scanpos = xsp;
+    if (jj_3R_81()) {
+    jj_scanpos = xsp;
+    if (jj_3R_82()) {
+    jj_scanpos = xsp;
+    if (jj_3R_83()) {
+    jj_scanpos = xsp;
+    if (jj_3R_84()) return true;
+    }
+    }
+    }
     }
     return false;
   }
 
-  static private boolean jj_3_4()
-  {
+  static private boolean jj_3_4() {
     if (jj_scan_token(LEFTPAREN)) return true;
-    return jj_scan_token(MULTIPLE);
+    if (jj_scan_token(MULTIPLE)) return true;
+    return false;
   }
 
-  static private boolean jj_3R_98()
-  {
-    return jj_3R_79();
+  static private boolean jj_3R_98() {
+    if (jj_3R_79()) return true;
+    return false;
   }
 
-  static private boolean jj_3R_97()
-  {
-    return jj_3R_101();
+  static private boolean jj_3R_97() {
+    if (jj_3R_101()) return true;
+    return false;
   }
 
-  static private boolean jj_3R_88()
-  {
+  static private boolean jj_3R_88() {
     if (jj_scan_token(VIEW)) return true;
-    return jj_3R_79();
+    if (jj_3R_79()) return true;
+    return false;
   }
 
-  static private boolean jj_3R_85()
-  {
+  static private boolean jj_3R_85() {
     if (jj_scan_token(GRANT)) return true;
     Token xsp;
     if (jj_3R_97()) return true;
-    while (true)
-    {
+    while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_97())
-      {
-        jj_scanpos = xsp;
-        break;
-      }
+      if (jj_3R_97()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
 
-  static private boolean jj_3R_100()
-  {
-    return jj_3R_79();
+  static private boolean jj_3R_100() {
+    if (jj_3R_79()) return true;
+    return false;
   }
 
-  static private boolean jj_3R_89()
-  {
+  static private boolean jj_3R_89() {
     if (jj_scan_token(CONST)) return true;
-    return jj_3R_79();
+    if (jj_3R_79()) return true;
+    return false;
   }
 
-  static private boolean jj_3_10()
-  {
+  static private boolean jj_3_10() {
     if (jj_scan_token(LEFTPAREN)) return true;
-    return jj_scan_token(STANDARD);
+    if (jj_scan_token(STANDARD)) return true;
+    return false;
   }
 
-  static private boolean jj_3R_86()
-  {
+  static private boolean jj_3R_86() {
     if (jj_scan_token(KEY)) return true;
-    return jj_3R_79();
+    if (jj_3R_79()) return true;
+    return false;
   }
 
-  static private boolean jj_3R_96()
-  {
-    return jj_3R_100();
+  static private boolean jj_3R_96() {
+    if (jj_3R_100()) return true;
+    return false;
   }
 
-  static private boolean jj_3_9()
-  {
+  static private boolean jj_3_9() {
     if (jj_scan_token(LEFTPAREN)) return true;
-    return jj_3R_73();
+    if (jj_3R_73()) return true;
+    return false;
   }
 
-  static private boolean jj_3R_95()
-  {
-    return jj_3R_99();
+  static private boolean jj_3_1() {
+    if (jj_3R_70()) return true;
+    return false;
   }
 
-  static private boolean jj_3_1()
-  {
-    return jj_3R_70();
+  static private boolean jj_3R_95() {
+    if (jj_3R_99()) return true;
+    return false;
   }
 
-  static private boolean jj_3R_78()
-  {
-    return jj_3R_89();
+  static private boolean jj_3R_78() {
+    if (jj_3R_89()) return true;
+    return false;
   }
 
-  static private boolean jj_3R_94()
-  {
-    return jj_3R_99();
+  static private boolean jj_3R_94() {
+    if (jj_3R_99()) return true;
+    return false;
   }
 
-  static private boolean jj_3_8()
-  {
+  static private boolean jj_3_8() {
     if (jj_scan_token(LEFTPAREN)) return true;
-    return jj_scan_token(SINGLE);
+    if (jj_scan_token(SINGLE)) return true;
+    return false;
   }
 
-  static private boolean jj_3R_77()
-  {
-    return jj_3R_88();
+  static private boolean jj_3R_77() {
+    if (jj_3R_88()) return true;
+    return false;
   }
 
-  static private boolean jj_3R_84()
-  {
+  static private boolean jj_3R_84() {
     if (jj_scan_token(UPDATEBY)) return true;
     Token xsp;
     if (jj_3R_96()) return true;
-    while (true)
-    {
+    while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_96())
-      {
-        jj_scanpos = xsp;
-        break;
-      }
+      if (jj_3R_96()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
 
-  static private boolean jj_3R_107()
-  {
-    return jj_scan_token(EXECUTE);
-  }
+  static private boolean jj_initialized_once = false;
+  /** Generated Token Manager. */
+  static public JPortalTokenManager token_source;
+  static SimpleCharStream jj_input_stream;
+  /** Current token. */
+  static public Token token;
+  /** Next token. */
+  static public Token jj_nt;
+  static private int jj_ntk;
+  static private Token jj_scanpos, jj_lastpos;
+  static private int jj_la;
+  /** Whether we are looking ahead. */
+  static private boolean jj_lookingAhead = false;
+  static private boolean jj_semLA;
+  static private int jj_gen;
+  static final private int[] jj_la1 = new int[189];
+  static private int[] jj_la1_0;
+  static private int[] jj_la1_1;
+  static private int[] jj_la1_2;
+  static private int[] jj_la1_3;
+  static private int[] jj_la1_4;
+  static {
+      jj_la1_init_0();
+      jj_la1_init_1();
+      jj_la1_init_2();
+      jj_la1_init_3();
+      jj_la1_init_4();
+   }
+   private static void jj_la1_init_0() {
+      jj_la1_0 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x20000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x200000,0x0,0x0,0x0,0x0,0x0,0x40240000,0x0,0x40240000,0x0,0x0,0x40240000,0x0,0x40240000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x18127f00,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x800000,0x0,0x0,0x80000080,0x0,0x80000080,0x0,0x0,0x400000,0x0,0x400000,0x0,0x0,0x80000,0x80000000,0x80000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1018000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1018000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+   }
+   private static void jj_la1_init_1() {
+      jj_la1_1 = new int[] {0x100,0x0,0x0,0x0,0x8000,0x8000,0x0,0x8000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x80000000,0x0,0x0,0x0,0x60000000,0x20000000,0x60000000,0x0,0x0,0x60000000,0x20000000,0x60000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x210,0x0,0x4906210,0x0,0x400000,0x0,0x0,0x0,0x400000,0x0,0x0,0x400000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x80000,0x0,0x4,0x0,0x601000,0x0,0x0,0x80040,0x0,0x80040,0x80000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x80000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x3080085,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x400,0x0,0x400,0x10000,0x0,0x8,0x10000,0x400,0x0,0x400,0x3080085,0x80000000,0x0,0x0,0x400,0x0,0x400,0x0,0x0,0x0,0x10000,0x0,0x8,0x10000,0x400,0x0,0x400,0x0,0x0,0x0,0x0,0x0,0x0,0x400,0x2,0x0,0x0,0x0,0x0,0x80000000,0x0,0x0,0x0,0x0,0x80000000,0x0,0x0,0x0,0x40000,0x0,0x0,0x20000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+   }
+   private static void jj_la1_init_2() {
+      jj_la1_2 = new int[] {0x0,0x0,0x4,0x0,0x2,0x2,0x0,0x40000000,0x0,0x0,0x20000,0x0,0x0,0x0,0x0,0x40000000,0x8004000,0x8004000,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x82800000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xff0,0x0,0x0,0x80000,0x0,0x80000,0x0,0x0,0x0,0xff0,0x0,0x0,0x0,0x40000,0x0,0x40000,0x0,0x0,0x2000,0x0,0x2000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2,0x0,0x0,0x0,0x8004000,0x0,0x280000,0x0,0x8004000,0x10000,0x10000,0x0,0x0,0x0,0x0,0x8000,0x8000,0x0,0x0,0x0,0x1,0x0,0x8000,0x8000,0x280000,0x0,0x0,0x0,0x0,0x8000,0x8000,0x10002,0x10002,0x0,0x0,0x0,0x0,0x1,0x0,0x8000,0x8000,0x10002,0x10002,0x0,0x0,0x0,0x0,0x0,0x500000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2,0x0,0x10000000,0x10000000,0x0,0x0,0x0,0x0,0x20000000,0x0,0x4000000,0x0,};
+   }
+   private static void jj_la1_init_3() {
+      jj_la1_3 = new int[] {0x0,0x0,0x0,0x1000,0x0,0x0,0x0,0x0,0x4000,0x0,0x0,0x400,0x0,0x0,0x0,0x0,0x240000,0x240000,0x0,0x0,0x40000000,0x80000000,0x80000000,0x0,0x1000000,0x0,0x0,0x0,0x80000000,0x0,0x0,0x0,0x1000000,0x80000000,0x0,0x0,0x0,0x1000000,0xc0000000,0xc0000000,0xa0000000,0xa0000000,0xc0000000,0x20000000,0xc0000000,0xc0000000,0x20000000,0xc0000000,0xc0000000,0x20000000,0xc0000000,0x20000000,0xa0000000,0xa0000000,0xa0000000,0xa0000000,0xc0000000,0xc0000000,0xc0000000,0x0,0xc0000000,0x1009a82b,0x80000000,0x0,0x8000000,0x0,0xc0000000,0x0,0x8000000,0x0,0x0,0xc0000000,0xc0000000,0x8000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40,0x0,0x0,0x4000,0x8000000,0x0,0x40,0x0,0x40,0x0,0x0,0x10,0x0,0x10,0x0,0x80000000,0x0,0x0,0x0,0x40,0x0,0x0,0x0,0x0,0x4,0x0,0x0,0x100000,0x0,0x0,0x0,0x0,0x40,0x200000,0x200000,0x200,0x200,0x80000000,0x80000000,0x80000000,0x0,0x40,0x40,0x0,0x0,0x0,0x0,0x0,0x40,0x40,0x40,0x0,0x0,0x0,0x0,0x40,0x40,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40,0x40,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x180,0x0,0x80000000,0x0,0x1000000,0x0,0x0,0x0,0x80000000,0x1000000,0x0,0x0,0x80000000,0x0,0x0,0x80000000,0x0,0x0,0x80000000,0x0,0x0,0x0,0x100000,0x0,0x0,0x0,0x0,0x80000000,0x0,0x40,0x0,0x0,};
+   }
+   private static void jj_la1_init_4() {
+      jj_la1_4 = new int[] {0x0,0x20,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x300,0x0,0x0,0x800000,0x320,0x300,0x0,0x480000,0x480000,0x0,0x300,0x0,0x0,0x0,0x0,0x0,0x0,0x20,0x300,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x10,0x10,0x0,0x0,0x10,0x0,0x10,0x10,0x0,0x10,0x10,0x0,0x10,0x0,0x0,0x0,0x0,0x0,0x10,0x10,0x10,0x0,0x0,0x0,0x0,0x0,0x0,0x300,0x0,0x0,0x0,0x300,0x310,0x10,0x10,0x0,0x300,0x20,0x0,0x300,0x300,0x300,0x300,0x300,0x300,0x300,0x300,0x0,0x0,0x0,0x300,0x0,0x300,0x0,0x0,0x20,0x0,0x300,0x0,0x300,0x0,0x0,0x0,0x0,0x0,0x0,0x20,0x300,0x300,0x0,0x300,0x0,0x0,0x10000,0x20,0x0,0x300,0x300,0x480000,0x480000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x300,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x20,0x300,0x0,0x0,0x0,0x0,0x0,0x300,0x0,0x300,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x300,0x300,0x300,0x300,0x0,0x0,0x300,0x0,0x300,0x0,0x0,0x20,0x10000,0x0,0x0,0x0,0x20,0x0,0x300,0x0,0x0,0x300,0x0,0x0,0x300,0x0,0x300,0x0,0x0,0x320,0x320,0x10000,0x0,0x0,0x0,0x0,0x20,};
+   }
+  static final private JJCalls[] jj_2_rtns = new JJCalls[12];
+  static private boolean jj_rescan = false;
+  static private int jj_gc = 0;
 
-  static private boolean jj_3R_76()
-  {
-    return jj_3R_87();
+  /** Constructor with InputStream. */
+  public JPortal(java.io.InputStream stream) {
+     this(stream, null);
   }
-
-  private static void jj_la1_init_0()
-  {
-    jj_la1_0 = new int[]{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x20000000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x200000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x40240000, 0x0, 0x40240000, 0x0, 0x0, 0x40240000, 0x0, 0x40240000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x18127f00, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x800000, 0x0, 0x0, 0x80000080, 0x0, 0x80000080, 0x0, 0x0, 0x400000, 0x0, 0x400000, 0x0, 0x0, 0x80000, 0x80000000, 0x80000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1018000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1018000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,};
-  }
-
-  private static void jj_la1_init_1()
-  {
-    jj_la1_1 = new int[]{0x100, 0x0, 0x0, 0x0, 0x8000, 0x8000, 0x0, 0x8000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x8000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x80000000, 0x0, 0x0, 0x0, 0x60000000, 0x20000000, 0x60000000, 0x0, 0x0, 0x60000000, 0x20000000, 0x60000000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x210, 0x0, 0x4906210, 0x0, 0x400000, 0x0, 0x0, 0x0, 0x400000, 0x0, 0x0, 0x400000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x80000, 0x0, 0x4, 0x0, 0x601000, 0x0, 0x0, 0x80040, 0x0, 0x80040, 0x80000000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x80000000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3080085, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x400, 0x0, 0x400, 0x10000, 0x0, 0x8, 0x10000, 0x400, 0x0, 0x400, 0x3080085, 0x80000000, 0x0, 0x0, 0x400, 0x0, 0x400, 0x0, 0x0, 0x0, 0x10000, 0x0, 0x8, 0x10000, 0x400, 0x0, 0x400, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x400, 0x2, 0x0, 0x0, 0x0, 0x0, 0x80000000, 0x0, 0x0, 0x0, 0x0, 0x80000000, 0x0, 0x0, 0x0, 0x40000, 0x0, 0x0, 0x20000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,};
-  }
-
-  private static void jj_la1_init_2()
-  {
-    jj_la1_2 = new int[]{0x0, 0x0, 0x4, 0x0, 0x2, 0x2, 0x0, 0x40000000, 0x0, 0x0, 0x20000, 0x0, 0x0, 0x0, 0x0, 0x40000000, 0x8004000, 0x8004000, 0x8, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x82800000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff0, 0x0, 0x0, 0x80000, 0x0, 0x80000, 0x0, 0x0, 0x0, 0xff0, 0x0, 0x0, 0x0, 0x40000, 0x0, 0x40000, 0x0, 0x0, 0x2000, 0x0, 0x2000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, 0x0, 0x0, 0x0, 0x8004000, 0x0, 0x280000, 0x0, 0x8004000, 0x10000, 0x10000, 0x0, 0x0, 0x0, 0x0, 0x8000, 0x8000, 0x0, 0x0, 0x0, 0x1, 0x0, 0x8000, 0x8000, 0x280000, 0x0, 0x0, 0x0, 0x0, 0x8000, 0x8000, 0x10002, 0x10002, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x8000, 0x8000, 0x10002, 0x10002, 0x0, 0x0, 0x0, 0x0, 0x0, 0x500000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, 0x0, 0x10000000, 0x10000000, 0x0, 0x0, 0x0, 0x0, 0x20000000, 0x0, 0x4000000, 0x0,};
-  }
-
-  private static void jj_la1_init_3()
-  {
-    jj_la1_3 = new int[]{0x0, 0x0, 0x0, 0x1000, 0x0, 0x0, 0x0, 0x0, 0x4000, 0x0, 0x0, 0x400, 0x0, 0x0, 0x0, 0x0, 0x240000, 0x240000, 0x0, 0x0, 0x40000000, 0x80000000, 0x80000000, 0x0, 0x1000000, 0x0, 0x0, 0x0, 0x80000000, 0x0, 0x0, 0x0, 0x1000000, 0x80000000, 0x0, 0x0, 0x0, 0x1000000, 0xc0000000, 0xc0000000, 0xa0000000, 0xa0000000, 0xc0000000, 0x20000000, 0xc0000000, 0xc0000000, 0x20000000, 0xc0000000, 0xc0000000, 0x20000000, 0xc0000000, 0x20000000, 0xa0000000, 0xa0000000, 0xa0000000, 0xa0000000, 0xc0000000, 0xc0000000, 0xc0000000, 0x0, 0xc0000000, 0x1009a82b, 0x80000000, 0x0, 0x8000000, 0x0, 0xc0000000, 0x0, 0x8000000, 0x0, 0x0, 0xc0000000, 0xc0000000, 0x8000000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x40, 0x0, 0x0, 0x4000, 0x8000000, 0x0, 0x40, 0x0, 0x40, 0x0, 0x0, 0x10, 0x0, 0x10, 0x0, 0x80000000, 0x0, 0x0, 0x0, 0x40, 0x0, 0x0, 0x0, 0x0, 0x4, 0x0, 0x0, 0x100000, 0x0, 0x0, 0x0, 0x0, 0x40, 0x200000, 0x200000, 0x200, 0x200, 0x80000000, 0x80000000, 0x80000000, 0x0, 0x40, 0x40, 0x0, 0x0, 0x0, 0x0, 0x0, 0x40, 0x40, 0x40, 0x0, 0x0, 0x0, 0x0, 0x40, 0x40, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x40, 0x40, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x180, 0x0, 0x80000000, 0x0, 0x1000000, 0x0, 0x0, 0x0, 0x80000000, 0x1000000, 0x0, 0x0, 0x80000000, 0x0, 0x0, 0x80000000, 0x0, 0x0, 0x80000000, 0x0, 0x0, 0x0, 0x100000, 0x0, 0x0, 0x0, 0x0, 0x80000000, 0x0, 0x40, 0x0, 0x0,};
-  }
-
-  private static void jj_la1_init_4()
-  {
-    jj_la1_4 = new int[]{0x0, 0x20, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x300, 0x0, 0x0, 0x800000, 0x320, 0x300, 0x0, 0x480000, 0x480000, 0x0, 0x300, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x20, 0x300, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10, 0x10, 0x0, 0x0, 0x10, 0x0, 0x10, 0x10, 0x0, 0x10, 0x10, 0x0, 0x10, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10, 0x10, 0x10, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x300, 0x0, 0x0, 0x0, 0x300, 0x310, 0x10, 0x10, 0x0, 0x300, 0x20, 0x0, 0x300, 0x300, 0x300, 0x300, 0x300, 0x300, 0x300, 0x300, 0x0, 0x0, 0x0, 0x300, 0x0, 0x300, 0x0, 0x0, 0x20, 0x0, 0x300, 0x0, 0x300, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x20, 0x300, 0x300, 0x0, 0x300, 0x0, 0x0, 0x10000, 0x20, 0x0, 0x300, 0x300, 0x480000, 0x480000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x300, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x20, 0x300, 0x0, 0x0, 0x0, 0x0, 0x0, 0x300, 0x0, 0x300, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x300, 0x300, 0x300, 0x300, 0x0, 0x0, 0x300, 0x0, 0x300, 0x0, 0x0, 0x20, 0x10000, 0x0, 0x0, 0x0, 0x20, 0x0, 0x300, 0x0, 0x0, 0x300, 0x0, 0x0, 0x300, 0x0, 0x300, 0x0, 0x0, 0x320, 0x320, 0x10000, 0x0, 0x0, 0x0, 0x0, 0x20,};
-  }
-
-  /**
-   * Reinitialise.
-   */
-  static public void ReInit(java.io.InputStream stream)
-  {
-    ReInit(stream, null);
-  }
-
-  /**
-   * Reinitialise.
-   */
-  static public void ReInit(java.io.InputStream stream, String encoding)
-  {
-    try
-    {
-      jj_input_stream.ReInit(stream, encoding, 1, 1);
+  /** Constructor with InputStream and supplied encoding */
+  public JPortal(java.io.InputStream stream, String encoding) {
+    if (jj_initialized_once) {
+      System.out.println("ERROR: Second call to constructor of static parser.  ");
+      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
+      System.out.println("       during parser generation.");
+      throw new Error();
     }
-    catch (java.io.UnsupportedEncodingException e)
-    {
-      throw new RuntimeException(e);
-    }
-    JPortalTokenManager.ReInit(jj_input_stream);
+    jj_initialized_once = true;
+    try { jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
+    token_source = new JPortalTokenManager(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
@@ -4809,13 +4290,43 @@ public class JPortal implements JPortalConstants
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
-  /**
-   * Reinitialise.
-   */
-  static public void ReInit(java.io.Reader stream)
-  {
+  /** Reinitialise. */
+  static public void ReInit(java.io.InputStream stream) {
+     ReInit(stream, null);
+  }
+  /** Reinitialise. */
+  static public void ReInit(java.io.InputStream stream, String encoding) {
+    try { jj_input_stream.ReInit(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
+    token_source.ReInit(jj_input_stream);
+    token = new Token();
+    jj_ntk = -1;
+    jj_gen = 0;
+    for (int i = 0; i < 189; i++) jj_la1[i] = -1;
+    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
+  }
+
+  /** Constructor. */
+  public JPortal(java.io.Reader stream) {
+    if (jj_initialized_once) {
+      System.out.println("ERROR: Second call to constructor of static parser. ");
+      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
+      System.out.println("       during parser generation.");
+      throw new Error();
+    }
+    jj_initialized_once = true;
+    jj_input_stream = new SimpleCharStream(stream, 1, 1);
+    token_source = new JPortalTokenManager(jj_input_stream);
+    token = new Token();
+    jj_ntk = -1;
+    jj_gen = 0;
+    for (int i = 0; i < 189; i++) jj_la1[i] = -1;
+    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
+  }
+
+  /** Reinitialise. */
+  static public void ReInit(java.io.Reader stream) {
     jj_input_stream.ReInit(stream, 1, 1);
-    JPortalTokenManager.ReInit(jj_input_stream);
+    token_source.ReInit(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
@@ -4823,23 +4334,45 @@ public class JPortal implements JPortalConstants
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
-  static private Token jj_consume_token(int kind) throws ParseException
-  {
+  /** Constructor with generated Token Manager. */
+  public JPortal(JPortalTokenManager tm) {
+    if (jj_initialized_once) {
+      System.out.println("ERROR: Second call to constructor of static parser. ");
+      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
+      System.out.println("       during parser generation.");
+      throw new Error();
+    }
+    jj_initialized_once = true;
+    token_source = tm;
+    token = new Token();
+    jj_ntk = -1;
+    jj_gen = 0;
+    for (int i = 0; i < 189; i++) jj_la1[i] = -1;
+    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
+  }
+
+  /** Reinitialise. */
+  public void ReInit(JPortalTokenManager tm) {
+    token_source = tm;
+    token = new Token();
+    jj_ntk = -1;
+    jj_gen = 0;
+    for (int i = 0; i < 189; i++) jj_la1[i] = -1;
+    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
+  }
+
+  static private Token jj_consume_token(int kind) throws ParseException {
     Token oldToken;
     if ((oldToken = token).next != null) token = token.next;
-    else token = token.next = JPortalTokenManager.getNextToken();
+    else token = token.next = token_source.getNextToken();
     jj_ntk = -1;
-    if (token.kind == kind)
-    {
+    if (token.kind == kind) {
       jj_gen++;
-      if (++jj_gc > 100)
-      {
+      if (++jj_gc > 100) {
         jj_gc = 0;
-        for (int i = 0; i < jj_2_rtns.length; i++)
-        {
+        for (int i = 0; i < jj_2_rtns.length; i++) {
           JJCalls c = jj_2_rtns[i];
-          while (c != null)
-          {
+          while (c != null) {
             if (c.gen < jj_gen) c.first = null;
             c = c.next;
           }
@@ -4852,31 +4385,22 @@ public class JPortal implements JPortalConstants
     throw generateParseException();
   }
 
-  static private boolean jj_scan_token(int kind)
-  {
-    if (jj_scanpos == jj_lastpos)
-    {
+  static private final class LookaheadSuccess extends java.lang.Error { }
+  static final private LookaheadSuccess jj_ls = new LookaheadSuccess();
+  static private boolean jj_scan_token(int kind) {
+    if (jj_scanpos == jj_lastpos) {
       jj_la--;
-      if (jj_scanpos.next == null)
-      {
-        jj_lastpos = jj_scanpos = jj_scanpos.next = JPortalTokenManager.getNextToken();
-      } else
-      {
+      if (jj_scanpos.next == null) {
+        jj_lastpos = jj_scanpos = jj_scanpos.next = token_source.getNextToken();
+      } else {
         jj_lastpos = jj_scanpos = jj_scanpos.next;
       }
-    } else
-    {
+    } else {
       jj_scanpos = jj_scanpos.next;
     }
-    if (jj_rescan)
-    {
-      int i = 0;
-      Token tok = token;
-      while (tok != null && tok != jj_scanpos)
-      {
-        i++;
-        tok = tok.next;
-      }
+    if (jj_rescan) {
+      int i = 0; Token tok = token;
+      while (tok != null && tok != jj_scanpos) { i++; tok = tok.next; }
       if (tok != null) jj_add_error_token(kind, i);
     }
     if (jj_scanpos.kind != kind) return true;
@@ -4884,64 +4408,55 @@ public class JPortal implements JPortalConstants
     return false;
   }
 
-  /**
-   * Get the next Token.
-   */
-  static final public Token getNextToken()
-  {
+
+/** Get the next Token. */
+  static final public Token getNextToken() {
     if (token.next != null) token = token.next;
-    else token = token.next = JPortalTokenManager.getNextToken();
+    else token = token.next = token_source.getNextToken();
     jj_ntk = -1;
     jj_gen++;
     return token;
   }
 
-  /**
-   * Get the specific Token.
-   */
-  static final public Token getToken(int index)
-  {
+/** Get the specific Token. */
+  static final public Token getToken(int index) {
     Token t = jj_lookingAhead ? jj_scanpos : token;
-    for (int i = 0; i < index; i++)
-    {
+    for (int i = 0; i < index; i++) {
       if (t.next != null) t = t.next;
-      else t = t.next = JPortalTokenManager.getNextToken();
+      else t = t.next = token_source.getNextToken();
     }
     return t;
   }
 
-  static private int jj_ntk()
-  {
-    if ((jj_nt = token.next) == null)
-      return (jj_ntk = (token.next = JPortalTokenManager.getNextToken()).kind);
+  static private int jj_ntk() {
+    if ((jj_nt=token.next) == null)
+      return (jj_ntk = (token.next=token_source.getNextToken()).kind);
     else
       return (jj_ntk = jj_nt.kind);
   }
 
-  static private void jj_add_error_token(int kind, int pos)
-  {
+  static private java.util.List jj_expentries = new java.util.ArrayList();
+  static private int[] jj_expentry;
+  static private int jj_kind = -1;
+  static private int[] jj_lasttokens = new int[100];
+  static private int jj_endpos;
+
+  static private void jj_add_error_token(int kind, int pos) {
     if (pos >= 100) return;
-    if (pos == jj_endpos + 1)
-    {
+    if (pos == jj_endpos + 1) {
       jj_lasttokens[jj_endpos++] = kind;
-    } else if (jj_endpos != 0)
-    {
+    } else if (jj_endpos != 0) {
       jj_expentry = new int[jj_endpos];
-      for (int i = 0; i < jj_endpos; i++)
-      {
+      for (int i = 0; i < jj_endpos; i++) {
         jj_expentry[i] = jj_lasttokens[i];
       }
       boolean exists = false;
-      for (java.util.Iterator it = jj_expentries.iterator(); it.hasNext(); )
-      {
-        int[] oldentry = (int[]) (it.next());
-        if (oldentry.length == jj_expentry.length)
-        {
+      for (java.util.Iterator it = jj_expentries.iterator(); it.hasNext();) {
+        int[] oldentry = (int[])(it.next());
+        if (oldentry.length == jj_expentry.length) {
           exists = true;
-          for (int i = 0; i < jj_expentry.length; i++)
-          {
-            if (oldentry[i] != jj_expentry[i])
-            {
+          for (int i = 0; i < jj_expentry.length; i++) {
+            if (oldentry[i] != jj_expentry[i]) {
               exists = false;
               break;
             }
@@ -4954,51 +4469,37 @@ public class JPortal implements JPortalConstants
     }
   }
 
-  /**
-   * Generate ParseException.
-   */
-  static public ParseException generateParseException()
-  {
+  /** Generate ParseException. */
+  static public ParseException generateParseException() {
     jj_expentries.clear();
     boolean[] la1tokens = new boolean[152];
-    if (jj_kind >= 0)
-    {
+    if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 189; i++)
-    {
-      if (jj_la1[i] == jj_gen)
-      {
-        for (int j = 0; j < 32; j++)
-        {
-          if ((jj_la1_0[i] & (1 << j)) != 0)
-          {
+    for (int i = 0; i < 189; i++) {
+      if (jj_la1[i] == jj_gen) {
+        for (int j = 0; j < 32; j++) {
+          if ((jj_la1_0[i] & (1<<j)) != 0) {
             la1tokens[j] = true;
           }
-          if ((jj_la1_1[i] & (1 << j)) != 0)
-          {
-            la1tokens[32 + j] = true;
+          if ((jj_la1_1[i] & (1<<j)) != 0) {
+            la1tokens[32+j] = true;
           }
-          if ((jj_la1_2[i] & (1 << j)) != 0)
-          {
-            la1tokens[64 + j] = true;
+          if ((jj_la1_2[i] & (1<<j)) != 0) {
+            la1tokens[64+j] = true;
           }
-          if ((jj_la1_3[i] & (1 << j)) != 0)
-          {
-            la1tokens[96 + j] = true;
+          if ((jj_la1_3[i] & (1<<j)) != 0) {
+            la1tokens[96+j] = true;
           }
-          if ((jj_la1_4[i] & (1 << j)) != 0)
-          {
-            la1tokens[128 + j] = true;
+          if ((jj_la1_4[i] & (1<<j)) != 0) {
+            la1tokens[128+j] = true;
           }
         }
       }
     }
-    for (int i = 0; i < 152; i++)
-    {
-      if (la1tokens[i])
-      {
+    for (int i = 0; i < 152; i++) {
+      if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
         jj_expentries.add(jj_expentry);
@@ -5008,127 +4509,60 @@ public class JPortal implements JPortalConstants
     jj_rescan_token();
     jj_add_error_token(0, 0);
     int[][] exptokseq = new int[jj_expentries.size()][];
-    for (int i = 0; i < jj_expentries.size(); i++)
-    {
-      exptokseq[i] = (int[]) jj_expentries.get(i);
+    for (int i = 0; i < jj_expentries.size(); i++) {
+      exptokseq[i] = (int[])jj_expentries.get(i);
     }
     return new ParseException(token, exptokseq, tokenImage);
   }
 
-  /**
-   * Enable tracing.
-   */
-  static final public void enable_tracing()
-  {
+  /** Enable tracing. */
+  static final public void enable_tracing() {
   }
 
-  /**
-   * Disable tracing.
-   */
-  static final public void disable_tracing()
-  {
+  /** Disable tracing. */
+  static final public void disable_tracing() {
   }
 
-  static private void jj_rescan_token()
-  {
+  static private void jj_rescan_token() {
     jj_rescan = true;
-    for (int i = 0; i < 12; i++)
-    {
-      try
-      {
-        JJCalls p = jj_2_rtns[i];
-        do
-        {
-          if (p.gen > jj_gen)
-          {
-            jj_la = p.arg;
-            jj_lastpos = jj_scanpos = p.first;
-            switch (i)
-            {
-              case 0:
-                jj_3_1();
-                break;
-              case 1:
-                jj_3_2();
-                break;
-              case 2:
-                jj_3_3();
-                break;
-              case 3:
-                jj_3_4();
-                break;
-              case 4:
-                jj_3_5();
-                break;
-              case 5:
-                jj_3_6();
-                break;
-              case 6:
-                jj_3_7();
-                break;
-              case 7:
-                jj_3_8();
-                break;
-              case 8:
-                jj_3_9();
-                break;
-              case 9:
-                jj_3_10();
-                break;
-              case 10:
-                jj_3_11();
-                break;
-              case 11:
-                jj_3_12();
-                break;
-            }
+    for (int i = 0; i < 12; i++) {
+    try {
+      JJCalls p = jj_2_rtns[i];
+      do {
+        if (p.gen > jj_gen) {
+          jj_la = p.arg; jj_lastpos = jj_scanpos = p.first;
+          switch (i) {
+            case 0: jj_3_1(); break;
+            case 1: jj_3_2(); break;
+            case 2: jj_3_3(); break;
+            case 3: jj_3_4(); break;
+            case 4: jj_3_5(); break;
+            case 5: jj_3_6(); break;
+            case 6: jj_3_7(); break;
+            case 7: jj_3_8(); break;
+            case 8: jj_3_9(); break;
+            case 9: jj_3_10(); break;
+            case 10: jj_3_11(); break;
+            case 11: jj_3_12(); break;
           }
-          p = p.next;
-        } while (p != null);
-      }
-      catch (LookaheadSuccess ls)
-      {
-      }
+        }
+        p = p.next;
+      } while (p != null);
+      } catch(LookaheadSuccess ls) { }
     }
     jj_rescan = false;
   }
 
-  static private void jj_save(int index, int xla)
-  {
+  static private void jj_save(int index, int xla) {
     JJCalls p = jj_2_rtns[index];
-    while (p.gen > jj_gen)
-    {
-      if (p.next == null)
-      {
-        p = p.next = new JJCalls();
-        break;
-      }
+    while (p.gen > jj_gen) {
+      if (p.next == null) { p = p.next = new JJCalls(); break; }
       p = p.next;
     }
-    p.gen = jj_gen + xla - jj_la;
-    p.first = token;
-    p.arg = xla;
+    p.gen = jj_gen + xla - jj_la; p.first = token; p.arg = xla;
   }
 
-  /**
-   * Reinitialise.
-   */
-  public void ReInit(JPortalTokenManager tm)
-  {
-    token_source = tm;
-    token = new Token();
-    jj_ntk = -1;
-    jj_gen = 0;
-    for (int i = 0; i < 189; i++) jj_la1[i] = -1;
-    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
-  }
-
-  static private final class LookaheadSuccess extends java.lang.Error
-  {
-  }
-
-  static final class JJCalls
-  {
+  static final class JJCalls {
     int gen;
     Token first;
     int arg;

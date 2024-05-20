@@ -6,8 +6,7 @@ package vlab.crackle;
  * Describes the input token stream.
  */
 
-public class Token
-{
+public class Token {
 
   /**
    * An integer that describes the kind of this token.  This numbering
@@ -16,21 +15,13 @@ public class Token
    */
   public int kind;
 
-  /**
-   * The line number of the first character of this Token.
-   */
+  /** The line number of the first character of this Token. */
   public int beginLine;
-  /**
-   * The column number of the first character of this Token.
-   */
+  /** The column number of the first character of this Token. */
   public int beginColumn;
-  /**
-   * The line number of the last character of this Token.
-   */
+  /** The line number of the last character of this Token. */
   public int endLine;
-  /**
-   * The column number of the last character of this Token.
-   */
+  /** The column number of the last character of this Token. */
   public int endColumn;
 
   /**
@@ -63,18 +54,28 @@ public class Token
   public Token specialToken;
 
   /**
+   * An optional attribute value of the Token.
+   * Tokens which are not used as syntactic sugar will often contain
+   * meaningful values that will be used later on by the compiler or
+   * interpreter. This attribute value is often different from the image.
+   * Any subclass of Token that actually wants to return a non-null value can
+   * override this method as appropriate.
+   */
+  public Object getValue() {
+    return null;
+  }
+
+  /**
    * No-argument contructor
    */
-  public Token()
-  {
-  }
+  public Token() {}
 
   /**
    * Constructs a new token for the specified Image.
    */
   public Token(int kind)
   {
-    this(kind, null);
+     this(kind, null);
   }
 
   /**
@@ -82,8 +83,16 @@ public class Token
    */
   public Token(int kind, String image)
   {
-    this.kind = kind;
-    this.image = image;
+     this.kind = kind;
+     this.image = image;
+  }
+
+  /**
+   * Returns the image.
+   */
+  public String toString()
+  {
+     return image;
   }
 
   /**
@@ -92,46 +101,24 @@ public class Token
    * Simply add the cases to the switch for all those special cases.
    * For example, if you have a subclass of Token called IDToken that
    * you want to create if ofKind is ID, simply add something like :
-   * <p>
-   * case MyParserConstants.ID : return new IDToken(ofKind, image);
-   * <p>
+   *
+   *    case MyParserConstants.ID : return new IDToken(ofKind, image);
+   *
    * to the following switch statement. Then you can cast matchedToken
    * variable to the appropriate type and use sit in your lexical actions.
    */
   public static Token newToken(int ofKind, String image)
   {
-    switch (ofKind)
-    {
-      default:
-        return new Token(ofKind, image);
-    }
+     switch(ofKind)
+     {
+       default : return new Token(ofKind, image);
+     }
   }
 
   public static Token newToken(int ofKind)
   {
-    return newToken(ofKind, null);
-  }
-
-  /**
-   * An optional attribute value of the Token.
-   * Tokens which are not used as syntactic sugar will often contain
-   * meaningful values that will be used later on by the compiler or
-   * interpreter. This attribute value is often different from the image.
-   * Any subclass of Token that actually wants to return a non-null value can
-   * override this method as appropriate.
-   */
-  public Object getValue()
-  {
-    return null;
-  }
-
-  /**
-   * Returns the image.
-   */
-  public String toString()
-  {
-    return image;
+     return newToken(ofKind, null);
   }
 
 }
-/* JavaCC - OriginalChecksum=c7bd0ef282076dc0fb77da6beb56508f (do not edit this line) */
+/* JavaCC - OriginalChecksum=fd368004ea8d05f462e201eb49c93b0c (do not edit this line) */

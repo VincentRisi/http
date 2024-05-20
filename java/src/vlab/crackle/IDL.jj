@@ -296,7 +296,7 @@ void idlCodeBlock() :
 {
   (
   LOOKAHEAD(2)
-  t = <LINENO>
+    t = <LINENO>
   {
     if (module.codeStart == 0)
       module.codeStart = t.beginLine;
@@ -336,7 +336,7 @@ void idlMessage() :
     "(" t = <INTEGER> ")"
     {
       s = t.image;
-      i = s;
+      i = Integer.valueOf(s);
       module.messageBase = i.intValue();
     }
   ) ?
